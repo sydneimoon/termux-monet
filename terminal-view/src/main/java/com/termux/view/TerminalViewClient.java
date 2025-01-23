@@ -33,6 +33,8 @@ public interface TerminalViewClient {
 
     boolean isTerminalViewSelected();
 
+    boolean isTerminalViewScalingDisabled();
+
     void copyModeChanged(boolean copyMode);
 
     boolean onKeyDown(int keyCode, KeyEvent e, TerminalSession session);
