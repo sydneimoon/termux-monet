@@ -158,6 +158,16 @@ public final class TerminalEmulator {
     private static final int ESC_APC_ESCAPE = 21;
 
     /**
+     * Escape processing: ESC [ <parameter bytes>
+     */
+    private static final int ESC_CSI_UNSUPPORTED_PARAMETER_BYTE = 22;
+
+    /**
+     * Escape processing: ESC [ <parameter bytes> <intermediate bytes>
+     */
+    private static final int ESC_CSI_UNSUPPORTED_INTERMEDIATE_BYTE = 23;
+
+    /**
      * The number of parameter arguments including colon separated sub-parameters.
      */
     private static final int MAX_ESCAPE_PARAMETERS = 32;
@@ -846,6 +856,10 @@ public final class TerminalEmulator {
                     case ESC_CSI:
                         doCsi(b);
                         break;
+                    case ESC_CSI_UNSUPPORTED_PARAMETER_BYTE:
+                    case ESC_CSI_UNSUPPORTED_INTERMEDIATE_BYTE:
+                        doCsiUnsupportedParameterOrIntermediateByte(b);
+                        break;
                     case ESC_CSI_EXCLAMATION:
                         if (b == 'p') {
                             // Soft terminal reset (DECSTR, http://vt100.net/docs/vt510-rm/DECSTR).
@@ -1356,8 +1370,37 @@ public final class TerminalEmulator {
     }
 
     /**
-     * Process byte while in the {@link #ESC_CSI_QUESTIONMARK} escape state.
+     * Process byte while in the {@link #ESC_CSI_UNSUPPORTED_PARAMETER_BYTE} or
+     * {@link #ESC_CSI_UNSUPPORTED_INTERMEDIATE_BYTE} escape state.
+     *
+     * Parse unsupported parameter, intermediate and final bytes but ignore them.
+     *
+     * > For Control Sequence Introducer, ... the ESC [ is followed by
+     * > - any number (including none) of "parameter bytes" in the range 0x30–0x3F (ASCII 0–9:;<=>?),
+     * > - then by any number of "intermediate bytes" in the range 0x20–0x2F (ASCII space and !"#$%&'()*+,-./),
+     * > - then finally by a single "final byte" in the range 0x40–0x7E (ASCII @A–Z[\]^_`a–z{|}~).
+     *
+     * - https://en.wikipedia.org/wiki/ANSI_escape_code#Control_Sequence_Introducer_commands
+     * - https://invisible-island.net/xterm/ecma-48-parameter-format.html#section5.4
      */
+    private void doCsiUnsupportedParameterOrIntermediateByte(int b) {
+        if (mEscapeState == ESC_CSI_UNSUPPORTED_PARAMETER_BYTE && b >= 0x30 && b <= 0x3F) {
+            // Supported `0–9:;>?` or unsupported `<=` parameter byte after an
+            // initial unsupported parameter byte in `doCsi()`, or a sequential parameter byte.
+            continueSequence(ESC_CSI_UNSUPPORTED_PARAMETER_BYTE);
+        } else if (b >= 0x20 && b <= 0x2F) {
+            // Optional intermediate byte `!"#$%&'()*+,-./` after parameter or intermediate byte.
+            continueSequence(ESC_CSI_UNSUPPORTED_INTERMEDIATE_BYTE);
+        } else if (b >= 0x40 && b <= 0x7E) {
+            // Final byte `@A–Z[\]^_`a–z{|}~` after parameter or intermediate byte.
+            // Calling `unknownSequence()` would log an error with only a final byte, so ignore it for now.
+            finishSequence();
+        } else {
+            unknownSequence(b);
+        }
+    }
+
+    /** Process byte while in the {@link #ESC_CSI_QUESTIONMARK} escape state. */
     private void doCsiQuestionMark(int b) {
         switch(b) {
             // Selective erase in display (DECSED) - http://www.vt100.net/docs/vt510-rm/DECSED.
@@ -2035,16 +2078,17 @@ public final class TerminalEmulator {
                 }
                 mCursorCol = newCol;
                 break;
-            case // Esc [ ? -- start of a private mode set
-            '?':
+            case '?': // Esc [ ? -- start of a private parameter byte
                 continueSequence(ESC_CSI_QUESTIONMARK);
                 break;
-            case // "Esc [ >" --
-            '>':
+            case '>': // "Esc [ >" -- start of a private parameter byte
                 continueSequence(ESC_CSI_BIGGERTHAN);
                 break;
-            case // Horizontal position absolute (HPA - http://www.vt100.net/docs/vt510-rm/HPA).
-            '`':
+            case '<': // "Esc [ <" -- start of a private parameter byte
+            case '=': // "Esc [ =" -- start of a private parameter byte
+                continueSequence(ESC_CSI_UNSUPPORTED_PARAMETER_BYTE);
+                break;
+            case '`': // Horizontal position absolute (HPA - http://www.vt100.net/docs/vt510-rm/HPA).
                 setCursorColRespectingOriginMode(getArg0(1) - 1);
                 break;
             case // Repeat the preceding graphic character Ps times (REP).
