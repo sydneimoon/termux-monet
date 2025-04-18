@@ -114,6 +114,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.termux.app.CustomDialogFragment;
+import com.tomer.fadingtextview.FadingTextView;
 
 /**
  * A terminal emulator activity.
@@ -338,6 +339,20 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
         configureSmoothKeyboard();
+
+        /*  top:
+            #4ffbc5 #4dfbff #77bfff
+            #68d5ef #79bcfe #998eff
+        */
+        applyGradientToTextView(findViewById(R.id.header_title), new int[]{
+            Color.parseColor("#68d5ef"),
+            Color.parseColor("#79bcfe"),
+            Color.parseColor("#998eff")
+        });
+        String[] texts = {"simplythebest","cripto hacker","•~ JulioCj7 ~•"};
+        FadingTextView FTV = (FadingTextView) findViewById(R.id.fadingTextView);
+        FTV.setTexts(texts);
+
     }
 
     private void setFullscreenMode() {
