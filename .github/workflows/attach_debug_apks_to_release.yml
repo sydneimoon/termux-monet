@@ -8,6 +8,8 @@ on:
 jobs:
   attach-apks:
     runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == vars.OWNER }}
+
     strategy:
       fail-fast: false
       matrix:
