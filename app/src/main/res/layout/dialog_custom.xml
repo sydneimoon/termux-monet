@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:background="?attr/colorSurface">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/dialog_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:src="@drawable/perfil"
+            android:contentDescription="Superstar" />
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Termux"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:layout_marginTop="18dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/dialog_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developed by SimplyTheBest"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialog_button_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            style="@style/Widget.Material3.Button"
+            android:layout_marginTop="24dp"/>
+    </LinearLayout>
+</ScrollView>

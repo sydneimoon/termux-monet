@@ -63,13 +63,21 @@ public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession
         fullSessionTitleStyled.setSpan(boldSpan, 0, numberPart.length() + sessionNamePart.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         fullSessionTitleStyled.setSpan(italicSpan, numberPart.length() + sessionNamePart.length(), fullSessionTitle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         sessionTitleView.setText(fullSessionTitleStyled);
+
+        TerminalSession currentSession = mActivity.getTermuxTerminalSessionClient().getCurrentSession();
+        if (sessionAtRow == currentSession) {
+            sessionTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_robot_angry, 0);
+        } else {
+            sessionTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+
         boolean sessionRunning = sessionAtRow.isRunning();
         if (sessionRunning) {
             sessionTitleView.setPaintFlags(sessionTitleView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             sessionTitleView.setPaintFlags(sessionTitleView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
-        int defaultColor = Color.parseColor("#cfe5ff");
+        int defaultColor = Color.parseColor("#646464");
         int color = sessionRunning || sessionAtRow.getExitStatus() == 0 ? defaultColor : Color.RED;
         sessionTitleView.setTextColor(color);
         return sessionRowView;
@@ -80,6 +88,7 @@ public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession
         TermuxSession clickedSession = getItem(position);
         mActivity.getTermuxTerminalSessionClient().setCurrentSession(clickedSession.getTerminalSession());
         mActivity.getDrawer().closeDrawers();
+        notifyDataSetChanged();
     }
 
     @Override

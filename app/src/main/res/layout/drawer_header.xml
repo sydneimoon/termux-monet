@@ -1,10 +1,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="14dp"
     android:background="@android:color/transparent"
     android:gravity="center_vertical">
 
@@ -20,45 +22,65 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/perfil"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:alpha="1.0" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/drawer_header_name"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JulioCj7"
-                android:textColor="@color/menu_accent"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/drawer_header_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6dp"
+                    android:text="JulioCj7"
+                    android:textColor="#BABABA"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/drawer_header_verify"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:src="@drawable/ic_shield_check"
+                    android:tint="#505050"
+                    android:alpha="0.9" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/drawer_header_alias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
                 android:text="SimplyTheBest"
-                android:textColor="@color/menu_accent"
+                android:textColor="#505050"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-    <!--
-    <View
+
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="#CC1B242F"
         android:layout_marginTop="12dp" />
 
     <TextView
-        android:id="@+id/drawer_header_sessions"
+        android:id="@+id/drawer_header_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SESIONES"
-        android:textColor="#cfe5ff"
-        android:textSize="10sp"
-        android:background="#252525"
-        android:layout_marginTop="8dp" />
-     -->
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:text="contact me: +591 79424937"
+        android:textColor="#505050"
+        android:textSize="10sp" />-->
+
 </LinearLayout>

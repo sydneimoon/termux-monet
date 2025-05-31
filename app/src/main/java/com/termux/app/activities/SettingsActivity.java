@@ -25,6 +25,13 @@ import com.termux.shared.termux.TermuxUtils;
 import com.termux.shared.activity.media.AppCompatActivityUtils;
 import com.termux.shared.theme.NightMode;
 
+import android.widget.Toast;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import androidx.core.content.ContextCompat;
+import com.google.android.material.appbar.MaterialToolbar;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -37,6 +44,14 @@ public class SettingsActivity extends AppCompatActivity {
         }
         AppCompatActivityUtils.setToolbar(this, com.termux.shared.R.id.toolbar);
         AppCompatActivityUtils.setShowBackButtonInActionBar(this, true);
+
+        getWindow().setStatusBarColor(Color.parseColor("#010409")); 
+        MaterialToolbar toolbar = findViewById(com.termux.shared.R.id.toolbar);
+        toolbar.setSubtitle("0xsimplythebest");
+        Drawable navIcon = toolbar.getNavigationIcon();
+        if (navIcon != null) {
+            navIcon.setTint(Color.parseColor("#505050"));
+        }
     }
 
     @Override
@@ -64,6 +79,15 @@ public class SettingsActivity extends AppCompatActivity {
                     configureTermuxWidgetPreference(context);
                     configureAboutPreference(context);
                     configureDonatePreference(context);
+
+                    Preference authorPreference = findPreference("author");
+                    if (authorPreference != null) {
+                        authorPreference.setOnPreferenceClickListener(preference -> {
+                            Toast.makeText(context, "¡Gracias por usar Termux Monet!", Toast.LENGTH_SHORT).show();
+                            return true;
+                        });
+                    }
+
                 }
             }.start();
         }
@@ -121,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         @Override
                         public void run() {
-                            String title = "About";
+                            String title = "About 😎";
                             StringBuilder aboutString = new StringBuilder();
                             aboutString.append(TermuxUtils.getAppInfoMarkdownString(context, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES));
                             aboutString.append("\n\n").append(AndroidUtils.getDeviceInfoMarkdownString(context, true));

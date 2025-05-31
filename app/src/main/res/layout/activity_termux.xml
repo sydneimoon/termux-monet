@@ -52,22 +52,28 @@
                 android:layout_gravity="end"
                 android:orientation="vertical">
 
-                <com.github.mmin18.widget.RealtimeBlurView
+                <com.termux.app.CustomShapeBlurView
                     android:id="@+id/sessions_backgroundblur"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="4dp"
                     app:realtimeBlurRadius="15dp"
                     app:realtimeOverlayColor="@android:color/transparent" />
 
                 <View
                     android:id="@+id/sessions_background"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="4dp"/>
 
                 <LinearLayout
                     android:id="@+id/left_drawer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="4dp"
                     android:layout_gravity="end"
                     android:orientation="vertical"
                     android:background="@android:color/transparent"
@@ -99,12 +105,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Background"
-                            android:textColor="#FFCFE5FF"
+                            android:text=" Wallpaper "
+                            android:textColor="#BABABA"
                             app:backgroundTint="#CC1B242F"
                             app:rippleColor="@color/menu_accent"
                             app:icon="@drawable/ic_image_search"
-                            app:iconTint="#FF98CBFF" />
+                            app:iconTint="#5ce6ff" />
 
                     </LinearLayout>
 
@@ -119,30 +125,36 @@
                             android:id="@+id/toggle_keyboard_button"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_keyboard"
-                            android:background="@null"
-                            app:tint="@color/menu_accent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            app:tint="#454545"
                             android:contentDescription="@string/action_toggle_soft_keyboard"/>
 
                         <ImageView
                             android:id="@+id/new_session_button"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_new_session"
                             android:background="@null"
-                            app:tint="#98cbff"
+                            app:tint="#7abbff"
                             android:contentDescription="@string/action_new_session"/>
 
                         <ImageView
                             android:id="@+id/settings_button"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_settings"
-                            android:background="@null"
-                            app:tint="@color/menu_accent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            app:tint="#454545"
                             android:contentDescription="@string/action_open_settings"/>
 
                     </LinearLayout>
@@ -150,11 +162,12 @@
             </RelativeLayout>
         </androidx.drawerlayout.widget.DrawerLayout>
 
-        <com.github.mmin18.widget.RealtimeBlurView
+        <com.termux.app.CustomShapeBlurView
             android:id="@+id/extrakeys_backgroundblur"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="4dp"
             app:realtimeBlurRadius="15dp"
             app:realtimeOverlayColor="@android:color/transparent" />
 
@@ -162,7 +175,8 @@
             android:id="@+id/extrakeys_background"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="4dp" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/terminal_toolbar_view_pager"
@@ -170,6 +184,8 @@
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="4dp"
             android:background="@android:color/transparent"/>
     </RelativeLayout>
 
@@ -178,5 +194,26 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@android:color/transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical">
+
+        <!--<com.termux.app.AnimatedGradientView
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />-->
+
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/color_shape" />-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
 
 </com.termux.app.terminal.TermuxActivityRootView>
