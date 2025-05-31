@@ -5,5 +5,14 @@
     android:background="@drawable/session_background_selected"
     android:ellipsize="marquee"
     android:gravity="start|center_vertical"
-    android:padding="6dip"
-    android:textSize="14sp" />
+    android:paddingTop="6dip"
+    android:paddingBottom="6dip"
+    android:paddingStart="18dip"
+    android:paddingEnd="18dip"
+    android:textSize="13sp" />
+
+<!--
+* textColor="#646464" in TermuxSessionsListViewController.java
+* icon to all sessions: android:drawableEnd="@drawable/ic_robot_angry"
+* icon to current session: modify TermuxSessionsListViewController.java TermuxTerminalSessionActivityClient.java
+-->

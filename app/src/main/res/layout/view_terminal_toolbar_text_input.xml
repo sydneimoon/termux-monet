@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <com.google.android.material.textfield.TextInputLayout
-        xmlns:tools="http://schemas.android.com/tools"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:imeOptions="actionSend|flagNoFullscreen"
-        android:inputType="text"
+        android:layout_height="wrap_content"
         android:importantForAutofill="no"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:hint="@string/extra_keys_command_hint"
         android:backgroundTint="@color/main_accent"
         android:textColorHint="#4e4e4e"
         android:textColorHighlight="@color/hint_accent"
-        android:paddingTop="0dp"
         android:textCursorDrawable="@null"
-        android:paddingBottom="0dp"
-        android:hint="@string/extra_keys_command_hint"
         tools:ignore="LabelFor"
-        app:hintTextColor="#4e4e4e"
+
         app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="@null"
-        app:startIconDrawable="@drawable/ic_console_line"
-        app:startIconTint="#4e4e4e"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeColor="#2e2e2e"
+        app:boxStrokeErrorColor="@color/input_text_error"
+
+        app:hintTextColor="#4e4e4e"
+
+        app:startIconDrawable="@drawable/ic_file_document_edit"
+        app:startIconTint="#2e2e2e"
         app:startIconContentDescription="Ingresar comando"
         app:startIconMinSize="38dp"
+
         app:endIconMode="clear_text"
         app:endIconTint="#4e4e4e"
+
         app:counterEnabled="true"
         app:counterMaxLength="666"
+        app:counterTextColor="@color/input_text_dark"
+        app:counterOverflowTextColor="@color/input_text_error"
+
         app:helperTextEnabled="true"
         app:helperText="JulioCj7"
-        app:helperTextTextColor="#4e4e4e"
-        app:boxStrokeColor="#98cbff">
+        app:helperTextTextColor="@color/input_text_dark">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/terminal_toolbar_text_input"
-            android:singleLine="true"
-            android:backgroundTint="@android:color/transparent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionSend"
+            android:backgroundTint="@android:color/transparent" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
 </LinearLayout>

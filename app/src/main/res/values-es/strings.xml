@@ -61,9 +61,9 @@
     <string name="action_kill_process">Cerrar proceso (%d)</string>
     <string name="title_confirm_kill_process">¿Cerrar realmente esta sesión?</string>
     <string name="action_style_terminal">Estilo</string>
-    <string name="action_font_and_color">Fuentes y Colores</string>
-    <string name="action_set_background_image">Seleccionar Fondo de pantalla</string>
-    <string name="action_remove_background_image">Remover Fondo de pantalla</string>
+    <string name="action_font_and_color">Fuentes y colores</string>
+    <string name="action_set_background_image">Seleccionar fondo de pantalla</string>
+    <string name="action_remove_background_image">Remover fondo de pantalla</string>
     <string name="action_toggle_keep_screen_on">Mantener pantalla encendida</string>
     <string name="action_open_help">Ayuda</string>
     <string name="action_open_settings">Ajustes</string>

@@ -80,7 +80,17 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.Arrays;
 
 import android.graphics.Color;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Typeface;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -89,6 +99,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import com.google.android.material.button.MaterialButton;
+import com.termux.app.CustomDialogFragment;
+
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.view.LayoutInflater;
+import android.widget.PopupWindow;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 /**
  * A terminal emulator activity.
@@ -100,7 +117,7 @@ import com.google.android.material.button.MaterialButton;
  * </ul>
  * about memory leaks.
  */
-public final class TermuxActivity extends AppCompatActivity implements ServiceConnection {
+public final class TermuxActivity extends BaseTermuxActivity implements ServiceConnection {
 
     /**
      * The connection to the {@link TermuxService}. Requested in {@link #onCreate(Bundle)} with a call to
@@ -212,8 +229,11 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private static final int CONTEXT_MENU_SHARE_TRANSCRIPT_ID = 1;
 
     private static final int CONTEXT_MENU_SHARE_SELECTED_TEXT = 10;
+
     private static final int CONTEXT_MENU_AUTOFILL_USERNAME = 14;
+
     private static final int CONTEXT_MENU_AUTOFILL_PASSWORD = 2;
+
     private static final int CONTEXT_MENU_RESET_TERMINAL_ID = 3;
 
     private static final int CONTEXT_MENU_KILL_PROCESS_ID = 4;
@@ -254,16 +274,21 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         setActivityTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termux);
-
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(0x00000000);
 
         LinearLayout headerLayout = findViewById(R.id.drawer_header);
+        headerLayout.setOnClickListener(v -> {
+            getDrawer().closeDrawers();
+            CustomDialogFragment dialog = new CustomDialogFragment();
+            dialog.show(getSupportFragmentManager(), "customDialog");
+        });
         headerLayout.setOnLongClickListener(view -> {
             openIncognitoChrome("https://github.com/JulioCj7");
-            return true; // Return true to indicate that the event is handled
+            return true;
         });
         MaterialButton changeBackgroundButton = findViewById(R.id.change_background_button);
+        changeBackgroundButton.setTypeface(null, Typeface.NORMAL);
         changeBackgroundButton.setOnClickListener(view -> {
             mTermuxBackgroundManager.setBackgroundImage();
         });
@@ -328,6 +353,55 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         TermuxUtils.sendTermuxOpenedBroadcast(this);
         verifyRWPermission();
         verifyAndroid11ManageFiles();
+
+        //ImageView verifyView = findViewById(R.id.drawer_header_verify);
+        //setAnimatedVector(verifyView, R.drawable.ic_shield_check_animated);
+        ImageView sessionView = findViewById(R.id.new_session_button);
+        setAnimatedVector(sessionView, R.drawable.ic_new_session_animated);
+
+        /*applyGradientToTextView(findViewById(R.id.drawer_header_name), new int[]{
+            Color.parseColor("#5be8ff"),
+            Color.parseColor("#72c7ff"),
+            Color.parseColor("#86a9ff")
+        });*/
+    }
+
+    private void applyGradientToTextView(final TextView textView, final int[] colors) {
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                float width = textView.getPaint().measureText(textView.getText().toString());
+                Shader shader = new LinearGradient(
+                    0, 0, width, 0,
+                    colors,
+                    null,
+                    Shader.TileMode.CLAMP
+                );
+                textView.getPaint().setShader(shader);
+                textView.invalidate();
+            }
+        });
+    }
+
+    private void setAnimatedVector(ImageView imageView, int resId) {
+        imageView.setImageResource(resId);
+        Drawable drawable = imageView.getDrawable();
+        if (drawable instanceof AnimatedVectorDrawable) {
+            ((AnimatedVectorDrawable) drawable).start();
+        }
+    }
+
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        VibrationEffect vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE); // 50ms
+        if (vibrator == null) return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (vibrationEffect != null) {
+                vibrator.vibrate(vibrationEffect);
+            }
+        } else {
+            vibrator.vibrate(50); // fallback para versiones < Android 8
+        }
     }
 
     private void openIncognitoChrome(String url) {
@@ -362,35 +436,52 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private Map<String, String> readColorsFromPropertiesFile(String filePath) {
         Properties properties = new Properties();
         Map<String, String> colors = new HashMap<>();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
             properties.load(reader);
 
-            String extraKeysColor = properties.getProperty("extra-keys-background");
-            if (extraKeysColor == null) {
-                int colorRes = getResources().getColor(R.color.background_accent);
-                extraKeysColor = String.format("#%06X", (0xFFFFFF & colorRes));
-            } else {
-                extraKeysColor = extraKeysColor.trim();
-            }
-            colors.put("extra-keys-background", extraKeysColor);
-
-            String sessionsColor = properties.getProperty("sessions-background");
-            if (sessionsColor == null) {
-                int colorRes = getResources().getColor(R.color.background_accent);
-                sessionsColor = String.format("#%06X", (0xFFFFFF & colorRes));
-            } else {
-                sessionsColor = sessionsColor.trim();
-            }
-            colors.put("sessions-background", sessionsColor);
+            colors.put("extra-keys-background", getColorOrDefault(properties, "extra-keys-background", getAccentColor()));
+            colors.put("sessions-background", getColorOrDefault(properties, "sessions-background", getAccentColor()));
+            colors.put("status-bar-background", getColorOrDefault(properties, "status-bar-background", "#60000000"));
 
         } catch (IOException e) {
-            e.printStackTrace();
-            int colorRes = getResources().getColor(R.color.background_accent);
-            String defaultColor = String.format("#%06X", (0xFFFFFF & colorRes));
-            colors.put("extra-keys-background", defaultColor);
-            colors.put("sessions-background", defaultColor);
+            String defaultAccent = getAccentColor();
+            colors.put("extra-keys-background", defaultAccent);
+            colors.put("sessions-background", defaultAccent);
+            colors.put("status-bar-background", "#60000000");
         }
+
         return colors;
+    }
+
+    private String getColorOrDefault(Properties props, String key, String defaultColor) {
+        String value = props.getProperty(key);
+        return (value != null ? value.trim() : defaultColor);
+    }
+
+    private String getAccentColor() {
+        int colorRes = getResources().getColor(R.color.background_accent);
+        return String.format("#%06X", (0xFFFFFF & colorRes));
+    }
+
+    private void applyDynamicUIConfigurations() {
+        String filePath = "/data/data/com.termux/files/home/.termux/termux.properties";
+        Map<String, String> colors = readColorsFromPropertiesFile(filePath);
+        int extraKeysColor = Color.parseColor(colors.get("extra-keys-background"));
+        int sessionsColor = Color.parseColor(colors.get("sessions-background"));
+        int statusBarColor = Color.parseColor(colors.get("status-bar-background"));
+
+        configureViewVisibility(R.id.terminal_monetbackground, mPreferences.isMonetBackgroundEnabled());
+        configureBackgroundBlur(
+            R.id.sessions_backgroundblur,
+            R.id.sessions_background,
+            sessionsColor,
+            mPreferences.isSessionsBlurEnabled(),
+            0.5f
+        );
+        configureExtraKeysBackground(extraKeysColor);
+
+        getWindow().setStatusBarColor(statusBarColor);
     }
 
     @Override
@@ -410,15 +501,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (mPreferences.isTerminalMarginAdjustmentEnabled())
             addTermuxActivityRootViewGlobalLayoutListener();
 
-        String filePath = "/data/data/com.termux/files/home/.termux/termux.properties";
-        Map<String, String> colors = readColorsFromPropertiesFile(filePath);
-        int extraKeysColor = Color.parseColor(colors.get("extra-keys-background"));
-        int sessionsColor = Color.parseColor(colors.get("sessions-background"));
-
-        configureViewVisibility(R.id.terminal_monetbackground, mPreferences.isMonetBackgroundEnabled());
-        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, sessionsColor, mPreferences.isSessionsBlurEnabled(), 0.5f);
-        configureExtraKeysBackground(extraKeysColor);
-
+        applyDynamicUIConfigurations();
         registerTermuxActivityBroadcastReceiver();
     }
 
@@ -426,21 +509,15 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     public void onResume() {
         super.onResume();
         Logger.logVerbose(LOG_TAG, "onResume");
-        if (mIsInvalidState)
-            return;
+
+        if (mIsInvalidState) return;
+
         if (mTermuxTerminalSessionActivityClient != null)
             mTermuxTerminalSessionActivityClient.onResume();
         if (mTermuxTerminalViewClient != null)
             mTermuxTerminalViewClient.onResume();
 
-        String filePath = "/data/data/com.termux/files/home/.termux/termux.properties";
-        Map<String, String> colors = readColorsFromPropertiesFile(filePath);
-        int extraKeysColor = Color.parseColor(colors.get("extra-keys-background"));
-        int sessionsColor = Color.parseColor(colors.get("sessions-background"));
-
-        configureViewVisibility(R.id.terminal_monetbackground, mPreferences.isMonetBackgroundEnabled());
-        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, sessionsColor, mPreferences.isSessionsBlurEnabled(), 0.5f);
-        configureExtraKeysBackground(extraKeysColor);
+        applyDynamicUIConfigurations();
 
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
@@ -452,15 +529,15 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         View view = findViewById(viewId);
         view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
-    
+
     private void configureBackgroundBlur(int blurViewId, int backgroundViewId, int sessionsColor, boolean isBlurEnabled, float alphaIfBlurred) {
         View blurView = findViewById(blurViewId);
         View backgroundView = findViewById(backgroundViewId);
-        blurView.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
-        backgroundView.setBackgroundColor(sessionsColor);
-        backgroundView.setAlpha(isBlurEnabled ? alphaIfBlurred : 1.0f);
+
+        setBlurAndVisibility(blurView, backgroundView, isBlurEnabled, alphaIfBlurred);
+        applyRoundedBackground(backgroundView, sessionsColor, 24f);
     }
-    
+
     private void configureExtraKeysBackground(int extraKeysColor) {
         View extraKeysBackground = findViewById(R.id.extrakeys_background);
         View extraKeysBackgroundBlur = findViewById(R.id.extrakeys_backgroundblur);
@@ -469,17 +546,25 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (!isToolbarToggled) {
             extraKeysBackgroundBlur.setVisibility(View.GONE);
             extraKeysBackground.setVisibility(View.GONE);
-        } else {
-            if (mPreferences.isExtraKeysBlurEnabled()) {
-                extraKeysBackgroundBlur.setVisibility(View.VISIBLE);
-                extraKeysBackground.setAlpha(0.80f);
-            } else {
-                extraKeysBackgroundBlur.setVisibility(View.GONE);
-                extraKeysBackground.setAlpha(1.0f);
-            }
-            extraKeysBackground.setBackgroundColor(extraKeysColor);
-            extraKeysBackground.setVisibility(View.VISIBLE);
+            return;
         }
+
+        boolean isBlurEnabled = mPreferences.isExtraKeysBlurEnabled();
+        setBlurAndVisibility(extraKeysBackgroundBlur, extraKeysBackground, isBlurEnabled, 0.80f);
+        applyRoundedBackground(extraKeysBackground, extraKeysColor, 24f);
+    }
+
+    private void applyRoundedBackground(View view, int color, float cornerRadius) {
+        GradientDrawable roundedBackground = new GradientDrawable();
+        roundedBackground.setColor(color);
+        roundedBackground.setCornerRadius(cornerRadius);
+        view.setBackground(roundedBackground);
+    }
+
+    private void setBlurAndVisibility(View blurView, View backgroundView, boolean isBlurEnabled, float blurredAlpha) {
+        blurView.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+        backgroundView.setAlpha(isBlurEnabled ? blurredAlpha : 1.0f);
+        backgroundView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -681,34 +766,39 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     public void toggleTerminalToolbar() {
         ViewPager terminalToolbarViewPager = getTerminalToolbarViewPager();
         if (terminalToolbarViewPager == null) return;
-    
+
         boolean showNow = mPreferences.toogleShowTerminalToolbar();
         Logger.showToast(this, showNow ? getString(R.string.msg_enabling_terminal_toolbar) : getString(R.string.msg_disabling_terminal_toolbar), true);
-    
+
         updateViewVisibility(terminalToolbarViewPager, showNow);
         updateViewVisibility(R.id.extrakeys_backgroundblur, showNow);
         updateViewVisibility(R.id.extrakeys_background, showNow);
-    
+
         isToolbarHidden = !showNow;
-    
+
         if (showNow && isTerminalToolbarTextInputViewSelected()) {
             findViewById(R.id.terminal_toolbar_text_input).requestFocus();
         }
     }
-    
+
     private void updateViewVisibility(int viewId, boolean isVisible) {
         View view = findViewById(viewId);
         if (view != null) {
             view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+
+            if (viewId == R.id.extrakeys_backgroundblur && isVisible) {
+                boolean isBlurEnabled = mPreferences.isExtraKeysBlurEnabled();
+                view.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+            }
         }
     }
-    
+
     private void updateViewVisibility(View view, boolean isVisible) {
         if (view != null) {
             view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
-    
+
 
     private void saveTerminalToolbarTextInput(Bundle savedInstanceState) {
         if (savedInstanceState == null)
@@ -724,13 +814,17 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     private void setSettingsButtonView() {
         View settingsButton = findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(v -> {
+            vibrate();
             ActivityUtils.startActivity(this, new Intent(this, SettingsActivity.class));
         });
     }
 
     private void setNewSessionButtonView() {
         View newSessionButton = findViewById(R.id.new_session_button);
-        newSessionButton.setOnClickListener(v -> mTermuxTerminalSessionActivityClient.addNewSession(false, null));
+        newSessionButton.setOnClickListener(v -> {
+            vibrate();
+            mTermuxTerminalSessionActivityClient.addNewSession(false, null);
+        });
         newSessionButton.setOnLongClickListener(v -> {
             TextInputDialogUtils.textInput(TermuxActivity.this, R.string.title_create_named_session, null, R.string.action_create_named_session_confirm, text -> mTermuxTerminalSessionActivityClient.addNewSession(false, text), R.string.action_new_session_failsafe, text -> mTermuxTerminalSessionActivityClient.addNewSession(true, text), -1, null, null);
             return true;
@@ -739,6 +833,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
     private void setToggleKeyboardView() {
         findViewById(R.id.toggle_keyboard_button).setOnClickListener(v -> {
+            vibrate();
             mTermuxTerminalViewClient.onToggleSoftKeyboardRequest();
             getDrawer().closeDrawers();
         });
@@ -787,7 +882,164 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         mLastToast.show();
     }
 
+    public void showContextPopupWindow(View anchorView) {
+        TerminalSession session = getCurrentSession();
+        if (session == null) return;
+
+        boolean autoFillEnabled = mTerminalView.isAutoFillEnabled();
+        String selectedText = mTerminalView.getStoredSelectedText();
+        boolean hasSelectedText = selectedText != null && !selectedText.isEmpty();
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View popupView = inflater.inflate(R.layout.custom_context_menu, null);
+
+        //popupView.setBackgroundResource(R.drawable.popup_background);
+        int[] gradientColors = new int[] {
+            0x804efcd7,
+            0x807abbff,
+            0x80c64dff
+        };
+        GradientDrawable border = new GradientDrawable(
+            GradientDrawable.Orientation.LEFT_RIGHT,
+            gradientColors
+        );
+        border.setCornerRadius(48f);
+        GradientDrawable background = new GradientDrawable();
+        background.setColor(0xcd000000);
+        background.setCornerRadius(44f);
+        Drawable[] layers = new Drawable[] { border, background };
+        LayerDrawable layerDrawable = new LayerDrawable(layers);
+        layerDrawable.setLayerInset(1, 6, 6, 6, 6);
+        popupView.setBackground(layerDrawable);
+
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true
+        );
+
+        popupWindow.setElevation(16f);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        MaterialButton selectUrlBtn = popupView.findViewById(R.id.select_url);
+        selectUrlBtn.setTypeface(null, Typeface.NORMAL);
+        selectUrlBtn.setOnClickListener(v -> {
+            mTermuxTerminalViewClient.showUrlSelection();
+            popupWindow.dismiss();
+        });
+
+        MaterialButton shareTranscriptBtn = popupView.findViewById(R.id.share_transcript);
+        shareTranscriptBtn.setTypeface(null, Typeface.NORMAL);
+        shareTranscriptBtn.setOnClickListener(v -> {
+            mTermuxTerminalViewClient.shareSessionTranscript();
+            popupWindow.dismiss();
+        });
+
+        MaterialButton shareSelected = popupView.findViewById(R.id.share_selected_text);
+        shareSelected.setTypeface(null, Typeface.NORMAL);
+        if (hasSelectedText) {
+            shareSelected.setVisibility(View.VISIBLE);
+            shareSelected.setOnClickListener(v -> {
+                mTermuxTerminalViewClient.shareSelectedText();
+                popupWindow.dismiss();
+            });
+        }
+
+        MaterialButton autofillUsername = popupView.findViewById(R.id.autofill_username);
+        MaterialButton autofillPassword = popupView.findViewById(R.id.autofill_password);
+        autofillUsername.setTypeface(null, Typeface.NORMAL);
+        autofillPassword.setTypeface(null, Typeface.NORMAL);
+        if (autoFillEnabled) {
+            autofillUsername.setVisibility(View.VISIBLE);
+            autofillUsername.setOnClickListener(v -> {
+                mTerminalView.requestAutoFillUsername();
+                popupWindow.dismiss();
+            });
+
+            autofillPassword.setVisibility(View.VISIBLE);
+            autofillPassword.setOnClickListener(v -> {
+                mTerminalView.requestAutoFillPassword();
+                popupWindow.dismiss();
+            });
+        }
+
+        MaterialButton resetBtn = popupView.findViewById(R.id.reset_terminal);
+        resetBtn.setTypeface(null, Typeface.NORMAL);
+        resetBtn.setOnClickListener(v -> {
+            onResetTerminalSession(session);
+            popupWindow.dismiss();
+        });
+
+        MaterialButton killProcessBtn = popupView.findViewById(R.id.kill_process);
+        killProcessBtn.setTypeface(null, Typeface.NORMAL);
+        killProcessBtn.setText(getString(R.string.action_kill_process, session.getPid()));
+        killProcessBtn.setEnabled(session.isRunning());
+        killProcessBtn.setOnClickListener(v -> {
+            showKillSessionDialog(session);
+            popupWindow.dismiss();
+        });
+
+        MaterialButton fontColorBtn = popupView.findViewById(R.id.font_color);
+        fontColorBtn.setTypeface(null, Typeface.NORMAL);
+        fontColorBtn.setOnClickListener(v -> {
+            showFontAndColorDialog();
+            popupWindow.dismiss();
+        });
+
+        MaterialButton setBgImageBtn = popupView.findViewById(R.id.set_background_image);
+        setBgImageBtn.setTypeface(null, Typeface.NORMAL);
+        setBgImageBtn.setOnClickListener(v -> {
+            mTermuxBackgroundManager.setBackgroundImage();
+            popupWindow.dismiss();
+        });
+
+        MaterialButton removeBgImageBtn = popupView.findViewById(R.id.remove_background_image);
+        removeBgImageBtn.setTypeface(null, Typeface.NORMAL);
+        removeBgImageBtn.setOnClickListener(v -> {
+            mTermuxBackgroundManager.removeBackgroundImage(true);
+            popupWindow.dismiss();
+        });
+
+        SwitchMaterial keepScreenSwitch = popupView.findViewById(R.id.keep_screen_on);
+        keepScreenSwitch.setTypeface(keepScreenSwitch.getTypeface(), Typeface.NORMAL);
+        keepScreenSwitch.setTextColor(Color.parseColor("#c3e4fd"));
+        keepScreenSwitch.setChecked(mPreferences.shouldKeepScreenOn());
+        keepScreenSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> toggleKeepScreenOn());
+
+        MaterialButton helpBtn = popupView.findViewById(R.id.help);
+        helpBtn.setTypeface(null, Typeface.NORMAL);
+        helpBtn.setOnClickListener(v -> {
+            ActivityUtils.startActivity(this, new Intent(this, HelpActivity.class));
+            popupWindow.dismiss();
+        });
+
+        MaterialButton settingsBtn = popupView.findViewById(R.id.settings);
+        settingsBtn.setTypeface(null, Typeface.NORMAL);
+        settingsBtn.setOnClickListener(v -> {
+            ActivityUtils.startActivity(this, new Intent(this, SettingsActivity.class));
+            popupWindow.dismiss();
+        });
+
+        MaterialButton reportBtn = popupView.findViewById(R.id.report);
+        reportBtn.setTypeface(null, Typeface.NORMAL);
+        reportBtn.setOnClickListener(v -> {
+            mTermuxTerminalViewClient.reportIssueFromTranscript();
+            popupWindow.dismiss();
+        });
+
+        popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
+    }
+
+
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        showContextPopupWindow(findViewById(android.R.id.content));
+    }
+
+    /*@Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         TerminalSession currentSession = getCurrentSession();
         if (currentSession == null) return;
@@ -813,18 +1065,18 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         menu.add(Menu.NONE, CONTEXT_MENU_HELP_ID, Menu.NONE, R.string.action_open_help);
         menu.add(Menu.NONE, CONTEXT_MENU_SETTINGS_ID, Menu.NONE, R.string.action_open_settings);
         menu.add(Menu.NONE, CONTEXT_MENU_REPORT_ID, Menu.NONE, R.string.action_report_issue);
-    }
+    }*/
 
     /**
      * Hook system menu to show context menu instead.
      */
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mTerminalView.showContextMenu();
         return false;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onContextItemSelected(MenuItem item) {
         TerminalSession session = getCurrentSession();
         switch(item.getItemId()) {
@@ -873,14 +1125,14 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
             default:
                 return super.onContextItemSelected(item);
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onContextMenuClosed(Menu menu) {
         super.onContextMenuClosed(menu);
         // onContextMenuClosed() is triggered twice if back button is pressed to dismiss instead of tap for some reason
         mTerminalView.onContextMenuClosed(menu);
-    }
+    }*/
 
     private void showKillSessionDialog(TerminalSession session) {
         if (session == null)
