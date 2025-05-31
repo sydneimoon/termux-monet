@@ -1220,6 +1220,9 @@ public final class TerminalView extends View {
             mRenderer.render(mEmulator, canvas, mTopRow, sel[0], sel[1], sel[2], sel[3]);
             // render the text selection handles
             renderTextSelection();
+            if (mEmulator != null && mEmulator.isCursorEnabled()) {
+                postInvalidateOnAnimation();
+            }
         }
     }
 
