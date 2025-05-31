@@ -241,29 +241,37 @@ public class TermuxAppSharedPreferences extends AppSharedPreferences {
     public void setBackgroundImageEnabled(boolean value) {
         SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_BACKGROUND_IMAGE_ENABLED, value, false);
     }
-    
+
     public boolean isExtraKeysBlurEnabled() {
         return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_EXTRAKEYS_BLUR_ENABLED, TERMUX_APP.DEFAULT_VALUE_EXTRAKEYS_BLUR_ENABLED);
     }
-    
+
     public void setExtraKeysBlurEnabled(boolean value) {
         SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_EXTRAKEYS_BLUR_ENABLED, value, false);
     }
-    
+
     public boolean isSessionsBlurEnabled() {
         return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_SESSIONS_BLUR_ENABLED, TERMUX_APP.DEFAULT_VALUE_SESSIONS_BLUR_ENABLED);
     }
-    
+
     public void setSessionsBlurEnabled(boolean value) {
         SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_SESSIONS_BLUR_ENABLED, value, false);
     }
-    
+
     public boolean isMonetBackgroundEnabled() {
         return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_MONET_BACKGROUND_ENABLED, TERMUX_APP.DEFAULT_VALUE_MONET_BACKGROUND_ENABLED);
     }
-    
+
     public void setMonetBackgroundEnabled(boolean value) {
         SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_MONET_BACKGROUND_ENABLED, value, false);
+    }
+
+    public boolean isStatusBarBlurEnabled() {
+        return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_STATUSBAR_BLUR_ENABLED, TERMUX_APP.DEFAULT_VALUE_STATUSBAR_BLUR_ENABLED);
+    }
+
+    public void setStatusBarBlurEnabled(boolean value) {
+        SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_STATUSBAR_BLUR_ENABLED, value, false);
     }
 
     public boolean arePluginErrorNotificationsEnabled(boolean readFromFile) {

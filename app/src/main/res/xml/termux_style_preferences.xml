@@ -10,34 +10,45 @@
             app:summaryOff="@string/termux_background_image_enabled_off"
             app:summaryOn="@string/termux_background_image_enabled_on"
             app:title="@string/termux_background_image_enabled_title" />
-            
+
         <SwitchPreferenceCompat
             app:key="monet_background_enabled"
             app:summaryOff="@string/termux_monet_background_enabled_off"
             app:summaryOn="@string/termux_monet_background_enabled_on"
             app:title="@string/termux_monet_background_enabled_title" />
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         app:key="extrakeys"
         app:title="@string/termux_extrakeys_header">
-        
+
         <SwitchPreferenceCompat
             app:key="extrakeys_blur_enabled"
             app:summaryOff="@string/termux_extrakeys_blur_enabled_off"
             app:summaryOn="@string/termux_extrakeys_blur_enabled_on"
             app:title="@string/termux_extrakeys_blur_enabled_title" />
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         app:key="sessions"
         app:title="@string/termux_sessions_header">
-        
+
         <SwitchPreferenceCompat
             app:key="sessions_blur_enabled"
             app:summaryOff="@string/termux_sessions_blur_enabled_off"
             app:summaryOn="@string/termux_sessions_blur_enabled_on"
             app:title="@string/termux_sessions_blur_enabled_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="statusbar"
+        app:title="@string/termux_statusbar_header">
+
+        <SwitchPreferenceCompat
+            app:key="statusbar_blur_enabled"
+            app:summaryOff="@string/termux_statusbar_blur_enabled_off"
+            app:summaryOn="@string/termux_statusbar_blur_enabled_on"
+            app:title="@string/termux_statusbar_blur_enabled_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

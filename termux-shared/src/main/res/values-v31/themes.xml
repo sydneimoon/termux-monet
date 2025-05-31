@@ -28,7 +28,9 @@
     <style name="Theme.MarkdownViewActivity.Light" parent="Theme.MediaViewActivity.Light"/>
 
     <!-- BaseActivity extended classes DayNight NoActionBar themes. -->
-    <style name="Theme.MarkdownViewActivity.DayNight" parent="Theme.MediaViewActivity.DayNight"/>
+    <style name="Theme.MarkdownViewActivity.DayNight" parent="Theme.MediaViewActivity.DayNight">
+        <item name="android:statusBarColor">#010409</item>
+    </style>
 
 
 

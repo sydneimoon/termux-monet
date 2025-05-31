@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:fillViewport="true"
+    android:background="?attr/colorSurfaceContainer"
+    android:overScrollMode="never"
+    android:scrollbars="vertical"
+    android:scrollbarThumbVertical="@drawable/terminal_scroll_shape">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<com.termux.app.CustomShapeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:realtimeBlurRadius="15dp"
+            app:realtimeOverlayColor="#aa121212" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/select_url"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_select_url"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_transcript"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_share_transcript"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_selected_text"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_share_selected_text"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autofill_username"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_autofill_username"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autofill_password"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_autofill_password"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/reset_terminal"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_reset_terminal"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/kill_process"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_kill_process"
+            android:textColor="@color/general_dialog_text_01"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/action_style_terminal"
+            android:textAppearance="?attr/textAppearanceLabelLarge" />-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/font_color"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_font_and_color"
+            android:textColor="@color/general_dialog_text_02"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/set_background_image"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_set_background_image"
+            android:textColor="@color/general_dialog_text_02"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/remove_background_image"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_remove_background_image"
+            android:textColor="@color/general_dialog_text_02"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/keep_screen_on"
+            style="@style/Widget.MaterialComponents.CompoundButton.Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_toggle_keep_screen_on"
+            android:layout_marginLeft="7dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/help"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_open_help"
+            android:textColor="@color/general_dialog_text_03"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_open_settings"
+            android:textColor="@color/general_dialog_text_03"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/report"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_report_issue"
+            android:textColor="@color/general_dialog_text_03"
+            android:gravity="start|center_vertical"
+            android:textAlignment="viewStart" />
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
