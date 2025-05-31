@@ -288,6 +288,11 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         }
         // Implement back key to toggle soft keyboard
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // When the drawer is open → we close it
+            if (mActivity.getDrawer() != null && mActivity.getDrawer().isDrawerOpen(Gravity.RIGHT)) {
+                mActivity.getDrawer().closeDrawers();
+                return true;
+            }
             // When back key toggle soft keyboard is enabled
             if (!mActivity.getProperties().isBackKeyTheEscapeKey() && mActivity.getPreferences().isBackKeyToggleSoftKeyboard()) {
                 // When soft keyboard can be shown
@@ -504,6 +509,11 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             if (codePoint != null)
                 mSessionShortcuts.add(new KeyboardShortcut(codePoint, entry.getValue()));
         }
+    }
+
+    public void setFontSize(int size) {
+        mActivity.getPreferences().setFontSize(size);
+        mActivity.getTerminalView().setTextSize(size);
     }
 
     public void changeFontSize(boolean increase) {

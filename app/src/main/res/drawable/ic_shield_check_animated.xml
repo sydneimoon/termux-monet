@@ -1,0 +1,20 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_shield_check">
+
+    <!--<target
+        android:name="shield_check"
+        android:animation="@animator/pulse_scale" />-->
+
+    <!--<target
+        android:name="shield_check"
+        android:animation="@animator/shine_alpha" />-->
+
+    <target
+        android:name="scale_vector"
+        android:animation="@animator/pulse_scale" />
+
+    <target
+        android:name="alpha_vector"
+        android:animation="@animator/shine_alpha" />
+
+</animated-vector>

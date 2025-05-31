@@ -72,6 +72,7 @@ package com.termux.shared.termux.settings.preferences;
  *
  * - 0.16.5 (2022-08-18)
  *      - Add `KEY_ACTIVITY_FINISH_REMOVE_TASK`.
+ *
  * - 0.17.0 (2022-11-04)
  *      - Added following to `TERMUX_APP`:
  *          `KEY_BACKGROUND_IMAGE_ENABLED` and `DEFAULT_VALUE_BACKGROUND_IMAGE_ENABLED`.
@@ -209,27 +210,34 @@ public final class TermuxPreferenceConstants {
         public static final String KEY_BACKGROUND_IMAGE_ENABLED = "background_image_enabled";
 
         public static final boolean DEFAULT_VALUE_BACKGROUND_IMAGE_ENABLED = false;
-        
+
         /**
          * Defines the key for whether extrakeys blur is enabled or not.
          */
         public static final String KEY_EXTRAKEYS_BLUR_ENABLED = "extrakeys_blur_enabled";
 
         public static final boolean DEFAULT_VALUE_EXTRAKEYS_BLUR_ENABLED = false;
-        
+
         /**
          * Defines the key for whether sessions blur is enabled or not.
          */
         public static final String KEY_SESSIONS_BLUR_ENABLED = "sessions_blur_enabled";
 
         public static final boolean DEFAULT_VALUE_SESSIONS_BLUR_ENABLED = false;
-        
+
         /**
          * Defines the key for whether monet background is enabled or not.
          */
         public static final String KEY_MONET_BACKGROUND_ENABLED = "monet_background_enabled";
 
         public static final boolean DEFAULT_VALUE_MONET_BACKGROUND_ENABLED = false;
+
+        /**
+         * Defines the key for whether statusbar blur is enabled or not.
+         */
+        public static final String KEY_STATUSBAR_BLUR_ENABLED = "statusbar_blur_enabled";
+
+        public static final boolean DEFAULT_VALUE_STATUSBAR_BLUR_ENABLED = false;
     }
 
     /**

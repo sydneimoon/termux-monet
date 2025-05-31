@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termux-Monet - Material You Theme for Termux</title>
+
+    <!-- Meta Description -->
+    <meta name="description"
+        content="Termux-Monet is an unofficial, modified fork of Termux, an Android terminal application and Linux environment, with Material You (Monet) theming and experimental features.">
+
+    <!-- Keywords -->
+    <meta name="keywords"
+        content="Termux-Monet, Termux, Material You, Monet, Android terminal, terminal emulator, Linux environment, Android 11, Android 12, ADB, open source">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Termux-Monet - Material You Theme for Termux">
+    <meta property="og:description"
+        content="An unofficial, modified fork of Termux with Material You (Monet) theming, experimental features and community-made changes.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png">
+    <meta property="og:url" content="https://ashellyou.github.io">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Termux-Monet - Material You Theme for Termux">
+    <meta name="twitter:description" content="An unofficial, modified fork of Termux with Material You theming.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/ic_launcher2.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/ic_launcher2.png"
+                    alt="Termux-Monet Logo" class="logo-img">
+                <span>Termux-Monet</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+                <li><a href="#download" class="nav-link">Download</a></li>
+                <li><a href="#ppk" class="nav-link">PPK</a></li>
+                <li><a href="#debugging" class="nav-link">Debugging</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Termux-Monet</span>
+                </h1>
+                <p class="hero-tagline" id="tagline">
+                    <span class="typing-text"></span>
+                </p>
+                <p class="hero-description">
+                    An unofficial, modified fork of
+                    <a href="https://github.com/termux/termux-app" target="_blank" rel="noopener">Termux</a> — an
+                    Android terminal application and Linux environment — with Material&nbsp;You (Monet) theming,
+                    experimental features and community-made changes.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://github.com/Termux-Monet/termux-monet/releases/latest" class="btn btn-primary"
+                        target="_blank" rel="noopener">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        Download on GitHub
+                    </a>
+                    <a href="#ppk" class="btn btn-secondary">
+                        Fix Phantom Process Killer
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="github-stars">200+</span>
+                        <span class="stat-label">GitHub Stars</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="github-downloads">100k+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="github-contributors">38</span>
+                        <span class="stat-label">Contributors</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-mockup">
+                <div class="window-frame">
+                    <div class="window-bar">
+                        <span class="window-dot red"></span>
+                        <span class="window-dot yellow"></span>
+                        <span class="window-dot green"></span>
+                        <span class="window-title">~ $ termux-monet</span>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png"
+                        alt="Termux-Monet Screenshot" class="window-shot" id="hero-screenshot" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful <span class="gradient-text">Features</span></h2>
+                <p class="section-subtitle">Everything the regular Termux gives you, plus a Material You touch</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Material You Theming</h3>
+                    <p class="feature-description">A dynamic Monet color scheme powered by your wallpaper. On Android
+                        12+ the app follows Material You, while lower versions show a static black and white theme.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Experimental Features</h3>
+                    <p class="feature-description">A playground of community-made changes and experimental patches on top
+                        of Termux. Don't expect consistency, professionality or stability.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+                            <line x1="6" y1="1" x2="6" y2="4" />
+                            <line x1="10" y1="1" x2="10" y2="4" />
+                            <line x1="14" y1="1" x2="14" y2="4" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Phantom Process Fixes</h3>
+                    <p class="feature-description">Guidance to tame the Android Phantom Process Killer on Android 12+
+                        via ADB, root or a Magisk module, so Termux stops being killed silently.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17l6-6-6-6M12 19h8" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Nightly &amp; Stable Builds</h3>
+                    <p class="feature-description">Stabler releases from GitHub Releases and bleeding-edge unstable
+                        APKs from GitHub Actions, built for every push to the repository.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Terminal Customization</h3>
+                    <p class="feature-description">Day/night color theme prefixes, true italic fonts, wallpaper support
+                        with overlay colors and optional background images — your terminal, your style.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 17 10 11 4 5" />
+                            <line x1="12" y1="19" x2="20" y2="19" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Dynamic MOTD &amp; Images</h3>
+                    <p class="feature-description">Standard and dynamic message-of-the-day, plus inline images and gifs
+                        using the Sixel and iTerm2 protocols right inside the terminal.</p>
+                </div>
+            </div>
+            <div class="features-extra">
+                <div class="extra-feature">
+                    <span class="extra-icon">🔤</span>
+                    <span>Disable text scaling</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">🌗</span>
+                    <span>Day / Night themes</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">🅸</span>
+                    <span>True italic fonts</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">📄</span>
+                    <span>Dynamic MOTD</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">🖼️</span>
+                    <span>Wallpaper support</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">🖥️</span>
+                    <span>Sixel / iTerm2 images</span>
+                </div>
+                <div class="extra-feature">
+                    <span class="extra-icon">📟</span>
+                    <span>Run from ADB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">See it in <span class="gradient-text">Action</span></h2>
+                <p class="section-subtitle">The Monet theme in all its glory — swipe through the themes</p>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous screenshot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carousel-track">
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/226617cc-6bb0-4c28-a01b-cb0e51f09716"
+                                    alt="Shine screenshot 1" loading="lazy">
+                                <figcaption class="shot-label">Shine</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/7402b763-a58b-4f9d-b1a9-51b39e540643"
+                                    alt="Shine screenshot 2" loading="lazy">
+                                <figcaption class="shot-label">Shine</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/fe11cba6-b097-4141-98c8-ae11eebe15a6"
+                                    alt="Remix screenshot 1" loading="lazy">
+                                <figcaption class="shot-label">Remix</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/c289d019-8d8c-4d7e-8c13-4411132cb015"
+                                    alt="Remix screenshot 2" loading="lazy">
+                                <figcaption class="shot-label">Remix</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next screenshot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+    </section>
+
+    <!-- Compatibility Section -->
+    <section class="requirements" id="compat">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compatibility &amp; <span class="gradient-text">Requirements</span></h2>
+                <p class="section-subtitle">Know what you need before jumping in</p>
+            </div>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <div class="requirement-icon android">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="7" y="2" width="10" height="20" rx="2" />
+                            <path d="M2 9h20M2 15h20" />
+                        </svg>
+                    </div>
+                    <h3>Android 11+</h3>
+                    <p>Minimum required version to install and run Termux-Monet.</p>
+                    <span class="requirement-badge">Required</span>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon monet">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3>Android 12+</h3>
+                    <p>Full dynamic Material You (Monet) theming. Lower versions get a static black &amp; white theme.</p>
+                    <span class="requirement-badge success">Full Monet</span>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon opensource">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3>Open Source</h3>
+                    <p>Licensed under the GNU GPL v3.0. Fork it, study it, build on it.</p>
+                    <a href="https://github.com/Termux-Monet/termux-monet/blob/master/LICENSE" target="_blank"
+                        rel="noopener" class="requirement-link">View License →</a>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon plugins">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                    </div>
+                    <h3>Optional Plugins</h3>
+                    <p>Modified Termux:Styling, Termux:API, Termux:Boot and more are available for the fork.</p>
+                    <a href="https://github.com/orgs/Termux-Monet/repositories" target="_blank" rel="noopener"
+                        class="requirement-link">Browse Plugins →</a>
+                </div>
+            </div>
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <h4>Disclaimer</h4>
+                    <p>Termux-Monet is an unofficial fork with experimental features. By installing this app you agree
+                        that you are aware of its unstableness. The developers are not responsible for bricked devices,
+                        dead SD cards or any damage caused by misuse of this program. Using Termux for attacking/hacking
+                        targets without prior mutual consent is illegal — it is the end user's responsibility to obey all
+                        applicable laws.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phantom Process Killer Section -->
+    <section class="ppk" id="ppk">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Phantom <span class="gradient-text">Process Killer</span></h2>
+                <p class="section-subtitle">Termux may be unstable on Android 12+ — here's how to fix it</p>
+            </div>
+            <div class="notice-box">
+                <div class="notice-icon">ℹ️</div>
+                <div class="notice-content">
+                    <h4>Notice</h4>
+                    <p>Android OS will kill any phantom processes greater than 32 (limit is for all apps combined) and
+                        also kill any processes using excessive CPU. You may get
+                        <code>[Process completed (signal 9) - press Enter]</code> in the terminal without exiting the
+                        shell yourself. Check the
+                        <a href="https://github.com/termux/termux-app/issues/2366" target="_blank" rel="noopener">related
+                            issue</a> and
+                        <a href="https://gist.github.com/agnostic-apollo/dc7e47991c512755ff26bd2d31e72ca8" target="_blank"
+                            rel="noopener">this gist</a>
+                        for more details.
+                    </p>
+                </div>
+            </div>
+            <div class="ppk-grid">
+                <div class="ppk-card">
+                    <div class="ppk-icon adb">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                            <path d="M8 9h.01M16 9h.01M9 15h6" />
+                        </svg>
+                    </div>
+                    <h3>Deactivate via ADB</h3>
+                    <p>Paste the following commands on an ADB console, in order:</p>
+                    <pre class="code-block"><code>adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"</code></pre>
+                    <pre class="code-block"><code>adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"</code></pre>
+                    <pre class="code-block"><code>adb shell settings put global settings_enable_monitor_phantom_procs false</code></pre>
+                </div>
+                <div class="ppk-card">
+                    <div class="ppk-icon root">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3>Deactivate via ROOT</h3>
+                    <p>On Termux (or any terminal emulator), paste the following commands in order:</p>
+                    <pre class="code-block"><code>su -c /system/bin/device_config set_sync_disabled_for_tests persistent</code></pre>
+                    <pre class="code-block"><code>su -c /system/bin/device_config put activity_manager max_phantom_processes 2147483647</code></pre>
+                    <pre class="code-block"><code>su -c setprop persist.sys.fflag.override.settings_enable_monitor_phantom_procs false</code></pre>
+                </div>
+                <div class="ppk-card">
+                    <div class="ppk-icon magisk">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 0118 0" />
+                            <path d="M3 12a9 9 0 0018 0" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
+                    <h3>Experimental Method (MAGISK)</h3>
+                    <p>On a rooted phone with Magisk installed, flash the following module:</p>
+                    <a class="btn btn-outline btn-sm"
+                        href="https://raw.githubusercontent.com/HardcodedCat/termux-monet/master/ppr/PhantomProcessRetainer-main.zip"
+                        target="_blank" rel="noopener">
+                        LetTheGhostsOut.zip
+                    </a>
+                    <p class="ppk-note">After that, the Phantom Process Killer might be deactivated on every device
+                        boot. Please make an <a href="https://github.com/Termux-Monet/termux-monet/issues"
+                            target="_blank" rel="noopener">issue</a> if the module didn't work for you.</p>
+                </div>
+                <div class="ppk-card">
+                    <div class="ppk-icon verify">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <h3>Verify it was Disabled (ROOT)</h3>
+                    <pre class="code-block"><code>su -c /system/bin/dumpsys activity settings | grep max_phantom_processes</code></pre>
+                    <pre class="code-block"><code>su -c /system/bin/device_config get activity_manager max_phantom_processes</code></pre>
+                    <p class="ppk-note">Both commands above should return <code>2147483647</code>.</p>
+                    <pre class="code-block"><code>su -c getprop persist.sys.fflag.override.settings_enable_monitor_phantom_procs</code></pre>
+                    <p class="ppk-note">It should return <code>false</code>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Debugging Section -->
+    <section class="debugging" id="debugging">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Debugging &amp; <span class="gradient-text">Log Levels</span></h2>
+                <p class="section-subtitle">Help debug problems of the Termux app and its plugins</p>
+            </div>
+            <div class="debug-content">
+                <p class="debug-text">
+                    Set an appropriate <code>logcat</code> <strong>Log Level</strong> in
+                    <em>Termux app settings → &lt;APP_NAME&gt; → Debugging → Log Level</em>
+                    (requires Termux app version <code>&gt;= 0.118.0</code>). It defaults to <strong>Normal</strong> and
+                    level <strong>Verbose</strong> logs additional information. Revert to <strong>Normal</strong> after
+                    debugging since private data may otherwise be passed to <code>logcat</code>.
+                </p>
+                <div class="log-levels">
+                    <span class="log-level">Off</span>
+                    <span class="log-level active">Normal</span>
+                    <span class="log-level">Debug</span>
+                    <span class="log-level">Verbose</span>
+                </div>
+                <p class="debug-text">
+                    Plugin apps don't execute the commands themselves — they send intents to Termux, so set the log
+                    level for both Termux and each plugin. Once set, run <code>logcat</code> in the Termux terminal to
+                    view logs in realtime (<code>Ctrl+c</code> to stop) or dump them to a file:
+                </p>
+                <pre class="code-block"><code>logcat</code></pre>
+                <pre class="code-block"><code>logcat -d > logcat.txt</code></pre>
+                <p class="debug-text">
+                    You can also generate <code>stat</code> info and a <code>logcat</code> dump automatically via the
+                    terminal's long hold options menu → <strong>More</strong> → <strong>Report Issue</strong>. Users
+                    must post complete reports (optionally without sensitive info) — issues opened with partial
+                    screenshots instead of text will likely be closed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forking Section -->
+    <section class="forking" id="forking">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Forking <span class="gradient-text">Instructions</span></h2>
+                <p class="section-subtitle">Want to build your own Termux-Monet based app?</p>
+            </div>
+            <div class="forking-list">
+                <div class="forking-item">
+                    <span class="forking-num">1</span>
+                    <p>Check <a href="https://github.com/Termux-Monet/termux-monet/blob/master/termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java"
+                            target="_blank" rel="noopener">TermuxConstants</a> javadocs for instructions on what changes
+                        to make to change the package name.</p>
+                </div>
+                <div class="forking-item">
+                    <span class="forking-num">2</span>
+                    <p>Keep <code>targetSdk 28</code> to avoid the login error <code>not exec("/data/data/com.termux/files/usr/bin/login"): Permission denied</code>.</p>
+                </div>
+                <div class="forking-item">
+                    <span class="forking-num">3</span>
+                    <p>Recompile the <a href="https://github.com/termux/termux-packages/wiki/For-maintainers#build-bootstrap-archives"
+                            target="_blank" rel="noopener">bootstrap zip</a> for the new package name.</p>
+                </div>
+                <div class="forking-item">
+                    <span class="forking-num">4</span>
+                    <p>Not all plugins use <code>TermuxConstants</code> yet — some have hardcoded <code>com.termux</code>
+                        values and need manual patching.</p>
+                </div>
+                <div class="forking-item">
+                    <span class="forking-num">5</span>
+                    <p>Enable GitHub Actions and do any commit (e.g. upload a placeholder file) to build the app. Create
+                        empty releases — GitHub Actions uploads the APKs automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get <span class="gradient-text">Termux-Monet</span></h2>
+                <p class="section-subtitle">Download from your preferred source</p>
+            </div>
+            <div class="download-grid">
+                <a href="https://github.com/Termux-Monet/termux-monet/releases" target="_blank" rel="noopener"
+                    class="download-card primary">
+                    <div class="download-info">
+                        <h3>GitHub Releases</h3>
+                        <p>Stabler releases — APKs under the release assets</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+                <a href="https://github.com/Termux-Monet/termux-monet/actions/workflows/debug_build.yml" target="_blank"
+                    rel="noopener" class="download-card">
+                    <div class="download-info">
+                        <h3>GitHub Actions</h3>
+                        <p>Latest unstable nightly builds — APKs under the artifacts</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+                <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener"
+                    class="download-card">
+                    <div class="download-info">
+                        <h3>Source Code</h3>
+                        <p>Build it yourself from the repository</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+            </div>
+            <div class="warning-box">
+                <div class="warning-icon">🔐</div>
+                <div class="warning-content">
+                    <h4>Security Warning</h4>
+                    <p>APK files on GitHub are signed with a <a
+                            href="https://github.com/termux/termux-app/blob/master/app/testkey_untrusted.jks"
+                            target="_blank" rel="noopener">test key shared with the community</a>. This is not an
+                        official developer key and everyone can use it to forge a malicious Termux update installable
+                        over the GitHub build. Think twice before installing Termux builds distributed via Telegram or
+                        other social media — this key is easy to detect in user generated content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="community" id="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">More Info &amp; <span class="gradient-text">Resources</span></h2>
+                <p class="section-subtitle">Learn Termux inside and out</p>
+            </div>
+            <div class="community-grid">
+                <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener"
+                    class="community-card github">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                    </div>
+                    <h3>GitHub Repository</h3>
+                    <p>Report issues, suggest features or submit pull requests</p>
+                </a>
+                <a href="https://wiki.termux.dev/wiki/" target="_blank" rel="noopener" class="community-card wiki">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+                        </svg>
+                    </div>
+                    <h3>Termux Wiki</h3>
+                    <p>Package management, remote access, backups and more</p>
+                </a>
+                <a href="https://github.com/termux/termux-app/wiki" target="_blank" rel="noopener"
+                    class="community-card appwiki">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="12" y1="18" x2="12.01" y2="18" />
+                        </svg>
+                    </div>
+                    <h3>Termux App Wiki</h3>
+                    <p>RUN_COMMAND intent, Android 10 notes and app internals</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/ic_launcher2.png"
+                        alt="Termux-Monet Logo" class="footer-logo">
+                    <div class="footer-info">
+                        <h3>Termux-Monet</h3>
+                        <p>A Material You themed fork of Termux with experimental features</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://github.com/Termux-Monet/termux-monet/wiki" target="_blank" rel="noopener">Wiki</a>
+                    <a href="https://github.com/Termux-Monet/termux-monet/blob/master/LICENSE" target="_blank"
+                        rel="noopener">License</a>
+                    <a href="https://github.com/termux/termux-app" target="_blank" rel="noopener">Termux</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Unofficial fork of <a href="https://github.com/termux/termux-app" target="_blank"
+                        rel="noopener">Termux</a> — thanks for creating this incredible app!</p>
+                <p>Licensed under <a href="https://github.com/Termux-Monet/termux-monet/blob/master/LICENSE"
+                        target="_blank" rel="noopener">GPL-3.0</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

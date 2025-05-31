@@ -3,7 +3,7 @@ package com.termux.shared.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+//import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.BroadcastReceiver;
@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.termux.shared.R;
 import com.termux.shared.activity.media.AppCompatActivityUtils;
 import com.termux.shared.data.DataUtils;
@@ -78,9 +79,14 @@ public class ReportActivity extends AppCompatActivity {
         Logger.logVerbose(LOG_TAG, "onCreate");
         AppCompatActivityUtils.setNightMode(this, NightMode.getAppNightMode().getName(), true);
         setContentView(R.layout.activity_report);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            toolbar.setSubtitle("0xsimplythebest");
+            toolbar.setNavigationIcon(R.drawable.ic_robot_confused);
+            toolbar.setNavigationIconTint(0xff505050);
+            toolbar.setNavigationOnClickListener(v -> finish());
+            toolbar.getOverflowIcon().setTint(0xff505050);
         }
         mBundle = null;
         Intent intent = getIntent();
