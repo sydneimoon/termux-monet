@@ -1517,6 +1517,31 @@ public final class TermuxConstants {
              */
             // Default: "com.termux.app.request_storage_permissions"
             public static final String ACTION_REQUEST_PERMISSIONS = TermuxConstants.TERMUX_PACKAGE_NAME + ".app.request_storage_permissions";
+
+            /**
+             * Intent action to set the terminal font size to a specific value.
+             */
+            // Default: "com.termux.app.set_font_size"
+            public static final String ACTION_SET_FONT_SIZE = TermuxConstants.TERMUX_PACKAGE_NAME + ".app.set_font_size";
+
+            /**
+             * Intent extra for terminal font size.
+             */
+            public static final String EXTRA_FONT_SIZE = "font_size";
+
+            /**
+             * Intent action to increase or decrease the terminal font size.
+             */
+            // Default: "com.termux.app.change_font_size"
+            public static final String ACTION_CHANGE_FONT_SIZE = TermuxConstants.TERMUX_PACKAGE_NAME + ".app.change_font_size";
+
+            /**
+             * Intent extra for terminal font size delta.
+             *
+             * Positive values increase the font size.
+             * Negative values decrease the font size.
+             */
+            public static final String EXTRA_FONT_SIZE_DELTA = "delta";
         }
 
         /**

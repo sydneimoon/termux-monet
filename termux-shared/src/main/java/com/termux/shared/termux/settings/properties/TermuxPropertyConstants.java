@@ -192,6 +192,13 @@ public final class TermuxPropertyConstants {
     public static final String KEY_USE_CTRL_SPACE_WORKAROUND = "ctrl-space-workaround";
 
     /**
+     * Defines the key for whether to append 'Zero Width Space' to symlink shared
+     * Allows to access the “Android/data” or “Android/obb” folders in Android 11+ without root privileges.
+     */
+    // Default: "append-zero-width-space-to-symlink-shared"
+    public static final String KEY_APPEND_ZERO_WIDTH_SPACE_TO_SYMLINK_SHARED =  "append-zero-width-space-to-symlink-shared";
+
+    /**
      * Defines the key for whether to use fullscreen
      */
     // Default: "fullscreen"
@@ -505,6 +512,7 @@ public final class TermuxPropertyConstants {
         KEY_TERMINAL_ONCLICK_URL_OPEN,
         KEY_DRAW_BOLD_TEXT_WITH_BRIGHT_COLORS,
         KEY_USE_CTRL_SPACE_WORKAROUND,
+        KEY_APPEND_ZERO_WIDTH_SPACE_TO_SYMLINK_SHARED,
         KEY_USE_FULLSCREEN,
         KEY_USE_FULLSCREEN_WORKAROUND,
         TermuxConstants.PROP_ALLOW_EXTERNAL_APPS,
@@ -552,6 +560,7 @@ public final class TermuxPropertyConstants {
         KEY_HIDE_SOFT_KEYBOARD_ON_STARTUP,
         KEY_TERMINAL_ONCLICK_URL_OPEN,
         KEY_USE_CTRL_SPACE_WORKAROUND,
+        KEY_APPEND_ZERO_WIDTH_SPACE_TO_SYMLINK_SHARED,
         KEY_USE_FULLSCREEN,
         KEY_USE_FULLSCREEN_WORKAROUND,
         KEY_ACTIVITY_FINISH_REMOVE_TASK,

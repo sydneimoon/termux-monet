@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termux-Monet+ - Material You Theme for Termux</title>
+
+    <!-- Meta Description -->
+    <meta name="description"
+        content="Termux-Monet+ is an unofficial, modified fork of Termux, an Android terminal application and Linux environment, with Material You (Monet) theming and experimental features.">
+
+    <!-- Keywords -->
+    <meta name="keywords"
+        content="Termux-Monet+, Termux, Material You, Monet, Android terminal, terminal emulator, Linux environment, Android 11, Android 12, ADB, open source">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Termux-Monet+ - Material You Theme for Termux">
+    <meta property="og:description"
+        content="An unofficial, modified fork of Termux with Material You (Monet) theming, experimental features and community-made changes.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png">
+    <meta property="og:url" content="https://ashellyou.github.io">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Termux-Monet+ - Material You Theme for Termux">
+    <meta name="twitter:description" content="An unofficial, modified fork of Termux with Material You theming.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/ic_launcher2.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/ic_launcher2.png"
+                    alt="Termux-Monet+ Logo" class="logo-img">
+                <span>Termux-Monet<span class="plus-symbol">+</span></span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+                <li><a href="#download" class="nav-link">Download</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Termux-Monet<span class="plus-symbol">+</span></span>
+                </h1>
+                <p class="hero-tagline" id="tagline">
+                    <span class="typing-text"></span>
+                </p>
+                <p class="hero-description">
+                    An unofficial, modified fork of
+                    <a href="https://github.com/termux/termux-app" target="_blank" rel="noopener">Termux</a> — an
+                    Android terminal application and Linux environment — with Material&nbsp;You (Monet) theming,
+                    experimental features and community-made changes.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://github.com/Termux-Monet/termux-monet/releases/latest" class="btn btn-primary"
+                        target="_blank" rel="noopener">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        Download on GitHub
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="github-stars">200+</span>
+                        <span class="stat-label">GitHub Stars</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="github-downloads">100k+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="github-contributors">38</span>
+                        <span class="stat-label">Contributors</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-mockup">
+                <div class="window-frame">
+                    <div class="window-bar">
+                        <span class="window-dot red"></span>
+                        <span class="window-dot yellow"></span>
+                        <span class="window-dot green"></span>
+                        <span class="window-title">~ $ termux-monet</span>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/Termux-Monet/termux-monet/master/art/screenshot_dark.png"
+                        alt="Termux-Monet+ Screenshot" class="window-shot" id="hero-screenshot" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful <span class="gradient-text">Features</span></h2>
+                <p class="section-subtitle">Everything the regular Termux gives you, plus a Material You touch</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Material You Theming</h3>
+                    <p class="feature-description">A dynamic Monet color scheme powered by your wallpaper. On Android
+                        12+ the app follows Material You, while lower versions show a static black and white theme.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Experimental Features</h3>
+                    <p class="feature-description">A playground of community-made changes and experimental patches on top
+                        of Termux. Don't expect consistency, professionality or stability.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17l6-6-6-6M12 19h8" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Nightly &amp; Stable Builds</h3>
+                    <p class="feature-description">Stabler releases from GitHub Releases and bleeding-edge unstable
+                        APKs from GitHub Actions, built for every push to the repository.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">See it in <span class="gradient-text">Action</span></h2>
+                <p class="section-subtitle">The Monet theme in all its glory — swipe through the themes</p>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous screenshot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carousel-track">
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/226617cc-6bb0-4c28-a01b-cb0e51f09716"
+                                    alt="Shine screenshot 1" loading="lazy">
+                                <figcaption class="shot-label">Shine</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/7402b763-a58b-4f9d-b1a9-51b39e540643"
+                                    alt="Shine screenshot 2" loading="lazy">
+                                <figcaption class="shot-label">Shine</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/fe11cba6-b097-4141-98c8-ae11eebe15a6"
+                                    alt="Remix screenshot 1" loading="lazy">
+                                <figcaption class="shot-label">Remix</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-slide">
+                            <figure class="shot-card">
+                                <img class="carousel-img"
+                                    src="https://github.com/user-attachments/assets/c289d019-8d8c-4d7e-8c13-4411132cb015"
+                                    alt="Remix screenshot 2" loading="lazy">
+                                <figcaption class="shot-label">Remix</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next screenshot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+    </section>
+
+    <!-- Compatibility Section -->
+    <section class="requirements" id="compat">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compatibility &amp; <span class="gradient-text">Requirements</span></h2>
+                <p class="section-subtitle">Know what you need before jumping in</p>
+            </div>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <div class="requirement-icon android">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="7" y="2" width="10" height="20" rx="2" />
+                            <path d="M2 9h20M2 15h20" />
+                        </svg>
+                    </div>
+                    <h3>Android 11+</h3>
+                    <p>Minimum required version to install and run Termux-Monet+.</p>
+                    <span class="requirement-badge">Required</span>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon monet">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3>Android 12+</h3>
+                    <p>Full dynamic Material You (Monet) theming. Lower versions get a static black &amp; white theme.</p>
+                    <span class="requirement-badge success">Full Monet</span>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon opensource">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3>Open Source</h3>
+                    <p>Licensed under the GNU GPL v3.0. Fork it, study it, build on it.</p>
+                    <a href="https://github.com/Termux-Monet/termux-monet/blob/master/LICENSE" target="_blank"
+                        rel="noopener" class="requirement-link">View License →</a>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon plugins">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                    </div>
+                    <h3>Optional Plugins</h3>
+                    <p>Modified Termux:Styling, Termux:API, Termux:Boot and more are available for the fork.</p>
+                    <a href="https://github.com/orgs/Termux-Monet/repositories" target="_blank" rel="noopener"
+                        class="requirement-link">Browse Plugins →</a>
+                </div>
+            </div>
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <h4>Disclaimer</h4>
+                    <p>Termux-Monet+ is an unofficial fork with experimental features. By installing this app you agree
+                        that you are aware of its unstableness. The developers are not responsible for bricked devices,
+                        dead SD cards or any damage caused by misuse of this program. Using Termux for attacking/hacking
+                        targets without prior mutual consent is illegal — it is the end user's responsibility to obey all
+                        applicable laws.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get <span class="gradient-text">Termux-Monet<span class="plus-symbol">+</span></span></h2>
+                <p class="section-subtitle">Download from your preferred source</p>
+            </div>
+            <div class="download-grid">
+                <a href="https://github.com/Termux-Monet/termux-monet/releases" target="_blank" rel="noopener"
+                    class="download-card primary">
+                    <div class="download-info">
+                        <h3>GitHub Releases</h3>
+                        <p>Stabler releases — APKs under the release assets</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+                <a href="https://github.com/Termux-Monet/termux-monet/actions/workflows/debug_build.yml" target="_blank"
+                    rel="noopener" class="download-card">
+                    <div class="download-info">
+                        <h3>GitHub Actions</h3>
+                        <p>Latest unstable nightly builds — APKs under the artifacts</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+                <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener"
+                    class="download-card">
+                    <div class="download-info">
+                        <h3>Source Code</h3>
+                        <p>Build it yourself from the repository</p>
+                    </div>
+                    <span class="download-arrow">→</span>
+                </a>
+            </div>
+            <div class="warning-box">
+                <div class="warning-icon">🔐</div>
+                <div class="warning-content">
+                    <h4>Security Warning</h4>
+                    <p>APK files on GitHub are signed with a <a
+                            href="https://github.com/termux/termux-app/blob/master/app/testkey_untrusted.jks"
+                            target="_blank" rel="noopener">test key shared with the community</a>. This is not an
+                        official developer key and everyone can use it to forge a malicious Termux update installable
+                        over the GitHub build. Think twice before installing Termux builds distributed via Telegram or
+                        other social media — this key is easy to detect in user generated content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="community" id="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">More Info &amp; <span class="gradient-text">Resources</span></h2>
+                <p class="section-subtitle">Learn Termux inside and out</p>
+            </div>
+            <div class="community-grid">
+                <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener"
+                    class="community-card github">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                    </div>
+                    <h3>GitHub Repository</h3>
+                    <p>Report issues, suggest features or submit pull requests</p>
+                </a>
+                <a href="https://wiki.termux.dev/wiki/" target="_blank" rel="noopener" class="community-card wiki">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+                        </svg>
+                    </div>
+                    <h3>Termux Wiki</h3>
+                    <p>Package management, remote access, backups and more</p>
+                </a>
+                <a href="https://github.com/termux/termux-app/wiki" target="_blank" rel="noopener"
+                    class="community-card appwiki">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="12" y1="18" x2="12.01" y2="18" />
+                        </svg>
+                    </div>
+                    <h3>Termux App Wiki</h3>
+                    <p>RUN_COMMAND intent, Android 10 notes and app internals</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/Termux-Monet/termux-monet" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://github.com/Termux-Monet/termux-monet/wiki" target="_blank" rel="noopener">Wiki</a>
+                    <a href="https://github.com/Termux-Monet/termux-monet/blob/master/LICENSE" target="_blank"
+                        rel="noopener">License</a>
+                    <a href="https://github.com/termux/termux-app" target="_blank" rel="noopener">Termux</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><span class="muted-text">made with <span class="material-icons heart-icon">favorite</span> by</span> <a href="https://github.com/0xiblis" target="_blank" rel="noopener">simplythebest</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ package com.termux.view;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
@@ -12,6 +13,9 @@ import com.termux.terminal.TerminalEmulator;
 import com.termux.terminal.TerminalRow;
 import com.termux.terminal.TextStyle;
 import com.termux.terminal.WcWidth;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Renderer of a {@link TerminalEmulator} into a {@link Canvas}.
@@ -69,6 +73,25 @@ public final class TerminalRenderer {
      * The {@link #mFontLineSpacing} + {@link #mFontAscent}.
      */
     final int mItalicFontLineSpacingAndAscent;
+
+    private float animatedCursorX = 0f;
+    private float animatedCursorY = 0f;
+    private boolean cursorInitialized = false;
+
+    private static class CursorParticle {
+        float x;
+        float y;
+        float vx;
+        float vy;
+        float size;
+        float alpha;
+        int color;
+    }
+
+    private final ArrayList<CursorParticle>
+        particles = new ArrayList<>();
+
+    private final Random random = new Random();
 
     public TerminalRenderer(int textSize, Typeface typeface, Typeface italicTypeface) {
         mTextSize = textSize;
@@ -145,7 +168,7 @@ public final class TerminalRenderer {
                         float left = column * mFontWidth;
                         float top = heightOffset - mFontLineSpacing;
                         RectF r = new RectF(left, top, left + mFontWidth, top + mFontLineSpacing);
-                        canvas.drawBitmap(mEmulator.getScreen().getSixelBitmap(codePoint, style), mEmulator.getScreen().getSixelRect(codePoint, style), r, null);
+                        canvas.drawBitmap(bm, mEmulator.getScreen().getSixelRect(codePoint, style), r, null);
                     }
                     column += 1;
                     measuredWidthForRun = 0.f;
@@ -230,7 +253,16 @@ public final class TerminalRenderer {
             backColor = palette[backColor];
         }
         // Reverse video here if _one and only one_ of the reverse flags are set:
-        final boolean reverseVideoHere = reverseVideo ^ (effect & (TextStyle.CHARACTER_ATTRIBUTE_INVERSE)) != 0;
+        //final boolean reverseVideoHere = reverseVideo ^ (effect & (TextStyle.CHARACTER_ATTRIBUTE_INVERSE)) != 0;
+        boolean reverseVideoHere =
+            reverseVideo ^
+            (effect & (TextStyle.CHARACTER_ATTRIBUTE_INVERSE)) != 0;
+        // Disable classic block cursor inversion
+        if (cursor != 0 &&
+            cursorStyle ==
+            TerminalEmulator.TERMINAL_CURSOR_STYLE_BLOCK) {
+            reverseVideoHere = false;
+        }
         if (reverseVideoHere) {
             int tmp = foreColor;
             foreColor = backColor;
@@ -252,7 +284,7 @@ public final class TerminalRenderer {
             mTextPaint.setColor(backColor);
             canvas.drawRect(left, y - fontLineSpacingAndAscent + fontAscent, right, y, mTextPaint);
         }
-        if (cursor != 0) {
+        /*if (cursor != 0) {
             mTextPaint.setColor(cursor);
             // fontLineSpacingAndAscent - fontAscent isn't equals to
             // fontLineSpacing?
@@ -262,7 +294,128 @@ public final class TerminalRenderer {
             else if (cursorStyle == TerminalEmulator.TERMINAL_CURSOR_STYLE_BAR)
                 right -= ((right - left) * 3) / 4.;
             canvas.drawRect(left, y - cursorHeight, right, y, mTextPaint);
+        }*/
+        if (cursor != 0) {
+            // ===== TARGET POSITION =====
+            float targetX = left;
+            float targetY = y;
+            // ===== INIT =====
+            if (!cursorInitialized) {
+                animatedCursorX = targetX;
+                animatedCursorY = targetY;
+                cursorInitialized = true;
+            }
+            // ===== RGB COLOR =====
+            float hue =
+                (System.currentTimeMillis() % 4000L)
+                    / 4000f * 360f;
+            int rgbColor = Color.HSVToColor(
+                new float[]{
+                    hue,
+                    1f,
+                    1f
+                }
+            );
+            // ===== SMOOTH MOVEMENT =====
+            float smoothness = 0.18f;
+            animatedCursorX +=
+                (targetX - animatedCursorX) * smoothness;
+            animatedCursorY +=
+                (targetY - animatedCursorY) * smoothness;
+            // ===== PARTICLE SPAWN =====
+            if (Math.abs(targetX - animatedCursorX) > 1f ||
+                Math.abs(targetY - animatedCursorY) > 1f) {
+                for (int i = 0; i < 1; i++) {  // (int i = 0; i < 2; i++)
+                    CursorParticle p =
+                        new CursorParticle();
+                    p.x =
+                        animatedCursorX +
+                        random.nextFloat() * 20f;
+                    p.y =
+                        animatedCursorY -
+                        random.nextFloat() * 20f;
+                    p.vx =
+                        (random.nextFloat() - 0.5f)
+                        * 2f;
+                    p.vy =
+                        -random.nextFloat() * 2f;
+                    p.size =
+                        1f + random.nextFloat() * 3f;  // 2f + random.nextFloat() * 5f;
+                    p.alpha = 255f;
+                    p.color = rgbColor;
+                    particles.add(p);
+                }
+            }
+            // ===== PAINT =====
+            mTextPaint.setColor(rgbColor);
+            // Glow
+            mTextPaint.setShadowLayer(
+                12f,
+                0f,
+                0f,
+                rgbColor
+            );
+            // ===== CURSOR DIMENSIONS =====
+            float cursorLeft = animatedCursorX;
+            float cursorRight = animatedCursorX + (right - left);
+            float cursorHeight = fontLineSpacing;
+            // ===== ORIGINAL CURSOR STYLE LOGIC =====
+            if (cursorStyle ==
+                TerminalEmulator.TERMINAL_CURSOR_STYLE_UNDERLINE) {
+                cursorHeight /= 4f;
+            } else if (cursorStyle ==
+                TerminalEmulator.TERMINAL_CURSOR_STYLE_BAR) {
+                cursorRight -=
+                    ((cursorRight - cursorLeft) * 3f) / 4f;
+            }
+            // ===== ROUNDNESS =====
+            float radius = 7f;
+            // ===== PARTICLES =====
+            Iterator<CursorParticle> iterator =
+                particles.iterator();
+            while (iterator.hasNext()) {
+                CursorParticle p = iterator.next();
+                // update
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha *= 0.92f;
+                // remove dead particles
+                if (p.alpha < 5f) {
+                    iterator.remove();
+                    continue;
+                }
+                // draw
+                mTextPaint.setColor(p.color);
+                mTextPaint.setAlpha((int)p.alpha);
+                mTextPaint.setShadowLayer(
+                    10f,
+                    0f,
+                    0f,
+                    p.color
+                );
+                canvas.drawCircle(
+                    p.x,
+                    p.y,
+                    p.size,
+                    mTextPaint
+                );
+            }
+            // ===== DRAW =====
+            mTextPaint.setAlpha(255);
+            canvas.drawRoundRect(
+                cursorLeft,
+                animatedCursorY - cursorHeight,
+                cursorRight,
+                animatedCursorY,
+                radius,
+                radius,
+                mTextPaint
+            );
+            // ===== CLEANUP =====
+            mTextPaint.clearShadowLayer();
         }
+
+
         if ((effect & TextStyle.CHARACTER_ATTRIBUTE_INVISIBLE) == 0) {
             if (dim) {
                 int red = (0xFF & (foreColor >> 16));

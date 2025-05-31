@@ -33,7 +33,7 @@ public class TermuxDocumentsProvider extends DocumentsProvider {
 
     private static final String ALL_MIME_TYPES = "*/*";
 
-    private static final File BASE_DIR = TermuxConstants.TERMUX_FILES_DIR;
+    private static final File BASE_DIR = new File(TermuxConstants.TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH);
 
     // The default columns to return information about a root if no specific
     // columns are requested in a query.
@@ -210,17 +210,54 @@ public class TermuxDocumentsProvider extends DocumentsProvider {
      * <p/>
      * The reverse of @{link #getFileForDocId}.
      */
-    private static String getDocIdForFile(File file) {
+    /*private static String getDocIdForFile(File file) {
         return file.getAbsolutePath();
-    }
+    }*/
 
     /**
      * Get the file given a document id (the reverse of {@link #getDocIdForFile(File)}).
      */
-    private static File getFileForDocId(String docId) throws FileNotFoundException {
+    /*private static File getFileForDocId(String docId) throws FileNotFoundException {
         final File f = new File(docId);
         if (!f.exists())
             throw new FileNotFoundException(f.getAbsolutePath() + " not found");
+        return f;
+    }*/
+
+    /**
+     * Convierte un File en un documentId corto.
+     */
+    private static String getDocIdForFile(File file) {
+        String basePath = TermuxConstants.TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH;
+        String fullPath = file.getAbsolutePath();
+        if (fullPath.equals(basePath)) {
+            return "com.termux";
+        } else if (fullPath.startsWith(basePath + "/")) {
+            String relativePath = fullPath.substring(basePath.length() + 1);
+            return "com.termux/" + relativePath;
+        } else {
+            return fullPath;
+        }
+    }
+
+    /**
+     * Convierte un documentId en File real.
+     */
+    private static File getFileForDocId(String docId) throws FileNotFoundException {
+        String basePath = TermuxConstants.TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH;
+        String path;
+        if (docId.equals("com.termux")) {
+            path = basePath;
+        } else if (docId.startsWith("com.termux/")) {
+            String relativePath = docId.substring("com.termux/".length());
+            path = basePath + "/" + relativePath;
+        } else {
+            path = docId;
+        }
+        File f = new File(path);
+        if (!f.exists()) {
+            throw new FileNotFoundException(f.getAbsolutePath() + " not found");
+        }
         return f;
     }
 

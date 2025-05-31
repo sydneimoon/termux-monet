@@ -18,6 +18,8 @@
          at index... TypedValue` will be thrown, since ThemeOverlay would have all the activity
          theme attributes defined.
         -->
+        <item name="fontFamily">@font/custom_font</item>
+        <item name="android:fontFamily">@font/custom_font</item>
         <item name="alertDialogTheme">@style/ThemeOverlay.Material3.Dialog.Alert</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
     </style>
@@ -25,10 +27,17 @@
 
 
     <!-- BaseActivity extended classes Day NoActionBar themes. -->
-    <style name="Theme.MarkdownViewActivity.Light" parent="Theme.MediaViewActivity.Light"/>
+    <style name="Theme.MarkdownViewActivity.Light" parent="Theme.MediaViewActivity.Light">
+        <item name="fontFamily">@font/custom_font</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+    </style>
 
     <!-- BaseActivity extended classes DayNight NoActionBar themes. -->
-    <style name="Theme.MarkdownViewActivity.DayNight" parent="Theme.MediaViewActivity.DayNight"/>
+    <style name="Theme.MarkdownViewActivity.DayNight" parent="Theme.MediaViewActivity.DayNight">
+        <item name="fontFamily">@font/custom_font</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:statusBarColor">#010409</item>
+    </style>
 
 
 
@@ -39,6 +48,8 @@
       https://github.com/material-components/material-components-android/blob/1.4.0/lib/java/com/google/android/material/dialog/res/values/themes.xml#L70
      -->
     <style name="ThemeOverlay.BaseDialog.Light" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="fontFamily">@font/custom_font</item>
+        <item name="android:fontFamily">@font/custom_font</item>
 
         <!-- Dialog title panel style. -->
         <item name="materialAlertDialogTitlePanelStyle">@style/BaseDialog.Title.Panel</item>
@@ -48,6 +59,9 @@
     </style>
 
     <!-- BaseDialog extended classes DayNight themes. -->
-    <style name="ThemeOverlay.MessageDialog.DayNight" parent="ThemeOverlay.Material3.MaterialAlertDialog"/>
+    <style name="ThemeOverlay.MessageDialog.DayNight" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="fontFamily">@font/custom_font</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+    </style>
 
 </resources>
