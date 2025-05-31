@@ -81,6 +81,7 @@ public class ReportActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            toolbar.setSubtitle("0xsimplythebest");
         }
         mBundle = null;
         Intent intent = getIntent();

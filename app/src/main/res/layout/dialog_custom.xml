@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+
+        <com.termux.app.CustomShapeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:realtimeBlurRadius="15dp"
+            app:realtimeOverlayColor="#90000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="28dp" >
+
+            <ImageView
+                android:id="@+id/dialog_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/perfil"
+                android:contentDescription="Superstar" />
+
+            <!--<TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Termux"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="#bcbcbc"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center" />-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAutofill="no"
+                android:backgroundTint="@color/main_accent"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:hint="Termux"
+                android:textColorHint="#bcbcbc"
+                android:textColorHighlight="@color/hint_accent"
+                android:textCursorDrawable="@null"
+                tools:ignore="LabelFor"
+                app:hintTextColor="#bcbcbc"
+                app:boxBackgroundMode="filled"
+                app:boxStrokeColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxStrokeErrorColor="@android:color/transparent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:backgroundTint="@android:color/transparent"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionSend|flagNoFullscreen"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/dialog_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Developed by SimplyTheBest"
+                android:textSize="12dp"
+                android:textColor="#858585"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:layout_marginTop="0dp"
+                android:gravity="center_horizontal"
+                android:translationY="-9dp"
+                android:textAlignment="center" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_button_close"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:text="Close"
+                style="@style/Widget.Material3.Button" />
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

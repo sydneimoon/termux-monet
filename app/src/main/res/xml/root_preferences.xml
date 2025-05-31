@@ -53,4 +53,8 @@
         app:persistent="false"
         app:isPreferenceVisible="false"/>
 
+    <Preference
+        app:key="author"
+        app:title="🤪"/>
+
 </PreferenceScreen>

@@ -30,8 +30,10 @@
 
         <!-- Transparent Status Bar and NavigationBar -->
         <item name="android:enforceStatusBarContrast">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">false</item>
 
         <!-- https://developer.android.com/training/tv/start/start.html#transition-color -->
