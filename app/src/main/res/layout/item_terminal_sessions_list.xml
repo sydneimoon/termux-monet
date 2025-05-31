@@ -12,7 +12,7 @@
     android:textSize="13sp" />
 
 <!--
-* textColor="#646464" in TermuxSessionsListViewController.java
+* textColor="#cfe5ff" in TermuxSessionsListViewController.java
 * icon to all sessions: android:drawableEnd="@drawable/ic_robot_angry"
 * icon to current session: modify TermuxSessionsListViewController.java TermuxTerminalSessionActivityClient.java
 -->
