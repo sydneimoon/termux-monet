@@ -550,7 +550,11 @@ public final class TerminalBuffer {
     }
 
     public Bitmap getSixelBitmap(int codePoint, long style) {
-        return bitmaps.get(TextStyle.bitmapNum(style)).bitmap;
+        TerminalBitmap bm = bitmaps.get(TextStyle.bitmapNum(style));
+        if (bm == null || bm.bitmap == null) {
+            return null;
+        }
+        return bm.bitmap;
     }
 
     public Rect getSixelRect(int codePoint, long style) {

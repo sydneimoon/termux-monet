@@ -512,4 +512,5 @@ public class TermuxTerminalSessionActivityClient extends TermuxTerminalSessionCl
             Logger.logStackTraceWithMessage(LOG_TAG, "Error in checkForFontAndColors()", e);
         }
     }
+
 }

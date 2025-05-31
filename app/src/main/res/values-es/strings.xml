@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!DOCTYPE resources [
-<!ENTITY TERMUX_PACKAGE_NAME "com.termux">
-<!ENTITY TERMUX_APP_NAME "Termux:Monet">
-<!ENTITY TERMUX_API_APP_NAME "Termux:API">
-<!ENTITY TERMUX_GUI_APP_NAME "Termux:GUI">
-<!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
-<!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
-<!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
-<!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
-<!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
-]>
-<!-- Spanish translation by CrazyBytesVE --><resources>
+    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
+    <!ENTITY TERMUX_APP_NAME "Termux:Monet">
+    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+    <!ENTITY TERMUX_GUI_APP_NAME "Termux:GUI">
+    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+    ]>
+
+<!-- Spanish translation by CrazyBytesVE -->
+<resources>
     <string name="application_name">&TERMUX_APP_NAME;</string>
     <string name="shared_user_label">Usuario &TERMUX_APP_NAME;</string>
     <!-- Termux RUN_COMMAND permission -->
@@ -23,9 +26,9 @@
     <string name="bootstrap_error_body">&TERMUX_APP_NAME; no fue posible instalar los paquetes de bootstrap.</string>
     <string name="bootstrap_error_abort">Abortar</string>
     <string name="bootstrap_error_try_again">Intentar de nuevo</string>
-    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; solo se puede ejecutar como usuario principal. 
-\nLos binarios bootstrap compilados para &TERMUX_APP_NAME; tienen una ruta $PREFIX codificada que no se puede instalar \u0020en cualquier ruta que no sea:
-\n%1$s.</string>
+    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; solo se puede ejecutar como usuario principal.
+        \nLos binarios bootstrap compilados para &TERMUX_APP_NAME; tienen una ruta $PREFIX codificada que no se puede instalar \u0020en cualquier ruta que no sea:
+        \n%1$s.</string>
     <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME; no se puede instalar en
         tarjeta SD portátil/externa/extraíble en su dispositivo.
         \nBootstrap binarios compilados para &TERMUX_APP_NAME; tienen una ruta $PREFIX codificada que no se puede instalar
@@ -40,8 +43,8 @@
     <string name="title_create_named_session">Nueva sesión nombrada</string>
     <string name="action_create_named_session_confirm">Crear</string>
     <string name="action_toggle_soft_keyboard">Teclado</string>
-    <string name="msg_enabling_terminal_toolbar">Habilitando la barra de herramientas</string>
-    <string name="msg_disabling_terminal_toolbar">Desactivando la barra de herramientas</string>
+    <string name="msg_enabling_terminal_toolbar">Habilitando el teclado extra</string>
+    <string name="msg_disabling_terminal_toolbar">Desactivando el teclado extra</string>
     <!-- Terminal Extra Keys -->
     <string name="extra_keys_command_hint">Comando</string>
     <!-- Terminal Popup -->
@@ -56,14 +59,15 @@
     <string name="title_share_selected_text">Texto del Terminal</string>
     <string name="title_share_selected_text_with">Enviar texto seleccionado a:</string>
     <string name="action_autofill_password">Autocompletar contraseñas</string>
+    <string name="action_autofill_username">Autocompletar nombre de usuario</string>
     <string name="action_reset_terminal">Reiniciar</string>
     <string name="msg_terminal_reset">Reiniciar terminal</string>
     <string name="action_kill_process">Cerrar proceso (%d)</string>
     <string name="title_confirm_kill_process">¿Cerrar realmente esta sesión?</string>
     <string name="action_style_terminal">Estilo</string>
-    <string name="action_font_and_color">Fuentes y Colores</string>
-    <string name="action_set_background_image">Seleccionar Fondo de pantalla</string>
-    <string name="action_remove_background_image">Remover Fondo de pantalla</string>
+    <string name="action_font_and_color">Fuentes y colores</string>
+    <string name="action_set_background_image">Seleccionar fondo de pantalla</string>
+    <string name="action_remove_background_image">Remover fondo de pantalla</string>
     <string name="action_toggle_keep_screen_on">Mantener pantalla encendida</string>
     <string name="action_open_help">Ayuda</string>
     <string name="action_open_settings">Ajustes</string>
@@ -110,7 +114,7 @@
     <string name="termux_terminal_view_key_logging_enabled_title">Registrar teclas de la Vista de terminal</string>
     <string name="termux_terminal_view_key_logging_enabled_off">Los registros no tendrán entradas para la pulsación de teclas en terminal. (Defecto)</string>
     <string name="termux_terminal_view_key_logging_enabled_on">Los registros de Logcat tendrán entradas para las pulsaciones de teclas en terminal.
-                    Estos son muy detallados y deben desactivarse en circunstancias normales o causarán problemas de rendimiento.</string>
+        Estos son muy detallados y deben desactivarse en circunstancias normales o causarán problemas de rendimiento.</string>
     <!-- Plugin Error Notifications -->
     <string name="termux_plugin_error_notifications_enabled_title">Notificaciones de error de plugin</string>
     <string name="termux_plugin_error_notifications_enabled_off">Deshabilitar los flashes y las notificaciones de errores de complementos.</string>
@@ -135,9 +139,9 @@
     <!-- Soft Keyboard Only If No Hardware-->
     <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Teclado virtual sólo si no hay teclado físico</string>
     <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">El teclado virtual se habilitará incluso si
-                    el teclado físico está conectado. (Defecto)</string>
+        el teclado físico está conectado. (Defecto)</string>
     <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">El teclado virtual se habilitará solo si
-                    no hay ningún teclado físico conectado.</string>
+        no hay ningún teclado físico conectado.</string>
     <!-- Terminal View Preferences -->
     <string name="termux_terminal_view_preferences_title">Vista de terminal</string>
     <string name="termux_terminal_view_preferences_summary">Preferencias para la vista de terminal</string>
@@ -147,8 +151,8 @@
     <string name="termux_terminal_view_terminal_margin_adjustment_title">Ajustes de margen de terminal</string>
     <string name="termux_terminal_view_terminal_margin_adjustment_off">El ajuste del margen del terminal se desactivará.</string>
     <string name="termux_terminal_view_terminal_margin_adjustment_on">Se habilitará el ajuste del margen del terminal.
-                    Debe habilitarse para intentar solucionar el problema en el que el teclado en pantalla cubre parte de las teclas adicionales/vista de terminal.
-                    Si hace que la pantalla parpadee en sus dispositivos, desactívelo. (Defecto)</string>
+        Debe habilitarse para intentar solucionar el problema en el que el teclado en pantalla cubre parte de las teclas adicionales/vista de terminal.
+        Si hace que la pantalla parpadee en sus dispositivos, desactívelo. (Defecto)</string>
     <!-- Terminal View Activity Remove Task -->
     <string name="termux_terminal_view_activity_remove_title">Deshabilitar la permanencia en apps recientes</string>
     <string name="termux_terminal_view_activity_remove_off">Cuando no hay sesiones activas, &TERMUX_APP_NAME; se cerrará y permanecerá visible en las apps recientes.</string>
@@ -183,16 +187,19 @@
     <string name="error_background_image_loading_from_gallery_failed">No se ha podido cargar la imagen. Prueba con otra imagen.</string>
     <string name="termux_gui_preferences_summary">Preferencias para &TERMUX_GUI_APP_NAME; aplicación</string>
     <string name="termux_gui_preferences_title">&TERMUX_GUI_APP_NAME;</string>
-    <string name="termux_sessions_blur_enabled_off">El fondo desenfocado del menú de ventanas está deshabilitado. Añade un fondo transparente y desenfocado al Menú de sesiones. (Puede afectar el rendimiento) (Defecto)</string>
-    <string name="termux_monet_background_enabled_title">Fondo estilo Monet (no estable)</string>
-    <string name="termux_monet_background_enabled_on">El fondo estilo Monet será habilitado.</string>
-    <string name="termux_monet_background_enabled_off">El fondo de la terminal estilo Monet está deshabilitado. Convierte el estilo del fondo de la terminal en Monet. (Defecto)</string>
+    <string name="termux_monet_background_enabled_title">Fondo estilo monet (no estable)</string>
+    <string name="termux_monet_background_enabled_off">El fondo de la terminal estilo monet está deshabilitado. Convierte el estilo del fondo de la terminal en monet. (Defecto)</string>
+    <string name="termux_monet_background_enabled_on">El fondo estilo monet será habilitado.</string>
     <string name="termux_extrakeys_header">Teclas adicionales</string>
     <string name="termux_extrakeys_blur_enabled_title">Fondo desenfocado de las teclas adicionales</string>
     <string name="termux_extrakeys_blur_enabled_off">El fondo desenfocado de las teclas adicionales está deshabilitado. Añade un fondo transparente y desenfocado a las teclas extra. (Puede afectar el rendimiento) (Defecto)</string>
     <string name="termux_extrakeys_blur_enabled_on">El fondo desenfocado de las teclas adicionales será habilitado.</string>
-    <string name="termux_sessions_header">Menú de Sesiones</string>
-    <string name="termux_sessions_blur_enabled_title">Fondo desenfocado del Menú de sesiones</string>
+    <string name="termux_sessions_header">Menú de sesiones</string>
+    <string name="termux_sessions_blur_enabled_title">Fondo desenfocado del menú de sesiones</string>
+    <string name="termux_sessions_blur_enabled_off">El fondo desenfocado del menú de sesiones está deshabilitado. Añade un fondo transparente y desenfocado al menú de sesiones. (Puede afectar el rendimiento) (Defecto)</string>
     <string name="termux_sessions_blur_enabled_on">El fondo desenfocado del menú de sesiones será habilitado.</string>
-    <string name="action_autofill_username">Autocompletar el nombre de usuario</string>
+    <string name="termux_statusbar_header">Barra de estado</string>
+    <string name="termux_statusbar_blur_enabled_title">Fondo desenfocado de la barra de estado</string>
+    <string name="termux_statusbar_blur_enabled_off">El fondo desenfocado de la barra de estado está deshabilitado. Añade un fondo transparente y desenfocado a la barra de estado. (Puede afectar el rendimiento) (Defecto)</string>
+    <string name="termux_statusbar_blur_enabled_on">El fondo desenfocado de la barra de estado será habilitado.</string>
 </resources>

@@ -16,6 +16,13 @@ import com.termux.app.TermuxActivity;
 import com.termux.shared.termux.extrakeys.ExtraKeysView;
 import com.termux.terminal.TerminalSession;
 
+import android.graphics.Typeface;
+import android.text.InputType;
+import android.view.inputmethod.EditorInfo;
+import androidx.core.content.res.ResourcesCompat;
+import com.google.android.material.textfield.TextInputLayout;
+
+
 public class TerminalToolbarViewPager {
 
     public static class PageAdapter extends PagerAdapter {
@@ -49,6 +56,8 @@ public class TerminalToolbarViewPager {
                 ExtraKeysView extraKeysView = (ExtraKeysView) layout;
                 extraKeysView.setExtraKeysViewClient(mActivity.getTermuxTerminalExtraKeys(position));
                 extraKeysView.setButtonTextAllCaps(mActivity.getProperties().shouldExtraKeysTextBeAllCaps());
+                Typeface customFont = ResourcesCompat.getFont(mActivity, R.font.font_regular);
+                extraKeysView.setCustomFont(customFont);
                 mActivity.setExtraKeysView(extraKeysView, position);
                 extraKeysView.reload(mActivity.getTermuxTerminalExtraKeys(position).getExtraKeysInfo(), mActivity.getTerminalToolbarDefaultHeight());
                 // apply extra keys fix if enabled in prefs
@@ -58,6 +67,11 @@ public class TerminalToolbarViewPager {
             } else {
                 layout = inflater.inflate(R.layout.view_terminal_toolbar_text_input, collection, false);
 
+                TextInputLayout textInputLayout = layout.findViewById(R.id.terminal_toolbar_text_input_layout);
+                Typeface customFontForHint = ResourcesCompat.getFont(mActivity, R.font.font_regular);
+                textInputLayout.setTypeface(customFontForHint);
+                textInputLayout.getEditText().setTypeface(customFontForHint, Typeface.NORMAL);
+
                 /*final Button button = layout.findViewById(R.id.terminal_toolbar_text_input_button);
                 button.setOnClickListener(v -> {
                     ViewPager pager = mActivity.getTerminalToolbarViewPager();
@@ -65,6 +79,15 @@ public class TerminalToolbarViewPager {
                 });*/
 
                 final EditText editText = layout.findViewById(R.id.terminal_toolbar_text_input);
+
+                // permitir sugerencias
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                // permitir sugerencias y autocorrección
+                //editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+                // no permitir sugerencias ni autocorreción
+                //editText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+
                 if (mSavedTextInput != null) {
                     editText.setText(mSavedTextInput);
                     mSavedTextInput = null;
@@ -115,6 +138,8 @@ public class TerminalToolbarViewPager {
                 final EditText editText = mTerminalToolbarViewPager.findViewById(R.id.terminal_toolbar_text_input);
                 if (editText != null)
                     editText.requestFocus();
+                    editText.setText("xD ");
+                    editText.setSelection(editText.getText().length());
             }
         }
     }
