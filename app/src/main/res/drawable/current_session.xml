@@ -14,12 +14,13 @@
     </item>
     <item>
         <shape android:shape="rectangle">
-            <gradient
+            <solid android:color="#CC1B242F" />
+            <!--<gradient
                 android:type="linear"
                 android:angle="0"
                 android:startColor="#4efcd7"
                 android:centerColor="#7abbff"
-                android:endColor="#c64dff" />
+                android:endColor="#c64dff" />-->
             <corners
                 android:topLeftRadius="50dp"
                 android:bottomLeftRadius="50dp"

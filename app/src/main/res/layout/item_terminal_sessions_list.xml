@@ -10,11 +10,11 @@
     android:paddingStart="18dip"
     android:paddingEnd="18dip"
     android:textSize="13sp"
-    android:drawableTint="#bb323232"
+    android:drawableTint="#35cfe5ff"
     android:drawablePadding="3dp" />
 
 <!--
-* textColor="#646464" in TermuxSessionsListViewController.java
+* textColor="#cfe5ff" in TermuxSessionsListViewController.java
 * icon to all sessions: android:drawableEnd="@drawable/ic_robot_angry"
 * icon to current session: modify TermuxSessionsListViewController.java TermuxTerminalSessionActivityClient.java
 -->
