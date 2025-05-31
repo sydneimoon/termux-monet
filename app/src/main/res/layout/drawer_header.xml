@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
                     android:text="JulioCj7"
-                    android:textColor="#BABABA"
+                    android:textColor="@color/menu_accent"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -52,8 +52,8 @@
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:src="@drawable/ic_shield_check"
-                    android:tint="#505050"
-                    android:alpha="0.9" />
+                    android:tint="#1B242F"
+                    android:alpha="0.75" />
             </LinearLayout>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="6dp"
                 android:text="SimplyTheBest"
-                android:textColor="#505050"
+                android:textColor="@color/menu_accent"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

@@ -106,11 +106,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=" Wallpaper "
-                            android:textColor="#BABABA"
+                            android:textColor="#FFCFE5FF"
                             app:backgroundTint="#CC1B242F"
                             app:rippleColor="@color/menu_accent"
                             app:icon="@drawable/ic_image_search"
-                            app:iconTint="#5ce6ff" />
+                            app:iconTint="#FF98CBFF" />
 
                     </LinearLayout>
 
@@ -130,7 +130,7 @@
                             android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_keyboard"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            app:tint="#454545"
+                            app:tint="@color/menu_accent"
                             android:contentDescription="@string/action_toggle_soft_keyboard"/>
 
                         <ImageView
@@ -142,7 +142,7 @@
                             android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_new_session"
                             android:background="@null"
-                            app:tint="#7abbff"
+                            app:tint="#98cbff"
                             android:contentDescription="@string/action_new_session"/>
 
                         <ImageView
@@ -154,7 +154,7 @@
                             android:layout_marginHorizontal="16dp"
                             app:srcCompat="@drawable/ic_settings"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            app:tint="#454545"
+                            app:tint="@color/menu_accent"
                             android:contentDescription="@string/action_open_settings"/>
 
                     </LinearLayout>
