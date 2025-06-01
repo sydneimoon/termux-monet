@@ -49,26 +49,26 @@
             <RelativeLayout
                 android:layout_width="240dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_gravity="end"
                 android:orientation="vertical">
 
                 <com.github.mmin18.widget.RealtimeBlurView
                     android:id="@+id/sessions_backgroundblur"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:realtimeBlurRadius="10dp"
+                    app:realtimeBlurRadius="15dp"
                     app:realtimeOverlayColor="@android:color/transparent" />
 
                 <View
                     android:id="@+id/sessions_background"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/background_accent"/>
+                    android:layout_height="match_parent"/>
 
                 <LinearLayout
                     android:id="@+id/left_drawer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="end"
                     android:orientation="vertical"
                     android:background="@android:color/transparent"
                     android:choiceMode="singleChoice"
@@ -76,20 +76,7 @@
                     android:dividerHeight="0dp"
                     android:descendantFocusability="blocksDescendants">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/settings_button"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_settings"
-                            android:background="@null"
-                            android:contentDescription="@string/action_open_settings"
-                            app:tint="@color/menu_accent" />
-                    </LinearLayout>
+                    <include layout="@layout/drawer_header" />
 
                     <ListView
                         android:id="@+id/terminal_sessions_list"
@@ -102,32 +89,62 @@
                         android:longClickable="true" />
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/change_background_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Background"
+                            android:textColor="#FFCFE5FF"
+                            app:backgroundTint="#CC1B242F"
+                            app:rippleColor="@color/menu_accent"
+                            app:icon="@drawable/ic_image_search"
+                            app:iconTint="#FF98CBFF" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         style="?android:attr/buttonBarStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
-                        <com.google.android.material.button.MaterialButton
+                        <ImageView
                             android:id="@+id/toggle_keyboard_button"
-                            style="?android:attr/buttonBarButtonStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/action_toggle_soft_keyboard"
-                            android:textAllCaps="true"
-                            android:textColor="@color/menu_accent" />
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="16dp"
+                            app:srcCompat="@drawable/ic_keyboard"
+                            android:background="@null"
+                            app:tint="@color/menu_accent"
+                            android:contentDescription="@string/action_toggle_soft_keyboard"/>
 
-                        <com.google.android.material.button.MaterialButton
+                        <ImageView
                             android:id="@+id/new_session_button"
-                            style="?android:attr/buttonBarButtonStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/action_new_session"
-                            android:textAllCaps="true"
-                            android:textColor="@color/menu_accent" />
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_margin="16dp"
+                            app:srcCompat="@drawable/ic_new_session"
+                            android:background="@null"
+                            app:tint="#98cbff"
+                            android:contentDescription="@string/action_new_session"/>
+
+                        <ImageView
+                            android:id="@+id/settings_button"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="16dp"
+                            app:srcCompat="@drawable/ic_settings"
+                            android:background="@null"
+                            app:tint="@color/menu_accent"
+                            android:contentDescription="@string/action_open_settings"/>
+
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -138,15 +155,14 @@
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
             android:layout_alignParentBottom="true"
-            app:realtimeBlurRadius="10dp"
+            app:realtimeBlurRadius="15dp"
             app:realtimeOverlayColor="@android:color/transparent" />
 
         <View
             android:id="@+id/extrakeys_background"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/background_accent"/>
+            android:layout_alignParentBottom="true"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/terminal_toolbar_view_pager"

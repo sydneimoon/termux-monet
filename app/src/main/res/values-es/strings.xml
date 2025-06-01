@@ -43,7 +43,7 @@
     <string name="msg_enabling_terminal_toolbar">Habilitando la barra de herramientas</string>
     <string name="msg_disabling_terminal_toolbar">Desactivando la barra de herramientas</string>
     <!-- Terminal Extra Keys -->
-    <string name="extra_keys_command_hint">Insertar comando...</string>
+    <string name="extra_keys_command_hint">Comando</string>
     <!-- Terminal Popup -->
     <string name="action_select_url">Seleccionar URL</string>
     <string name="title_select_url_dialog">Hacer clic en la URL para copiar o presionar prolongadamente para abrir</string>
@@ -128,6 +128,10 @@
     <string name="termux_soft_keyboard_enabled_title">Teclado virtual habilitado</string>
     <string name="termux_soft_keyboard_enabled_off">El teclado virtual será deshabilitado.</string>
     <string name="termux_soft_keyboard_enabled_on">El teclado virtual será habilitado. (Defecto)</string>
+    <!-- Back Key Toggle -->
+    <string name="termux_back_key_toggle_soft_keyboard_title">Tecla atrás alterna teclado virtual</string>
+    <string name="termux_back_key_toggle_soft_keyboard_off">La tecla atrás no alternará el teclado virtual.</string>
+    <string name="termux_back_key_toggle_soft_keyboard_on">La tecla atrás alternará el teclado virtual. (Defecto)</string>
     <!-- Soft Keyboard Only If No Hardware-->
     <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Teclado virtual sólo si no hay teclado físico</string>
     <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">El teclado virtual se habilitará incluso si

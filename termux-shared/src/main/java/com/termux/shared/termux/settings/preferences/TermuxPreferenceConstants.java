@@ -117,6 +117,13 @@ public final class TermuxPreferenceConstants {
         public static final boolean DEFAULT_VALUE_KEY_SOFT_KEYBOARD_ENABLED = true;
 
         /**
+         * Defines the key for whether the soft keyboard will be toggle by backkey.
+         */
+        public static final String KEY_BACK_KEY_TOGGLE_SOFT_KEYBOARD = "back_key_toggle_soft_keyboard";
+
+        public static final boolean DEFAULT_VALUE_KEY_BACK_KEY_TOGGLE_SOFT_KEYBOARD = true;
+
+        /**
          * Defines the key for whether the soft keyboard will be enabled only if no hardware keyboard
          * attached, for cases where users want to use a hardware keyboard instead.
          */

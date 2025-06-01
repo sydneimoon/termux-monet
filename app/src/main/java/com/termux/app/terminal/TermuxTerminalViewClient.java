@@ -237,9 +237,9 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP || unicodeChar == 'p') /* previous */
             {
                 mTermuxTerminalSessionActivityClient.switchToSession(false);
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                mActivity.getDrawer().openDrawer(Gravity.LEFT);
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                mActivity.getDrawer().openDrawer(Gravity.RIGHT);
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
                 mActivity.getDrawer().closeDrawers();
             } else if (unicodeChar == 'k') /* keyboard */
             {
@@ -280,6 +280,17 @@ public class TermuxTerminalViewClient extends TermuxTerminalViewClientBase {
         if (keyCode == KeyEvent.KEYCODE_BACK && mActivity.getTerminalView().mEmulator == null) {
             mActivity.finishActivityIfNotFinishing();
             return true;
+        }
+        // Implement back key to toggle soft keyboard
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // When back key toggle soft keyboard is enabled
+            if (!mActivity.getProperties().isBackKeyTheEscapeKey() && mActivity.getPreferences().isBackKeyToggleSoftKeyboard()) {
+                // When soft keyboard can be shown
+                if (!KeyboardUtils.isHardKeyboardConnected(mActivity) || KeyboardUtils.isHardKeyboardConnected(mActivity) && !mActivity.getPreferences().isSoftKeyboardEnabledOnlyIfNoHardware()) {
+                    KeyboardUtils.toggleSoftKeyboard(mActivity);
+                    return true;
+                }
+            }
         }
         return handleVirtualKeys(keyCode, e, false);
     }

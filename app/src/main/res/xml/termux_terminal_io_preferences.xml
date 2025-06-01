@@ -11,6 +11,12 @@
             app:title="@string/termux_soft_keyboard_enabled_title" />
 
         <SwitchPreferenceCompat
+            app:key="back_key_toggle_soft_keyboard"
+            app:summaryOff="@string/termux_back_key_toggle_soft_keyboard_off"
+            app:summaryOn="@string/termux_back_key_toggle_soft_keyboard_on"
+            app:title="@string/termux_back_key_toggle_soft_keyboard_title" />
+
+        <SwitchPreferenceCompat
             app:key="soft_keyboard_enabled_only_if_no_hardware"
             app:summaryOff="@string/termux_soft_keyboard_enabled_only_if_no_hardware_off"
             app:summaryOn="@string/termux_soft_keyboard_enabled_only_if_no_hardware_on"

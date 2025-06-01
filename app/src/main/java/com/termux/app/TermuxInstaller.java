@@ -39,6 +39,13 @@ import static com.termux.shared.termux.TermuxConstants.TERMUX_PREFIX_DIR_PATH;
 import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR;
 import static com.termux.shared.termux.TermuxConstants.TERMUX_STAGING_PREFIX_DIR_PATH;
 
+import static com.termux.shared.termux.TermuxConstants.TERMUX_HOME_DIR;
+import static com.termux.shared.termux.TermuxConstants.TERMUX_HOME_DIR_PATH;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import java.io.PrintStream;
+
 /**
  * Install the Termux bootstrap packages if necessary by following the below steps:
  * <p/>
@@ -240,14 +247,20 @@ final class TermuxInstaller {
         sendBootstrapCrashReportNotification(activity, message);
         activity.runOnUiThread(() -> {
             try {
-                new AlertDialog.Builder(activity).setTitle(R.string.bootstrap_error_title).setMessage(R.string.bootstrap_error_body).setNegativeButton(R.string.bootstrap_error_abort, (dialog, which) -> {
-                    dialog.dismiss();
-                    activity.finish();
-                }).setPositiveButton(R.string.bootstrap_error_try_again, (dialog, which) -> {
-                    dialog.dismiss();
-                    FileUtils.deleteFile("termux prefix directory", TERMUX_PREFIX_DIR_PATH, true);
-                    TermuxInstaller.setupBootstrapIfNeeded(activity, whenDone);
-                }).show();
+                AlertDialog alertDialog = new AlertDialog.Builder(activity)
+                        .setTitle(R.string.bootstrap_error_title)
+                        .setMessage(message) // Use the provided message instead of a hardcoded string resource
+                        .setNegativeButton(R.string.bootstrap_error_abort, (dialog, which) -> {
+                            dialog.dismiss();
+                            activity.finish();
+                        })
+                        .setPositiveButton(R.string.bootstrap_error_try_again, (dialog, which) -> {
+                            dialog.dismiss();
+                            FileUtils.deleteFile("termux prefix directory", TERMUX_PREFIX_DIR_PATH, true);
+                            TermuxInstaller.setupBootstrapIfNeeded(activity, whenDone);
+                        })
+                        .create(); // Create the AlertDialog instance
+                alertDialog.show(); // Show the AlertDialog
             } catch (WindowManager.BadTokenException e1) {
                 // Activity already dismissed - ignore.
             }
@@ -335,6 +348,47 @@ final class TermuxInstaller {
                     Logger.logErrorAndShowToast(context, LOG_TAG, e.getMessage());
                     Logger.logStackTraceWithMessage(LOG_TAG, "Setup Storage Error: Error setting up link", e);
                     TermuxCrashUtils.sendCrashReportNotification(context, LOG_TAG, title, null, "## " + title + "\n\n" + Logger.getStackTracesMarkdownString(null, Logger.getStackTracesStringArray(e)), true, false, TermuxUtils.AppInfoMode.TERMUX_PACKAGE, true);
+                }
+            }
+        }.start();
+    }
+
+    public static void setupAppListCache(final Context context) {
+        final String LOG_TAG = "termux-applist";
+        final String APPLIST_CACHE_FILE = ".apps";
+        new Thread() {
+            public void run() {
+                try {
+
+                    final File targetFile = new File(TERMUX_HOME_DIR, APPLIST_CACHE_FILE);
+                    final FileOutputStream outStream = new FileOutputStream(targetFile);
+                    final PrintStream printStream = new PrintStream(outStream);
+
+                    final PackageManager pm = context.getPackageManager();
+                    List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+                    for (ApplicationInfo packageInfo : packages) {
+                        final String  packageName     = packageInfo.packageName;
+                        final String  appName         = packageInfo.loadLabel(pm).toString();
+                        final String  sourceDir       = packageInfo.sourceDir;
+                        final Intent  LaunchActivity  = pm.getLaunchIntentForPackage(packageName);
+                        final Boolean isSystemApp     = ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) ? true : false;
+
+                        Logger.logInfo(LOG_TAG, "[" + LaunchActivity + "] : [" + packageName + "] : [" + isSystemApp + "] : [" + appName + "]");
+                        if (LaunchActivity == null) {
+                            continue;
+                        }
+
+                        final String  LaunchComponent = LaunchActivity.getComponent().flattenToShortString();
+                        printStream.print( appName + "|" + LaunchComponent + "|" + packageName + "|" + isSystemApp + "\n");
+                    }
+
+                    printStream.flush();
+                    printStream.close();
+                    outStream.flush();
+                    outStream.close();
+
+                } catch (Exception e) {
+                    //Logger.logError(LOG_TAG, "Error setting up applist-cache", e);
                 }
             }
         }.start();
