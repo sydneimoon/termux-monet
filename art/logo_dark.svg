@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 2048 525" width="1920" height="493" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <linearGradient id="cyanmagentagradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#5fd7ff; stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#5fd7ff; stop-opacity:1" />
+    </linearGradient>
+</defs>
+<g fill="url(#cyanmagentagradient)">
+    <path transform="translate(1164,122)" d="m0 0h37l15 24 14 23 15 24 11 18 4-5 14-22 30-48 9-14h35v186h-39v-95l1-22-10 15-16 25-15 23-4 6h-18l-7-10-14-22-16-25-7-11-1-1 1 15v102h-39z" />
+    <path transform="translate(978,122)" d="m0 0h90l14 3 16 8 12 11 7 11 4 11 1 5v21l-4 13-6 11-10 11-13 9 14 25 13 22 14 24v1h-46l-6-9-16-29-16-28-29-1v66l-1 1h-38zm39 35v52h45l9-3 7-6 4-9 1-10-2-9-5-8-10-6-4-1z" />
+    <path transform="translate(1395,122)" d="m0 0h40l1 120 4 11 4 6 5 5 9 6 6 2h18l12-5 9-8 5-9 3-10 1-118h39v122l-3 15-5 12-7 11-11 11-13 8-16 6-11 2h-25l-17-4-16-8-8-6-5-4-8-10-8-16-3-12-1-14v-112z" />
+    <path transform="translate(1574,122)" d="m0 0h49l33 48 8 12 4-4 21-32 16-24h46l-2 5-12 17-15 22-33 48 1 5 12 16 13 18 14 19 13 18 12 16v2h-49l-14-20-16-23-11-16-1-3-5 5-15 22-22 32-2 3h-46l2-5 12-17 14-20 12-17 14-20 11-16-7-11-12-16-10-14-26-36-9-12z" />
+    <path transform="translate(809,122)" d="m0 0h125l1 1v34h-87v39h74v34h-74v43h88v35h-127z" />
+    <path transform="translate(289,100)" d="m0 0h53l113 113-1 5-112 112h-53l6-7 107-107-2-4-111-111z" />
+    <path transform="translate(625,122)" d="m0 0h150v36h-55v149l-1 1h-39l-1-149-54-1z" />
+    <path transform="translate(458,290)" d="m0 0h130v40h-130z" />
+    <path transform="translate(1382,355)" d="m0 0h8l7 10 13 22 6 9v2h2l2-5 24-38h8v75h-9v-57l-13 20-9 14-3 2-5-1-12-19-10-16-1 57h-8z" />
+    <path transform="translate(1559,355)" d="m0 0h7l9 11 15 20 13 17 9 12v-60h9v75h-9l-9-12-26-34-10-13v59h-9v-74z" />
+    <path transform="translate(1504,354)" d="m0 0 11 1 9 4 8 6 7 10 3 10v16l-4 11-4 6-5 5-9 6-7 2h-16l-10-4-8-6-6-8-4-10-1-6v-8l3-12 5-9 7-7 9-5zm-6 9-10 5-7 8-3 7-1 5v10l3 10 6 8 7 5 7 2h10l11-4 8-8 4-10v-16l-4-10-5-6-6-4-6-2z" />
+    <path transform="translate(1643,355)" d="m0 0h45l1 2-1 6-36 1v23l31 1v7l-1 1h-31v26h37v8h-45z" />
+    <path transform="translate(1700,355)" d="m0 0h52v8h-22v67h-9l-1-66-20-1z" />
+</g>
+</svg>
