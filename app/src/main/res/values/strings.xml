@@ -196,13 +196,17 @@
                 <string name="termux_soft_keyboard_enabled_off">Soft keyboard will be disabled.</string>
                 <string name="termux_soft_keyboard_enabled_on">Soft keyboard will be enabled. (Default)</string>
 
+                <!-- Back Key Toggle -->
+                <string name="termux_back_key_toggle_soft_keyboard_title">Back Key Toggle Soft Keyboard</string>
+                <string name="termux_back_key_toggle_soft_keyboard_off">Back key will not toggle soft keyboard.</string>
+                <string name="termux_back_key_toggle_soft_keyboard_on">Back key will toggle soft keyboard. (Default)</string>
+
                 <!-- Soft Keyboard Only If No Hardware-->
                 <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Soft Keyboard Only If No Hardware</string>
                 <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">Soft keyboard will be enabled even if
                     hardware keyboard is connected. (Default)</string>
                 <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">Soft keyboard will be enabled only if
                     no hardware keyboard is connected.</string>
-
 
         <!-- Terminal View Preferences -->
         <string name="termux_terminal_view_preferences_title">Terminal View</string>

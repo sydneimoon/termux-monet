@@ -33,6 +33,13 @@ import com.termux.shared.R;
 import com.termux.shared.termux.terminal.io.TerminalExtraKeys;
 import com.termux.shared.theme.ThemeUtils;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import android.graphics.Color;
+import java.util.Arrays;
+import java.util.Properties;
+
 /**
  * A {@link View} showing extra keys (such as Escape, Ctrl, Alt) not normally available on an Android soft
  * keyboards.
@@ -109,42 +116,42 @@ public final class ExtraKeysView extends GridLayout {
     /**
      * Defines the default value for {@link #mButtonTextColor} defined by current theme.
      */
-    public static final int ATTR_BUTTON_TEXT_COLOR = R.attr.extraKeysButtonTextColor;
+    public static int ATTR_BUTTON_TEXT_COLOR;
 
     /**
      * Defines the default value for {@link #mButtonActiveTextColor} defined by current theme.
      */
-    public static final int ATTR_BUTTON_ACTIVE_TEXT_COLOR = R.attr.extraKeysButtonActiveTextColor;
+    public static int ATTR_BUTTON_ACTIVE_TEXT_COLOR;
 
     /**
      * Defines the default value for {@link #mButtonBackgroundColor} defined by current theme.
      */
-    public static final int ATTR_BUTTON_BACKGROUND_COLOR = R.attr.extraKeysButtonBackgroundColor;
+    public static int ATTR_BUTTON_BACKGROUND_COLOR;
 
     /**
      * Defines the default value for {@link #mButtonActiveBackgroundColor} defined by current theme.
      */
-    public static final int ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR = R.attr.extraKeysButtonActiveBackgroundColor;
+    public static int ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR;
 
     /**
      * Defines the default fallback value for {@link #mButtonTextColor} if {@link #ATTR_BUTTON_TEXT_COLOR} is undefined.
      */
-    public static final int DEFAULT_BUTTON_TEXT_COLOR = 0xFFFFFFFF;
+    public static int DEFAULT_BUTTON_TEXT_COLOR;
 
     /**
      * Defines the default fallback value for {@link #mButtonActiveTextColor} if {@link #ATTR_BUTTON_ACTIVE_TEXT_COLOR} is undefined.
      */
-    public static final int DEFAULT_BUTTON_ACTIVE_TEXT_COLOR = 0xFF80DEEA;
+    public static int DEFAULT_BUTTON_ACTIVE_TEXT_COLOR;
 
     /**
      * Defines the default fallback value for {@link #mButtonBackgroundColor} if {@link #ATTR_BUTTON_BACKGROUND_COLOR} is undefined.
      */
-    public static final int DEFAULT_BUTTON_BACKGROUND_COLOR = 0x00000000;
+    public static int DEFAULT_BUTTON_BACKGROUND_COLOR;
 
     /**
      * Defines the default fallback value for {@link #mButtonActiveBackgroundColor} if {@link #ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR} is undefined.
      */
-    public static final int DEFAULT_BUTTON_ACTIVE_BACKGROUND_COLOR = 0xFF7F7F7F;
+    public static int DEFAULT_BUTTON_ACTIVE_BACKGROUND_COLOR;
 
     /**
      * Defines the minimum allowed duration in milliseconds for {@link #mLongPressTimeout}.
@@ -265,12 +272,74 @@ public final class ExtraKeysView extends GridLayout {
         super(context, attrs);
         setRepetitiveKeys(ExtraKeysConstants.PRIMARY_REPETITIVE_KEYS);
         setSpecialButtons(getDefaultSpecialButtons(this));
+        setDefaultButtonColor();
         setButtonColors(ThemeUtils.getSystemAttrColor(context, ATTR_BUTTON_TEXT_COLOR, DEFAULT_BUTTON_TEXT_COLOR), ThemeUtils.getSystemAttrColor(context, ATTR_BUTTON_ACTIVE_TEXT_COLOR, DEFAULT_BUTTON_ACTIVE_TEXT_COLOR), ThemeUtils.getSystemAttrColor(context, ATTR_BUTTON_BACKGROUND_COLOR, DEFAULT_BUTTON_BACKGROUND_COLOR), ThemeUtils.getSystemAttrColor(context, ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR, DEFAULT_BUTTON_ACTIVE_BACKGROUND_COLOR));
         setLongPressTimeout(ViewConfiguration.getLongPressTimeout());
         setLongPressRepeatDelay(DEFAULT_LONG_PRESS_REPEAT_DELAY);
 
         AccessibilityManager am = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         mAccessibilityEnabled = am.isEnabled();
+    }
+
+    /**
+     * Get color values set by user in termux.properties.
+     * Set TEXT_COLOR, INTERESTING_COLOR, and BUTTON_PRESSED_COLOR based on user values,
+     * or fallback values, if not present.
+     */
+    public void setDefaultButtonColor() {
+        ATTR_BUTTON_TEXT_COLOR = 0;
+        ATTR_BUTTON_ACTIVE_TEXT_COLOR = 0;
+        ATTR_BUTTON_BACKGROUND_COLOR = 0;
+        ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR = 0;
+        InputStream fileInputStream;
+        boolean caught = false;
+        int color = Color.WHITE;
+        String[] keys = new String [] {"button-text-color", "button-active-text-color", "button-background-color", "button-active-background-color"};
+        for ( String key : keys ) {
+            caught = false;
+            try	{
+                String path = "/data/data/com.termux/files/home/.termux/termux.properties";
+                File file = new File(path);
+                Properties properties = new Properties();
+                fileInputStream = new FileInputStream(file);
+                properties.load(fileInputStream);
+                fileInputStream.close();
+                color = Color.parseColor(properties.getProperty(key));
+            } catch (Throwable th) {
+                caught = true;
+            }
+            int position = Arrays.asList(keys).indexOf(key);
+            switch(position) {
+                case 0:
+                    if (caught) {
+                        ATTR_BUTTON_TEXT_COLOR = R.attr.extraKeysButtonTextColor;
+                    } else {
+                        DEFAULT_BUTTON_TEXT_COLOR = color;
+                    }
+                    break;
+                case 1:
+                    if (caught) {
+                        ATTR_BUTTON_ACTIVE_TEXT_COLOR = R.attr.extraKeysButtonActiveTextColor;
+                    } else {
+                        DEFAULT_BUTTON_ACTIVE_TEXT_COLOR = color;
+                    }
+                    break;
+                case 2:
+                    if (caught) {
+                        ATTR_BUTTON_BACKGROUND_COLOR = R.attr.extraKeysButtonBackgroundColor;
+                    } else {
+                        DEFAULT_BUTTON_BACKGROUND_COLOR = color;
+                    }
+                    break;
+                case 3:
+                    if (caught) {
+                        ATTR_BUTTON_ACTIVE_BACKGROUND_COLOR = R.attr.extraKeysButtonActiveBackgroundColor;
+                    } else {
+                        DEFAULT_BUTTON_ACTIVE_BACKGROUND_COLOR = color;
+                    }
+                    break;
+            }
+	    }
     }
 
     /**
@@ -708,7 +777,7 @@ public final class ExtraKeysView extends GridLayout {
         button.setMinimumHeight(0);
         button.setWidth(width);
         button.setHeight(height);
-        button.setBackgroundColor(mButtonActiveBackgroundColor);
+        button.setBackgroundColor(0x70000000);
         mPopupWindow = new PopupWindow(this);
         mPopupWindow.setWidth(LayoutParams.WRAP_CONTENT);
         mPopupWindow.setHeight(LayoutParams.WRAP_CONTENT);

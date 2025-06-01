@@ -109,7 +109,7 @@ public class ExtraKeysConstants {
                 // U+2398
                 put("PASTE", "⎘");
                 // U+21F3
-                put("SCROLL", "⇳");
+                put("SCROLL", "ↆ");
             }
         };
 

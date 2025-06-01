@@ -29,7 +29,7 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
+//import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -62,6 +62,7 @@ import com.termux.shared.termux.settings.properties.TermuxAppSharedProperties;
 import com.termux.shared.termux.theme.TermuxThemeUtils;
 import com.termux.shared.theme.NightMode;
 import com.termux.shared.view.ViewUtils;
+import com.termux.shared.view.KeyboardUtils;
 import com.termux.terminal.TerminalSession;
 import com.termux.terminal.TerminalSessionClient;
 import com.termux.view.TerminalView;
@@ -77,6 +78,17 @@ import androidx.core.view.WindowInsetsCompat.Type;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 import java.util.Arrays;
+
+import android.graphics.Color;
+import android.widget.LinearLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import com.google.android.material.button.MaterialButton;
 
 /**
  * A terminal emulator activity.
@@ -188,7 +200,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
      * The {@link TermuxActivity} is in an invalid state and must not be run.
      */
     private boolean mIsInvalidState;
-    
+
     public boolean isToolbarHidden = false;
 
     private int mNavBarHeight;
@@ -242,6 +254,20 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         setActivityTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termux);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(0x00000000);
+
+        LinearLayout headerLayout = findViewById(R.id.drawer_header);
+        headerLayout.setOnLongClickListener(view -> {
+            openIncognitoChrome("https://github.com/JulioCj7");
+            return true; // Return true to indicate that the event is handled
+        });
+        MaterialButton changeBackgroundButton = findViewById(R.id.change_background_button);
+        changeBackgroundButton.setOnClickListener(view -> {
+            mTermuxBackgroundManager.setBackgroundImage();
+        });
+
         // Load termux shared preferences
         // This will also fail if TermuxConstants.TERMUX_PACKAGE_NAME does not equal applicationId
         mPreferences = TermuxAppSharedPreferences.build(this, true);
@@ -304,6 +330,20 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         verifyAndroid11ManageFiles();
     }
 
+    private void openIncognitoChrome(String url) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setPackage("com.android.chrome");
+            intent.putExtra("com.android.browser.application_id", getPackageName());
+            intent.putExtra("com.android.browser.headers", "IncognitoMode=1");
+            startActivity(intent);
+        } catch (Exception e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        }
+    }
+
     private void verifyRWPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             String[] permissions = new String[] { android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE };
@@ -319,27 +359,66 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         }
     }
 
+    private Map<String, String> readColorsFromPropertiesFile(String filePath) {
+        Properties properties = new Properties();
+        Map<String, String> colors = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
+            properties.load(reader);
+
+            String extraKeysColor = properties.getProperty("extra-keys-background");
+            if (extraKeysColor == null) {
+                int colorRes = getResources().getColor(R.color.background_accent);
+                extraKeysColor = String.format("#%06X", (0xFFFFFF & colorRes));
+            } else {
+                extraKeysColor = extraKeysColor.trim();
+            }
+            colors.put("extra-keys-background", extraKeysColor);
+
+            String sessionsColor = properties.getProperty("sessions-background");
+            if (sessionsColor == null) {
+                int colorRes = getResources().getColor(R.color.background_accent);
+                sessionsColor = String.format("#%06X", (0xFFFFFF & colorRes));
+            } else {
+                sessionsColor = sessionsColor.trim();
+            }
+            colors.put("sessions-background", sessionsColor);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            int colorRes = getResources().getColor(R.color.background_accent);
+            String defaultColor = String.format("#%06X", (0xFFFFFF & colorRes));
+            colors.put("extra-keys-background", defaultColor);
+            colors.put("sessions-background", defaultColor);
+        }
+        return colors;
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         Logger.logDebug(LOG_TAG, "onStart");
-    
+
         if (mIsInvalidState) return;
-    
+
         mIsVisible = true;
-    
+
         if (mTermuxTerminalSessionActivityClient != null)
             mTermuxTerminalSessionActivityClient.onStart();
         if (mTermuxTerminalViewClient != null)
             mTermuxTerminalViewClient.onStart();
-    
+
         if (mPreferences.isTerminalMarginAdjustmentEnabled())
             addTermuxActivityRootViewGlobalLayoutListener();
-    
+
+        String filePath = "/data/data/com.termux/files/home/.termux/termux.properties";
+        Map<String, String> colors = readColorsFromPropertiesFile(filePath);
+        int extraKeysColor = Color.parseColor(colors.get("extra-keys-background"));
+        int sessionsColor = Color.parseColor(colors.get("sessions-background"));
+
         configureViewVisibility(R.id.terminal_monetbackground, mPreferences.isMonetBackgroundEnabled());
-        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, mPreferences.isSessionsBlurEnabled(), 0.5f);
-        configureExtraKeysBackground();
-    
+        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, sessionsColor, mPreferences.isSessionsBlurEnabled(), 0.5f);
+        configureExtraKeysBackground(extraKeysColor);
+
         registerTermuxActivityBroadcastReceiver();
     }
 
@@ -354,10 +433,15 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if (mTermuxTerminalViewClient != null)
             mTermuxTerminalViewClient.onResume();
 
+        String filePath = "/data/data/com.termux/files/home/.termux/termux.properties";
+        Map<String, String> colors = readColorsFromPropertiesFile(filePath);
+        int extraKeysColor = Color.parseColor(colors.get("extra-keys-background"));
+        int sessionsColor = Color.parseColor(colors.get("sessions-background"));
+
         configureViewVisibility(R.id.terminal_monetbackground, mPreferences.isMonetBackgroundEnabled());
-        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, mPreferences.isSessionsBlurEnabled(), 0.5f);
-        configureExtraKeysBackground();
-        
+        configureBackgroundBlur(R.id.sessions_backgroundblur, R.id.sessions_background, sessionsColor, mPreferences.isSessionsBlurEnabled(), 0.5f);
+        configureExtraKeysBackground(extraKeysColor);
+
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
         TermuxCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
@@ -369,14 +453,15 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
     
-    private void configureBackgroundBlur(int blurViewId, int backgroundViewId, boolean isBlurEnabled, float alphaIfBlurred) {
+    private void configureBackgroundBlur(int blurViewId, int backgroundViewId, int sessionsColor, boolean isBlurEnabled, float alphaIfBlurred) {
         View blurView = findViewById(blurViewId);
         View backgroundView = findViewById(backgroundViewId);
         blurView.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+        backgroundView.setBackgroundColor(sessionsColor);
         backgroundView.setAlpha(isBlurEnabled ? alphaIfBlurred : 1.0f);
     }
     
-    private void configureExtraKeysBackground() {
+    private void configureExtraKeysBackground(int extraKeysColor) {
         View extraKeysBackground = findViewById(R.id.extrakeys_background);
         View extraKeysBackgroundBlur = findViewById(R.id.extrakeys_backgroundblur);
         boolean isToolbarToggled = mPreferences.toogleShowTerminalToolbar();
@@ -392,6 +477,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
                 extraKeysBackgroundBlur.setVisibility(View.GONE);
                 extraKeysBackground.setAlpha(1.0f);
             }
+            extraKeysBackground.setBackgroundColor(extraKeysColor);
             extraKeysBackground.setVisibility(View.VISIBLE);
         }
     }
@@ -636,7 +722,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     }
 
     private void setSettingsButtonView() {
-        ImageButton settingsButton = findViewById(R.id.settings_button);
+        View settingsButton = findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(v -> {
             ActivityUtils.startActivity(this, new Intent(this, SettingsActivity.class));
         });
@@ -669,10 +755,12 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     @SuppressLint("RtlHardcoded")
     @Override
     public void onBackPressed() {
-        if (getDrawer().isDrawerOpen(Gravity.LEFT)) {
+        if (getDrawer().isDrawerOpen(Gravity.RIGHT)) {
             getDrawer().closeDrawers();
-        } else if (!getDrawer().isDrawerOpen(Gravity.LEFT)) {
-            getDrawer().openDrawer(Gravity.LEFT);
+        //} else if (!getDrawer().isDrawerOpen(Gravity.RIGHT)) {
+            //getDrawer().openDrawer(Gravity.RIGHT);
+        } else {
+            finishActivityIfNotFinishing();
         }
     }
 
@@ -1024,6 +1112,8 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         if ("storage".equals(extraReloadStyle)) {
             intent.removeExtra(TERMUX_ACTIVITY.EXTRA_RELOAD_STYLE);
             intent.setAction(TERMUX_ACTIVITY.ACTION_REQUEST_PERMISSIONS);
+        } else if ("apps-cache".equals(extraReloadStyle)) {
+            TermuxInstaller.setupAppListCache(TermuxActivity.this);
         }
     }
 

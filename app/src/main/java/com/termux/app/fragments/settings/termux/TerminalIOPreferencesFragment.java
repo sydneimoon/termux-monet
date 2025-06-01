@@ -53,6 +53,9 @@ class TerminalIOPreferencesDataStore extends PreferenceDataStore {
             case "soft_keyboard_enabled":
                 mPreferences.setSoftKeyboardEnabled(value);
                 break;
+            case "back_key_toggle_soft_keyboard":
+                mPreferences.setBackKeyToggleSoftKeyboard(value);
+                break;
             case "soft_keyboard_enabled_only_if_no_hardware":
                 mPreferences.setSoftKeyboardEnabledOnlyIfNoHardware(value);
                 break;
@@ -68,6 +71,8 @@ class TerminalIOPreferencesDataStore extends PreferenceDataStore {
         switch(key) {
             case "soft_keyboard_enabled":
                 return mPreferences.isSoftKeyboardEnabled();
+            case "back_key_toggle_soft_keyboard":
+                return mPreferences.isBackKeyToggleSoftKeyboard();
             case "soft_keyboard_enabled_only_if_no_hardware":
                 return mPreferences.isSoftKeyboardEnabledOnlyIfNoHardware();
             default:

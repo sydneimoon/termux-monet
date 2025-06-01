@@ -96,7 +96,7 @@
     <string name="log_level_verbose">Verboso</string>
     <string name="log_level_unknown">*Desconocido*</string>
     <string name="log_level_value">Nivel del registro logcat ajustado a \"%1$s\"</string>
-    <string name="msg_about_termux_monet">Estas utilizando una bifurcación no oficial, modificada de Termux, con implementaciones hechas por la comunidad y características descartadas/no planificadas. Ten en cuenta que esta aplicación es inestable y no está soportada por Termux.</string>
+    <string name="msg_about_termux_monet">Estás utilizando una bifurcación no oficial y modificada de Termux, con características experimentales no contempladas en el proyecto original. Esta versión puede ser inestable y no cuenta con el respaldo del equipo oficial de Termux.</string>
     <string name="a11y_special_key_on">encendido</string>
     <string name="a11y_special_key_latched_on">encendido, bloqueado</string>
     <string name="a11y_special_key_off">apagado</string>
