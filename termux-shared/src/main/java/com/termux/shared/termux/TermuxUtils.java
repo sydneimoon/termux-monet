@@ -516,8 +516,9 @@ public class TermuxUtils {
         if (context == null)
             return "null";
         StringBuilder markdownString = new StringBuilder();
-        markdownString.append("## Termux:Monet");
-        markdownString.append("\n\n").append(MarkdownUtils.getLinkMarkdownString("Termux-Monet", "https://github.com/Termux-Monet/termux-monet")).append(" - by SimplyTheBest ");
+        markdownString.append("## Termux:Monet <span style='font-size:12px; float:right;'>2.0</span>\n");
+        //markdownString.append("## Termux:Monet");
+        markdownString.append("\n\n").append(MarkdownUtils.getLinkMarkdownString("Source code", "https://github.com/Termux-Monet/termux-monet")).append(" | (by simplythebest) ");
         markdownString.append("\n\n").append(context.getString(R.string.msg_about_termux_monet));
         markdownString.append("\n\n## Important Links");
         markdownString.append("\n\n### GitHub\n");
