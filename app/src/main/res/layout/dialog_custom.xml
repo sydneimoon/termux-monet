@@ -7,18 +7,18 @@
     android:fillViewport="true"
     android:background="@android:color/transparent">
 
-    <com.termux.app.CustomShapeBlurView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:realtimeBlurRadius="15dp"
-            app:realtimeOverlayColor="@android:color/transparent" />
-
     <LinearLayout
         android:orientation="vertical"
         android:padding="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
+
+        <com.termux.app.CustomShapeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:realtimeBlurRadius="15dp"
+            app:realtimeOverlayColor="@android:color/transparent" />
 
         <ImageView
             android:id="@+id/dialog_image"
