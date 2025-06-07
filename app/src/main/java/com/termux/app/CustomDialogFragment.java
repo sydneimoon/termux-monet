@@ -37,7 +37,7 @@ public class CustomDialogFragment extends DialogFragment {
         }
 
 
-TextInputEditText editText = findViewById(R.id.editText);
+TextInputEditText editText = view.findViewById(R.id.editText);
 editText.setTypeface(Typeface.DEFAULT_BOLD);
 
         MaterialButton closeButton = view.findViewById(R.id.dialog_button_close);
