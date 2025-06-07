@@ -279,7 +279,6 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         headerLayout.setOnClickListener(v -> {
             getDrawer().closeDrawers();
             CustomDialogFragment dialog = new CustomDialogFragment();
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show(getSupportFragmentManager(), "customDialog");
         });
         headerLayout.setOnLongClickListener(view -> {
