@@ -25,66 +25,14 @@
             android:gravity="center_horizontal"
             android:padding="28dp" >
 
-            <!--<ImageView
+            <ImageView
                 android:id="@+id/dialog_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:src="@drawable/perfil"
-                android:contentDescription="Superstar" />-->
+                android:contentDescription="Superstar" />
 
-            <!--<EditText
-    android:id="@+id/my_input"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Escribe algo..."
-    android:padding="12dp"
-    android:textColor="#000"
-    android:textColorHint="#999"
-    android:inputType="text" />-->
-
-    <com.google.android.material.textfield.TextInputLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:imeOptions="actionSend|flagNoFullscreen"
-        android:inputType="text"
-        android:importantForAutofill="no"
-        android:backgroundTint="@color/main_accent"
-        android:textColorHint="#4e4e4e"
-        android:textColorHighlight="@color/hint_accent"
-        android:paddingTop="0dp"
-        android:textCursorDrawable="@null"
-        android:paddingBottom="0dp"
-        android:hint="@string/extra_keys_command_hint"
-        tools:ignore="LabelFor"
-        app:hintTextColor="#4e4e4e"
-        app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="@null"
-        app:startIconDrawable="@drawable/ic_file_document_edit"
-        app:startIconTint="#2e2e2e"
-        app:startIconContentDescription="Ingresar comando"
-        app:startIconMinSize="38dp"
-        app:endIconMode="clear_text"
-        app:endIconTint="#4e4e4e"
-        app:counterEnabled="true"
-        app:counterMaxLength="666"
-        app:counterTextColor="@color/input_text_dark"
-        app:counterOverflowTextColor="@color/input_text_error"
-        app:helperTextEnabled="true"
-        app:helperText="JulioCj7"
-        app:helperTextTextColor="@color/input_text_dark"
-        app:boxStrokeColor="#2e2e2e"
-        app:boxStrokeErrorColor="@color/input_text_error">
-        <com.google.android.material.textfield.TextInputEditText
-            android:singleLine="true"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-            
 
             <TextView
                 android:id="@+id/dialog_title"
@@ -110,6 +58,40 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:textAlignment="center" />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:imeOptions="actionSend|flagNoFullscreen"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        android:backgroundTint="@color/main_accent"
+        android:textColorHint="#4e4e4e"
+        android:textColorHighlight="@color/hint_accent"
+        android:paddingTop="0dp"
+        android:textCursorDrawable="@null"
+        android:paddingBottom="0dp"
+        android:hint="Password"
+        tools:ignore="LabelFor"
+        app:hintTextColor="#4e4e4e"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@null"
+        app:boxStrokeColor="#2e2e2e"
+        app:boxStrokeErrorColor="@color/input_text_error">
+        <com.google.android.material.textfield.TextInputEditText
+            android:singleLine="true"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+            
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_button_close"
