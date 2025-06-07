@@ -52,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:imeOptions="actionSend|flagNoFullscreen"
-                android:inputType="textPassword"
                 android:importantForAutofill="no"
                 android:backgroundTint="@color/main_accent"
                 android:textColorHint="#4e4e4e"
@@ -73,7 +72,8 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
