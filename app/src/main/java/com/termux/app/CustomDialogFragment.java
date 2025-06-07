@@ -15,7 +15,7 @@ import com.termux.R;
 
 public class CustomDialogFragment extends DialogFragment {
 
-    @NonNull
+    /*@NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom, null);
@@ -30,7 +30,41 @@ public class CustomDialogFragment extends DialogFragment {
         dialog.setCanceledOnTouchOutside(false);
 
         return dialog;
-    }
+    }*/
+
+@NonNull
+@Override
+public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom, null);
+
+    // Ajuste del padding inferior cuando aparece el teclado
+    view.setOnApplyWindowInsetsListener((v, insets) -> {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            Insets imeInsets = insets.getInsets(WindowInsets.Type.ime());
+            v.setPadding(0, 0, 0, imeInsets.bottom); // Ajuste solo del padding inferior
+        }
+        return insets;
+    });
+
+    MaterialButton closeButton = view.findViewById(R.id.dialog_button_close);
+    closeButton.setOnClickListener(v -> dismiss());
+
+    Dialog dialog = new MaterialAlertDialogBuilder(requireContext(), com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog)
+            .setView(view)
+            .create();
+
+    dialog.setCanceledOnTouchOutside(false);
+
+    // Muy importante: decorFitsSystemWindows = false para manejar los insets manualmente
+    dialog.setOnShowListener(d -> {
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setDecorFitsSystemWindows(false);
+        }
+    });
+
+    return dialog;
+}
+    
 
     @Override
     public void onStart() {
