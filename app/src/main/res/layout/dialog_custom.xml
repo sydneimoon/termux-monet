@@ -63,7 +63,7 @@
                 app:hintTextColor="#4e4e4e"
                 app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@null"
-                app:boxStrokeColor="#2e2e2e"
+                app:boxStrokeColor="@android:color/transparent"
                 app:boxStrokeErrorColor="@color/input_text_error">
                 <com.google.android.material.textfield.TextInputEditText
                     android:singleLine="true"
@@ -74,6 +74,7 @@
                     android:gravity="center"
                     android:inputType="textPassword"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     android:hint="Termux" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +87,7 @@
                 android:textSize="10dp"
                 android:textColor="#505050"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="0dp"
                 android:gravity="center_horizontal"
                 android:textAlignment="center" />
 
