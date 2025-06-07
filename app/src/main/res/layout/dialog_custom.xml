@@ -65,7 +65,7 @@
     app:boxStrokeColor="@android:color/transparent"
     app:boxStrokeWidth="0dp"
     app:boxStrokeWidthFocused="0dp"
-    app:boxBackgroundColor="@android:color/transparent"
+    app:boxBackgroundColor="@android:color/transparent">
                 <com.google.android.material.textfield.TextInputEditText
                     android:singleLine="true"
                     android:backgroundTint="@android:color/transparent"
