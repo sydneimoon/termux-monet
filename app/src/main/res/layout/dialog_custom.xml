@@ -74,7 +74,7 @@
                     android:gravity="center"
                     android:inputType="textPassword"
                     android:textSize="18dp"
-                    android:hint="TERMUX:MONET" />
+                    android:hint="Termux" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="Developed by SimplyTheBest"
                 android:textSize="10dp"
-                android:textColor="#808080"
+                android:textColor="#505050"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
