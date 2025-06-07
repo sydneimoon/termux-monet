@@ -60,15 +60,15 @@
                 android:textCursorDrawable="@null"
                 android:paddingBottom="0dp"
                 tools:ignore="LabelFor"
-                app:hintTextColor="#4e4e4e"
-                app:boxBackgroundMode="filled"
+                app:hintTextColor="#bcbcbc"
+                app:boxBackgroundMode="none"
                 app:boxBackgroundColor="@null"
                 app:boxStrokeColor="@android:color/transparent"
                 app:boxStrokeErrorColor="@color/input_text_error">
                 <com.google.android.material.textfield.TextInputEditText
                     android:singleLine="true"
                     android:backgroundTint="@android:color/transparent"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
