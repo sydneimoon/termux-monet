@@ -61,11 +61,12 @@
                 android:paddingBottom="0dp"
                 tools:ignore="LabelFor"
                 app:hintTextColor="#bcbcbc"
-    app:boxBackgroundMode="filled"
-    app:boxStrokeColor="@android:color/transparent"
-    app:boxStrokeWidth="0dp"
-    app:boxStrokeWidthFocused="0dp"
-    app:boxBackgroundColor="@android:color/transparent">
+                app:boxBackgroundMode="filled"
+                app:boxStrokeColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxStrokeErrorColor="@android:color/transparent">
                 <com.google.android.material.textfield.TextInputEditText
                     android:singleLine="true"
                     android:backgroundTint="@android:color/transparent"
@@ -80,13 +81,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--
-                app:boxBackgroundMode="filled"
-                app:boxBackgroundColor="@null"
-                app:boxStrokeColor="@android:color/transparent"
-                app:boxStrokeErrorColor="@color/input_text_error">
-            -->
-
             <TextView
                 android:id="@+id/dialog_description"
                 android:layout_width="match_parent"
@@ -97,6 +91,7 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:layout_marginTop="0dp"
                 android:gravity="center_horizontal"
+                android:translationY="-15dp"
                 android:textAlignment="center" />
 
             <com.google.android.material.button.MaterialButton
