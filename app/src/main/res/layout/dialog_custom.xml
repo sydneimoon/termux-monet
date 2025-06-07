@@ -25,13 +25,23 @@
             android:gravity="center_horizontal"
             android:padding="28dp" >
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/dialog_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:src="@drawable/perfil"
-                android:contentDescription="Superstar" />
+                android:contentDescription="Superstar" />-->
+
+            <EditText
+    android:id="@+id/my_input"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Escribe algo..."
+    android:padding="12dp"
+    android:textColor="#000"
+    android:textColorHint="#999"
+    android:inputType="text" />
 
             <TextView
                 android:id="@+id/dialog_title"
