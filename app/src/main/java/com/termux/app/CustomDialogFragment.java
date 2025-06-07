@@ -13,6 +13,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.termux.R;
 
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.graphics.Insets; // Para API 30+
+import android.os.Build;
+
 public class CustomDialogFragment extends DialogFragment {
 
     /*@NonNull
