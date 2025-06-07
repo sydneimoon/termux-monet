@@ -54,12 +54,13 @@
                 android:imeOptions="actionSend|flagNoFullscreen"
                 android:importantForAutofill="no"
                 android:backgroundTint="@color/main_accent"
-                android:textColorHint="#4e4e4e"
+                android:textColorHint="#bcbcbc"
                 android:textColorHighlight="@color/hint_accent"
                 android:paddingTop="0dp"
                 android:textCursorDrawable="@null"
                 android:paddingBottom="0dp"
                 tools:ignore="LabelFor"
+                app:hintTextColor="#4e4e4e"
                 app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@null"
                 app:boxStrokeColor="#2e2e2e"
@@ -73,8 +74,8 @@
                     android:gravity="center"
                     android:inputType="textPassword"
                     android:textSize="18dp"
-                    android:hint="TERMUX:MONET"
-                    app:hintTextColor="#BCBCBC" />
+                    android:hint="TERMUX:MONET" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
