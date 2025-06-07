@@ -33,7 +33,7 @@
                 android:src="@drawable/perfil"
                 android:contentDescription="Superstar" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/dialog_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,10 +44,9 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
-                android:textAlignment="center" />
+                android:textAlignment="center" />-->
 
             <com.google.android.material.textfield.TextInputLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -59,9 +58,6 @@
                 android:paddingTop="0dp"
                 android:textCursorDrawable="@null"
                 android:paddingBottom="0dp"
-                android:hint="access"
-                tools:ignore="LabelFor"
-                app:hintTextColor="#4e4e4e"
                 app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@null"
                 app:boxStrokeColor="#2e2e2e"
@@ -73,7 +69,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:hint="TERMUX:MONET"
+                    app:hintTextColor="#BCBCBC" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
