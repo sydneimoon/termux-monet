@@ -5,7 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    android:background="@android:color/transparent">
+    android:background="#45afff00">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <com.termux.app.CustomShapeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:realtimeBlurRadius="15dp"
+            app:realtimeOverlayColor="@android:color/transparent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/dialog_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/perfil"
+                android:contentDescription="Superstar" />
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Termux"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:layout_marginTop="18dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/dialog_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Developed by SimplyTheBest"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_button_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                style="@style/Widget.Material3.Button"
+                android:layout_marginTop="24dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
+
+<!--<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:background="#45afff00">
 
     <LinearLayout
         android:orientation="vertical"
@@ -58,4 +125,4 @@
             style="@style/Widget.Material3.Button"
             android:layout_marginTop="24dp"/>
     </LinearLayout>
-</ScrollView>
+</ScrollView>-->
