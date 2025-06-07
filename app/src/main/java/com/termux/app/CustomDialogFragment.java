@@ -17,6 +17,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.termux.R;
 
+import android.graphics.Typeface;
+import com.google.android.material.textfield.TextInputEditText;
+
+
 public class CustomDialogFragment extends DialogFragment {
 
     @NonNull
@@ -31,6 +35,10 @@ public class CustomDialogFragment extends DialogFragment {
                 return insets;
             });
         }
+
+
+TextInputEditText editText = findViewById(R.id.editText);
+editText.setTypeface(Typeface.DEFAULT_BOLD);
 
         MaterialButton closeButton = view.findViewById(R.id.dialog_button_close);
         closeButton.setOnClickListener(v -> dismiss());
