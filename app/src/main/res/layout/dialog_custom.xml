@@ -61,7 +61,7 @@
                 android:paddingBottom="0dp"
                 tools:ignore="LabelFor"
                 app:hintTextColor="#bcbcbc"
-    app:boxBackgroundMode="outlined"
+    app:boxBackgroundMode="filled"
     app:boxStrokeColor="@android:color/transparent"
     app:boxStrokeWidth="0dp"
     app:boxStrokeWidthFocused="0dp"
