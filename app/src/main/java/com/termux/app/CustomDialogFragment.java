@@ -37,7 +37,7 @@ public class CustomDialogFragment extends DialogFragment {
         return dialog;
     }*/
 
-@NonNull
+/*@NonNull
 @Override
 public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom, null);
@@ -64,6 +64,40 @@ public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     dialog.setOnShowListener(d -> {
         if (dialog.getWindow() != null) {
             dialog.getWindow().setDecorFitsSystemWindows(false);
+        }
+    });
+
+    return dialog;
+}*/
+
+@NonNull
+@Override
+public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom, null);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        view.setOnApplyWindowInsetsListener((v, insets) -> {
+            Insets imeInsets = insets.getInsets(WindowInsets.Type.ime());
+            v.setPadding(0, 0, 0, imeInsets.bottom);
+            return insets;
+        });
+    }
+
+    MaterialButton closeButton = view.findViewById(R.id.dialog_button_close);
+    closeButton.setOnClickListener(v -> dismiss());
+
+    Dialog dialog = new MaterialAlertDialogBuilder(requireContext(), com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog)
+            .setView(view)
+            .create();
+
+    dialog.setCanceledOnTouchOutside(false);
+
+    dialog.setOnShowListener(d -> {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && dialog.getWindow() != null) {
+            dialog.getWindow().setDecorFitsSystemWindows(false);
+
+            // Fuerza que los insets se apliquen inmediatamente
+            view.requestApplyInsets();
         }
     });
 
