@@ -11,6 +11,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.termux.R;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+
 public class CustomDialogFragment extends DialogFragment {
 
     @NonNull
@@ -28,5 +31,14 @@ public class CustomDialogFragment extends DialogFragment {
         dialog.setCanceledOnTouchOutside(false);
 
         return dialog;
+    }
+
+    @Override
+    public void onStart() {
+    super.onStart();
+    Dialog dialog = getDialog();
+    if (dialog != null && dialog.getWindow() != null) {
+        dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+    }
     }
 }
