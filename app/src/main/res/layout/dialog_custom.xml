@@ -91,7 +91,7 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:layout_marginTop="0dp"
                 android:gravity="center_horizontal"
-                android:translationY="-15dp"
+                android:translationY="-10dp"
                 android:textAlignment="center" />
 
             <com.google.android.material.button.MaterialButton
