@@ -63,12 +63,12 @@ public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession
         fullSessionTitleStyled.setSpan(italicSpan, numberPart.length() + sessionNamePart.length(), fullSessionTitle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         sessionTitleView.setText(fullSessionTitleStyled);
 
-        TerminalSession currentSession = mActivity.getTermuxTerminalSessionClient().getCurrentSession();
+        /*TerminalSession currentSession = mActivity.getTermuxTerminalSessionClient().getCurrentSession();
         if (sessionAtRow == currentSession) {
             sessionTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_robot_angry, 0);
         } else {
             sessionTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        }
+        }*/
 
         boolean sessionRunning = sessionAtRow.isRunning();
         if (sessionRunning) {
@@ -87,7 +87,7 @@ public class TermuxSessionsListViewController extends ArrayAdapter<TermuxSession
         TermuxSession clickedSession = getItem(position);
         mActivity.getTermuxTerminalSessionClient().setCurrentSession(clickedSession.getTerminalSession());
         mActivity.getDrawer().closeDrawers();
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     @Override
