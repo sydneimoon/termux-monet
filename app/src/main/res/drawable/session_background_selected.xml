@@ -2,15 +2,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_activated="true">
         <layer-list>
+    <!-- Icono flotante a la derecha -->
+    <item android:drawable="@drawable/ic_robot_angry"
+            android:right="16dp"
+            android:gravity="right|center_vertical" />
+
+    <!-- Imagen de fondo de la sesión -->
+    <item android:drawable="@drawable/current_session" />
+
             <!-- Icono detrás -->
-            <item android:right="16dp">
+            <!--<item android:right="16dp">
                 <vector android:src="@drawable/ic_robot_angry"
                         android:gravity="right|center_vertical"
                         android:tint="#bb323232" />
             </item>
 
             <!-- Imagen de fondo activado -->
-            <item android:drawable="@drawable/current_session" />
+            <!--<item android:drawable="@drawable/current_session" />-->
         </layer-list>
     </item>
 
