@@ -2,13 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_activated="true">
         <layer-list>
-            <!-- Imagen de fondo de la sesión activa -->
             <item android:drawable="@drawable/current_session" />
-
-            <!-- Icono flotante a la derecha y detras -->
             <item android:drawable="@drawable/ic_robot_angry"
-                android:right="16dp"
-                android:gravity="right|center_vertical" />
+                  android:tint="#ff0000"
+                  android:right="16dp"
+                  android:gravity="right|center_vertical" />
         </layer-list>
     </item>
 
