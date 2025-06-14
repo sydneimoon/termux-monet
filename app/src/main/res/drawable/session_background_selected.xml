@@ -4,7 +4,6 @@
         <layer-list>
             <item android:drawable="@drawable/current_session" />
             <item android:drawable="@drawable/ic_robot_angry"
-                  android:tint="#ff0000"
                   android:right="16dp"
                   android:gravity="right|center_vertical" />
         </layer-list>
