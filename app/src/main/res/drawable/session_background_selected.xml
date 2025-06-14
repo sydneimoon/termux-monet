@@ -4,7 +4,7 @@
         <layer-list>
             <!-- Icono detrás -->
             <item android:right="16dp">
-                <bitmap android:src="@drawable/ic_robot_angry"
+                <vector android:src="@drawable/ic_robot_angry"
                         android:gravity="right|center_vertical"
                         android:tint="#bb323232" />
             </item>
