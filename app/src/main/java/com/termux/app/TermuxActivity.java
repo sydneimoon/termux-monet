@@ -389,6 +389,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         // Obtener LayoutInflater e inflar la vista con blur
         LayoutInflater inflater = LayoutInflater.from(this);
         final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
+
+blurOverlay.setId(R.id.status_bar_blur);
+boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+        
         // Crear LayoutParams con altura dinámica
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -434,10 +439,10 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         return result;
     }
 
-private void updateBlur(boolean isBlurEnabled) {
+/*private void updateBlur(boolean isBlurEnabled) {
     // Muestra u oculta el blur según el boolean
     configureViewVisibility(R.id.status_bar_blur, isBlurEnabled);
-}
+}*/
 
 
     
@@ -559,9 +564,10 @@ private void updateBlur(boolean isBlurEnabled) {
 
         getWindow().setStatusBarColor(statusBarColor);
 
-        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        //boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
         //if (isBlurEnabled) addStatusBarBlurOverlay();
-        updateBlur(isBlurEnabled);
+        //updateBlur(isBlurEnabled);
+        addStatusBarBlurOverlay();
     }
 
     @Override
