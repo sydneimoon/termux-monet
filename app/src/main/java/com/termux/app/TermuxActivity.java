@@ -383,9 +383,9 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         // Obtener decorView
         final ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
 
-        if (decorView.findViewById(R.id.status_bar_blur) != null) {
+        /*if (decorView.findViewById(R.id.status_bar_blur) != null) {
             return;
-        }
+        }*/
         // Obtener LayoutInflater e inflar la vista con blur
         LayoutInflater inflater = LayoutInflater.from(this);
         final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
