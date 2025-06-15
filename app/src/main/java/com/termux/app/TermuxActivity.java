@@ -434,6 +434,14 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         return result;
     }
 
+private void updateBlur(boolean isBlurEnabled) {
+    // Muestra u oculta el blur según el boolean
+    configureViewVisibility(R.id.status_bar_blur, isBlurEnabled);
+}
+
+
+    
+
     private void applyGradientToTextView(final TextView textView, final int[] colors) {
         textView.post(new Runnable() {
             @Override
@@ -550,6 +558,10 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         configureExtraKeysBackground(extraKeysColor);
 
         getWindow().setStatusBarColor(statusBarColor);
+
+        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        //if (isBlurEnabled) addStatusBarBlurOverlay();
+        updateBlur(isBlurEnabled);
     }
 
     @Override
@@ -570,11 +582,6 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             addTermuxActivityRootViewGlobalLayoutListener();
 
         applyDynamicUIConfigurations();
-
-        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
-        if (isBlurEnabled) {
-           addStatusBarBlurOverlay();
-        }
         
         registerTermuxActivityBroadcastReceiver();
     }
@@ -592,11 +599,6 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             mTermuxTerminalViewClient.onResume();
 
         applyDynamicUIConfigurations();
-
-        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
-        if (isBlurEnabled) {
-           addStatusBarBlurOverlay();
-        }
         
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
