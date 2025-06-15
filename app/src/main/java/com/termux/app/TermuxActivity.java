@@ -374,7 +374,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
     }
 
 
-    private void addStatusBarBlurOverlay() {
+    private void addStatusBarBlurOverlay(boolean isBlurEnabled) {
         // Hacer el status bar transparente
         /*getWindow().getDecorView().setSystemUiVisibility(
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -391,7 +391,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
 
 blurOverlay.setId(R.id.status_bar_blur);
-boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+//boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
 blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
         
         // Crear LayoutParams con altura dinámica
@@ -564,10 +564,10 @@ blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
 
         getWindow().setStatusBarColor(statusBarColor);
 
-        //boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
         //if (isBlurEnabled) addStatusBarBlurOverlay();
         //updateBlur(isBlurEnabled);
-        addStatusBarBlurOverlay();
+        addStatusBarBlurOverlay(isBlurEnabled);
     }
 
     @Override
