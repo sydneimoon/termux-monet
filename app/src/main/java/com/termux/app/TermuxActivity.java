@@ -391,9 +391,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
 
 blurOverlay.setId(R.id.status_bar_blur);
-//boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
 blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
-        
+if (isBlurEnabled) {
         // Crear LayoutParams con altura dinámica
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -425,6 +424,7 @@ blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
                 blurOverlay.setVisibility(isStatusBarVisible ? View.VISIBLE : View.GONE);
             }
         });*/
+}
     }
 
     private int getStatusBarHeight() {
