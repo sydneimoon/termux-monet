@@ -107,6 +107,9 @@ import android.view.LayoutInflater;
 import android.widget.PopupWindow;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+
 /**
  * A terminal emulator activity.
  * <p/>
@@ -364,6 +367,71 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             Color.parseColor("#72c7ff"),
             Color.parseColor("#86a9ff")
         });*/
+        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        if (isBlurEnabled) {
+           addStatusBarBlurOverlay();
+        }
+    }
+
+
+    private void addStatusBarBlurOverlay() {
+        // Hacer el status bar transparente
+        /*getWindow().getDecorView().setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+        getWindow().setStatusBarColor(Color.TRANSPARENT);*/
+        // Obtener decorView
+        final ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
+
+        if (decorView.findViewById(R.id.status_bar_blur) != null) {
+            return;
+        }
+        // Obtener LayoutInflater e inflar la vista con blur
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
+        // Crear LayoutParams con altura dinámica
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            getStatusBarHeight()
+        );
+        layoutParams.gravity = Gravity.TOP;
+        blurOverlay.setLayoutParams(layoutParams);
+        // Agregar la vista al fondo del decorView
+        decorView.addView(blurOverlay, 0);
+        // Detectar cambios de orientación y actualizar altura si es necesario
+        View rootView = decorView.getRootView();
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    int newHeight = getStatusBarHeight();
+                    ViewGroup.LayoutParams lp = blurOverlay.getLayoutParams();
+                    if (lp.height != newHeight) {
+                        lp.height = newHeight;
+                        blurOverlay.setLayoutParams(lp);
+                    }
+                }
+            });
+        // Ocultar/mostrar blur según visibilidad del status bar
+        /*decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+        @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                boolean isStatusBarVisible = (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0;
+                blurOverlay.setVisibility(isStatusBarVisible ? View.VISIBLE : View.GONE);
+            }
+        });*/
+    }
+
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        } else {
+            // Fallback: 24dp en píxeles
+            result = (int) (24 * getResources().getDisplayMetrics().density);
+        }
+        return result;
     }
 
     private void applyGradientToTextView(final TextView textView, final int[] colors) {
