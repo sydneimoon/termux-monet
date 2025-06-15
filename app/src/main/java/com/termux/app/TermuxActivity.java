@@ -374,7 +374,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
     }
 
 
-    private void addStatusBarBlurOverlay(boolean isBlurEnabled) {
+    //private void addStatusBarBlurOverlay(boolean isBlurEnabled) {
+    private void addStatusBarBlurOverlay() {
         // Hacer el status bar transparente
         /*getWindow().getDecorView().setSystemUiVisibility(
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -391,7 +392,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         final View blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
 
 blurOverlay.setId(R.id.status_bar_blur);
-blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+//blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+blurOverlay.setVisibility(mPreferences.isStatusBarBlurEnabled() ? View.VISIBLE : View.GONE);
 showToast(String.valueOf(mPreferences.isStatusBarBlurEnabled()), true);
 if (isBlurEnabled) {
         // Crear LayoutParams con altura dinámica
@@ -589,7 +591,8 @@ if (isBlurEnabled) {
             addTermuxActivityRootViewGlobalLayoutListener();
 
         applyDynamicUIConfigurations();
-        addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
+        //addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
+        addStatusBarBlurOverlay();
         
         registerTermuxActivityBroadcastReceiver();
     }
@@ -607,7 +610,8 @@ if (isBlurEnabled) {
             mTermuxTerminalViewClient.onResume();
 
         applyDynamicUIConfigurations();
-        addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
+        //addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
+        addStatusBarBlurOverlay();
 
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
