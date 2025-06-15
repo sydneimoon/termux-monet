@@ -564,10 +564,10 @@ blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
 
         getWindow().setStatusBarColor(statusBarColor);
 
-        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        //boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
         //if (isBlurEnabled) addStatusBarBlurOverlay();
         //updateBlur(isBlurEnabled);
-        addStatusBarBlurOverlay(isBlurEnabled);
+        //addStatusBarBlurOverlay(isBlurEnabled);
     }
 
     @Override
@@ -588,6 +588,7 @@ blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
             addTermuxActivityRootViewGlobalLayoutListener();
 
         applyDynamicUIConfigurations();
+        addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
         
         registerTermuxActivityBroadcastReceiver();
     }
@@ -605,7 +606,8 @@ blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
             mTermuxTerminalViewClient.onResume();
 
         applyDynamicUIConfigurations();
-        
+        addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
+
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
         TermuxCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
