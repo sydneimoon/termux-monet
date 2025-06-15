@@ -230,6 +230,14 @@ public final class TermuxPreferenceConstants {
         public static final String KEY_MONET_BACKGROUND_ENABLED = "monet_background_enabled";
 
         public static final boolean DEFAULT_VALUE_MONET_BACKGROUND_ENABLED = false;
+
+        /**
+         * Defines the key for whether statusbar blur is enabled or not.
+         */
+        public static final String KEY_STATUSBAR_BLUR_ENABLED = "statusbar_blur_enabled";
+
+        public static final boolean DEFAULT_VALUE_STATUSBAR_BLUR_ENABLED = false;
+
     }
 
     /**
