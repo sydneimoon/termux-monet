@@ -266,6 +266,14 @@ public class TermuxAppSharedPreferences extends AppSharedPreferences {
         SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_MONET_BACKGROUND_ENABLED, value, false);
     }
 
+    public boolean isStatusBarBlurEnabled() {
+        return SharedPreferenceUtils.getBoolean(mSharedPreferences, TERMUX_APP.KEY_STATUSBAR_BLUR_ENABLED, TERMUX_APP.DEFAULT_VALUE_STATUSBAR_BLUR_ENABLED);
+    }
+    
+    public void setStatusBarBlurEnabled(boolean value) {
+        SharedPreferenceUtils.setBoolean(mSharedPreferences, TERMUX_APP.KEY_STATUSBAR_BLUR_ENABLED, value, false);
+    }
+
     public boolean arePluginErrorNotificationsEnabled(boolean readFromFile) {
         if (readFromFile)
             return SharedPreferenceUtils.getBoolean(mMultiProcessSharedPreferences, TERMUX_APP.KEY_PLUGIN_ERROR_NOTIFICATIONS_ENABLED, TERMUX_APP.DEFAULT_VALUE_PLUGIN_ERROR_NOTIFICATIONS_ENABLED);
