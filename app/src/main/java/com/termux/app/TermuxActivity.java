@@ -395,7 +395,8 @@ blurOverlay.setId(R.id.status_bar_blur);
 //blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
 blurOverlay.setVisibility(mPreferences.isStatusBarBlurEnabled() ? View.VISIBLE : View.GONE);
 showToast(String.valueOf(mPreferences.isStatusBarBlurEnabled()), true);
-if (isBlurEnabled) {
+//if (isBlurEnabled) {
+if (mPreferences.isStatusBarBlurEnabled()) {
         // Crear LayoutParams con altura dinámica
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
