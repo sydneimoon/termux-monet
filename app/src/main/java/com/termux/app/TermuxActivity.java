@@ -392,6 +392,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
 blurOverlay.setId(R.id.status_bar_blur);
 blurOverlay.setVisibility(isBlurEnabled ? View.VISIBLE : View.GONE);
+showToast(String.valueOf(mPreferences.isStatusBarBlurEnabled()), true);
 if (isBlurEnabled) {
         // Crear LayoutParams con altura dinámica
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
