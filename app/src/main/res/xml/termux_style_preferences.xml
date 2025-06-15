@@ -40,4 +40,15 @@
             app:title="@string/termux_sessions_blur_enabled_title" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="statusbar"
+        app:title="Barra de estado">
+        
+        <SwitchPreferenceCompat
+            app:key="statusbar_blur_enabled"
+            app:summaryOff="@string/termux_sessions_blur_enabled_off"
+            app:summaryOn="@string/termux_sessions_blur_enabled_on"
+            app:title="@string/termux_sessions_blur_enabled_title" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
