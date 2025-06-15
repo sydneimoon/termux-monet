@@ -431,6 +431,37 @@ if (mPreferences.isStatusBarBlurEnabled()) {
 }
     }
 
+private void addOrRemoveStatusBarBlurOverlay() {
+    ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
+
+    View blurOverlay = decorView.findViewById(R.id.status_bar_blur);
+    boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+
+    if (isBlurEnabled) {
+        if (blurOverlay == null) {
+            // Agregar si NO existe
+            LayoutInflater inflater = LayoutInflater.from(this);
+            blurOverlay = inflater.inflate(R.layout.blur_statusbar_overlay, decorView, false);
+            blurOverlay.setId(R.id.status_bar_blur);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    getStatusBarHeight()
+            );
+            layoutParams.gravity = Gravity.TOP;
+            blurOverlay.setLayoutParams(layoutParams);
+            decorView.addView(blurOverlay, 0);
+        } else {
+            // Asegurarte que esté visible si existe
+            blurOverlay.setVisibility(View.VISIBLE);
+        }
+    } else {
+        if (blurOverlay != null) {
+            // Eliminar si existe
+            decorView.removeView(blurOverlay);
+        }
+    }
+}
+
     private int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -593,7 +624,8 @@ if (mPreferences.isStatusBarBlurEnabled()) {
 
         applyDynamicUIConfigurations();
         //addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
-        addStatusBarBlurOverlay();
+        //addStatusBarBlurOverlay();
+        addOrRemoveStatusBarBlurOverlay();
         
         registerTermuxActivityBroadcastReceiver();
     }
@@ -612,7 +644,8 @@ if (mPreferences.isStatusBarBlurEnabled()) {
 
         applyDynamicUIConfigurations();
         //addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
-        addStatusBarBlurOverlay();
+        //addStatusBarBlurOverlay();
+        addOrRemoveStatusBarBlurOverlay();
 
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
