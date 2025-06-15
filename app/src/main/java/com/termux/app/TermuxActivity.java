@@ -367,10 +367,10 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             Color.parseColor("#72c7ff"),
             Color.parseColor("#86a9ff")
         });*/
-        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+       /* boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
         if (isBlurEnabled) {
            addStatusBarBlurOverlay();
-        }
+        }*/
     }
 
 
@@ -570,6 +570,12 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             addTermuxActivityRootViewGlobalLayoutListener();
 
         applyDynamicUIConfigurations();
+
+        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        if (isBlurEnabled) {
+           addStatusBarBlurOverlay();
+        }
+        
         registerTermuxActivityBroadcastReceiver();
     }
 
@@ -587,6 +593,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
         applyDynamicUIConfigurations();
 
+        boolean isBlurEnabled = mPreferences.isStatusBarBlurEnabled();
+        if (isBlurEnabled) {
+           addStatusBarBlurOverlay();
+        }
+        
         // Check if a crash happened on last run of the app or if a plugin crashed and show a
         // notification with the crash details if it did
         TermuxCrashUtils.notifyAppCrashFromCrashLogFile(this, LOG_TAG);
