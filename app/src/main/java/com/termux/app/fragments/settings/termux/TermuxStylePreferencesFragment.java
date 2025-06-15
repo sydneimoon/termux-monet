@@ -85,6 +85,9 @@ class TermuxStylePreferencesDataStore extends PreferenceDataStore {
             case "monet_background_enabled":
                 mPreferences.setMonetBackgroundEnabled(value);
                 break;
+            case "statusbar_blur_enabled":
+                mPreferences.setStatusBarBlurEnabled(value);
+                break;
             default:
                 break;
         }
@@ -103,6 +106,8 @@ class TermuxStylePreferencesDataStore extends PreferenceDataStore {
                 return mPreferences.isSessionsBlurEnabled();
             case "monet_background_enabled":
                 return mPreferences.isMonetBackgroundEnabled();
+            case "statusbar_blur_enabled":
+                return mPreferences.isStatusBarBlurEnabled();
             default:
                 return false;
         }
