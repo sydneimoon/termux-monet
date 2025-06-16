@@ -622,10 +622,10 @@ private void addOrRemoveStatusBarBlurOverlay() {
         if (mPreferences.isTerminalMarginAdjustmentEnabled())
             addTermuxActivityRootViewGlobalLayoutListener();
 
-        applyDynamicUIConfigurations();
+        //applyDynamicUIConfigurations();
         //addStatusBarBlurOverlay(mPreferences.isStatusBarBlurEnabled());
         //addStatusBarBlurOverlay();
-        addOrRemoveStatusBarBlurOverlay();
+        //addOrRemoveStatusBarBlurOverlay();
         
         registerTermuxActivityBroadcastReceiver();
     }
