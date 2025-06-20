@@ -297,13 +297,13 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         mTermuxActivityRootView = findViewById(R.id.activity_termux_root_view);
         mTermuxActivityRootView.setActivity(this);
         mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
-        //mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
-        /*View content = findViewById(android.R.id.content);
+        mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
+        View content = findViewById(android.R.id.content);
         content.setOnApplyWindowInsetsListener((v, insets) -> {
             WindowInsetsCompat insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(insets, v);
             mNavBarHeight = insetsCompat.getInsets(Type.systemBars()).bottom;
             return insetsCompat.toWindowInsets();
-        });*/
+        });
         if (mProperties.isUsingFullScreen()) {
             WindowInsetsController insetsController = getWindow().getInsetsController();
             if (insetsController != null) {
@@ -413,6 +413,10 @@ View blurView = findViewById(R.id.extrakeys_backgroundblur);
 View backgroundView = findViewById(R.id.extrakeys_background);
 View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
 
+View terminalView = findViewById(R.id.terminal_view);
+View drawerView = findViewById(R.id.drawer_layout);
+
+
 // Usamos uno de ellos como "ancla" para escuchar los insets
 ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
@@ -457,6 +461,9 @@ ViewCompat.setWindowInsetsAnimationCallback(
                     blurView.setTranslationY(offset);
                     backgroundView.setTranslationY(offset);
                     pagerView.setTranslationY(offset);
+
+                    drawerView.setTranslationY(offset);
+                    terminalView.setTranslationY(offset);
                     break;
                 }
             }
@@ -468,6 +475,9 @@ ViewCompat.setWindowInsetsAnimationCallback(
             blurView.setTranslationY(0);
             backgroundView.setTranslationY(0);
             pagerView.setTranslationY(0);
+
+            drawerView.setTranslationY(offset);
+            terminalView.setTranslationY(offset);
         }
     }
 );
