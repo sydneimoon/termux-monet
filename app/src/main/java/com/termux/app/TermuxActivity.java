@@ -347,8 +347,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
 
-    //View rootView = findViewById(R.id.terminal_toolbar_view_pager);
-    View rootView = findViewById(R.id.terminal_toolbar_container);
+    View rootView = findViewById(R.id.terminal_toolbar_view_pager);
+    //View rootView = findViewById(R.id.terminal_toolbar_container);
     //View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
     
     // Paso 1: escuchar visibilidad del teclado
