@@ -356,7 +356,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 });*/
 
     //View rootView = findViewById(R.id.root_container);  // tu contenedor raíz o vista a animar
-    View rootView = findViewById(R.id.activity_termux_root_view);
+    //View rootView = findViewById(R.id.activity_termux_root_view);
+    View rootView = findViewById(R.id.terminal_toolbar_view_pager);
 
     // Paso 1: escuchar visibilidad del teclado
     ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
