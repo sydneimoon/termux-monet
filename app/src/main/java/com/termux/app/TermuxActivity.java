@@ -797,12 +797,19 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         AppCompatActivityUtils.setNightMode(this, NightMode.getAppNightMode().getName(), true);
     }
 
-    private void setMargins() {
+private void setMargins() {
+    ViewGroup rootLayout = findViewById(R.id.activity_termux_root_relative_layout);
+    int marginHorizontal = mProperties.getTerminalMarginHorizontal();
+    int marginVertical = mProperties.getTerminalMarginVertical();
+    ViewUtils.setLayoutMarginsInDp(rootLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
+}
+    
+   /* private void setMargins() {
         RelativeLayout relativeLayout = findViewById(R.id.activity_termux_root_relative_layout);
         int marginHorizontal = mProperties.getTerminalMarginHorizontal();
         int marginVertical = mProperties.getTerminalMarginVertical();
         ViewUtils.setLayoutMarginsInDp(relativeLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
-    }
+    }*/
 
     public void addTermuxActivityRootViewGlobalLayoutListener() {
         getTermuxActivityRootView().getViewTreeObserver().addOnGlobalLayoutListener(getTermuxActivityRootView());
