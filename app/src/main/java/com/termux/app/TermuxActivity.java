@@ -346,6 +346,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyRWPermission();
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
+        configureSmoothKeyboard();
+    }
+
+
+private void configureSmoothKeyboard() {
 
 View blurView = findViewById(R.id.extrakeys_backgroundblur);
 View backgroundView = findViewById(R.id.extrakeys_background);
@@ -409,17 +414,8 @@ ViewCompat.setWindowInsetsAnimationCallback(
     }
 );
 
+}
 
-
-
-
-
-
-
-        
-
-
-    }
 
     private void configureDrawerLayout() {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
