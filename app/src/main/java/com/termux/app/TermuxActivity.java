@@ -476,8 +476,8 @@ ViewCompat.setWindowInsetsAnimationCallback(
             backgroundView.setTranslationY(0);
             pagerView.setTranslationY(0);
 
-            drawerView.setTranslationY(offset);
-            terminalView.setTranslationY(offset);
+            drawerView.setTranslationY(0);
+            terminalView.setTranslationY(0);
         }
     }
 );
