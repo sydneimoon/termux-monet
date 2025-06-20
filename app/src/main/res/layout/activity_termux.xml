@@ -209,9 +209,8 @@
     android:id="@+id/terminal_toolbar_group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_alignParentBottom="true"> <!-- Solo si está dentro de un RelativeLayout -->
-
+    android:orientation="vertical">
+    
     <RelativeLayout
         android:id="@+id/terminal_toolbar_container"
         android:layout_width="match_parent"
