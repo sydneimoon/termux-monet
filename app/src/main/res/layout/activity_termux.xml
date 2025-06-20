@@ -17,19 +17,19 @@
         android:layout_marginVertical="0dp"
         android:orientation="vertical">
 
-        <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/drawer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_above="@id/terminal_toolbar_container">
-
         <!--<androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_above="@+id/terminal_toolbar_view_pager">-->
+            android:layout_above="@id/terminal_toolbar_container">-->
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/terminal_toolbar_view_pager">
 
             <View
                 android:id="@+id/terminal_monetbackground"
@@ -205,7 +205,7 @@
         android:background="@android:color/transparent" />
 </RelativeLayout>-->
 
-<LinearLayout
+<!--<LinearLayout
     android:id="@+id/terminal_toolbar_group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -242,11 +242,11 @@
             android:layout_marginHorizontal="4dp"
             android:background="@android:color/transparent" />
     </RelativeLayout>
-</LinearLayout>
+</LinearLayout>-->
 
         
 
-        <!--<com.termux.app.CustomShapeBlurView
+        <com.termux.app.CustomShapeBlurView
             android:id="@+id/extrakeys_backgroundblur"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
@@ -270,7 +270,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="4dp"
             android:layout_marginHorizontal="4dp"
-            android:background="@android:color/transparent"/>-->
+            android:background="@android:color/transparent"/>
     </RelativeLayout>
 
     <View
