@@ -347,6 +347,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
 
+    /*
     View rootView = findViewById(R.id.terminal_toolbar_view_pager);
     //View rootView = findViewById(R.id.terminal_toolbar_container);
     //View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
@@ -407,6 +408,78 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             }
         }
     );
+    */
+View blurView = findViewById(R.id.extrakeys_backgroundblur);
+View backgroundView = findViewById(R.id.extrakeys_background);
+View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
+
+// Usamos uno de ellos como "ancla" para escuchar los insets
+ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
+    boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
+    int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
+    Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+    return insets;
+});
+
+// Animación sincronizada para los 3 views
+ViewCompat.setWindowInsetsAnimationCallback(
+    pagerView,
+    new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_STOP) {
+
+        float startBottom;
+        float endBottom;
+
+        @Override
+        public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
+            startBottom = pagerView.getBottom();
+        }
+
+        @NonNull
+        @Override
+        public WindowInsetsAnimationCompat.BoundsCompat onStart(
+                @NonNull WindowInsetsAnimationCompat animation,
+                @NonNull WindowInsetsAnimationCompat.BoundsCompat bounds) {
+            endBottom = pagerView.getBottom();
+            return bounds;
+        }
+
+        @NonNull
+        @Override
+        public WindowInsetsCompat onProgress(
+                @NonNull WindowInsetsCompat insets,
+                @NonNull List<WindowInsetsAnimationCompat> runningAnimations) {
+
+            for (WindowInsetsAnimationCompat anim : runningAnimations) {
+                if ((anim.getTypeMask() & WindowInsetsCompat.Type.ime()) != 0) {
+                    float progress = anim.getInterpolatedFraction();
+                    float offset = (startBottom - endBottom) * (1 - progress);
+
+                    blurView.setTranslationY(offset);
+                    backgroundView.setTranslationY(offset);
+                    pagerView.setTranslationY(offset);
+                    break;
+                }
+            }
+            return insets;
+        }
+
+        @Override
+        public void onEnd(@NonNull WindowInsetsAnimationCompat animation) {
+            blurView.setTranslationY(0);
+            backgroundView.setTranslationY(0);
+            pagerView.setTranslationY(0);
+        }
+    }
+);
+
+
+
+
+
+
+
+
+        
 
 
     }
