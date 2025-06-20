@@ -349,7 +349,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
     //View rootView = findViewById(R.id.terminal_toolbar_view_pager);
     View rootView = findViewById(R.id.terminal_toolbar_container);
-    View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
+    //View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
     
     // Paso 1: escuchar visibilidad del teclado
     ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
@@ -369,8 +369,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
             @Override
             public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
-                //startBottom = rootView.getBottom();
-                startBottom = toolbarGroup.getBottom();
+                startBottom = rootView.getBottom();
+                //startBottom = toolbarGroup.getBottom();
             }
 
             @NonNull
@@ -378,8 +378,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             public WindowInsetsAnimationCompat.BoundsCompat onStart(
                     @NonNull WindowInsetsAnimationCompat animation,
                     @NonNull WindowInsetsAnimationCompat.BoundsCompat bounds) {
-                //endBottom = rootView.getBottom();
-                endBottom = toolbarGroup.getBottom();
+                endBottom = rootView.getBottom();
+                //endBottom = toolbarGroup.getBottom();
                 return bounds;
             }
 
@@ -393,8 +393,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
                     if ((anim.getTypeMask() & WindowInsetsCompat.Type.ime()) != 0) {
                         float progress = anim.getInterpolatedFraction();
                         float offset = (startBottom - endBottom) * (1 - progress);
-                        //rootView.setTranslationY(offset);
-                        toolbarGroup.setTranslationY(offset); // Se mueven los 3 views juntos
+                        rootView.setTranslationY(offset);
+                        //toolbarGroup.setTranslationY(offset); // Se mueven los 3 views juntos
                         break;
                     }
                 }
