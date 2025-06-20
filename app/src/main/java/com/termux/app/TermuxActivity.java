@@ -298,12 +298,12 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         mTermuxActivityRootView.setActivity(this);
         mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
         mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
-        View content = findViewById(android.R.id.content);
+        /*View content = findViewById(android.R.id.content);
         content.setOnApplyWindowInsetsListener((v, insets) -> {
             WindowInsetsCompat insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(insets, v);
             mNavBarHeight = insetsCompat.getInsets(Type.systemBars()).bottom;
             return insetsCompat.toWindowInsets();
-        });
+        });*/
         if (mProperties.isUsingFullScreen()) {
             WindowInsetsController insetsController = getWindow().getInsetsController();
             if (insetsController != null) {
