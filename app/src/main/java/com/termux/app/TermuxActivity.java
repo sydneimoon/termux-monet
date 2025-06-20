@@ -109,6 +109,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.termux.app.CustomDialogFragment;
 
+import java.util.List;
 import android.util.Log;
 //import android.view.View;
 //import androidx.core.view.ViewCompat;
