@@ -297,13 +297,13 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         mTermuxActivityRootView = findViewById(R.id.activity_termux_root_view);
         mTermuxActivityRootView.setActivity(this);
         mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
-        /*mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
+        mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
         View content = findViewById(android.R.id.content);
         content.setOnApplyWindowInsetsListener((v, insets) -> {
             WindowInsetsCompat insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(insets, v);
             mNavBarHeight = insetsCompat.getInsets(Type.systemBars()).bottom;
             return insetsCompat.toWindowInsets();
-        });*/
+        });
         if (mProperties.isUsingFullScreen()) {
             WindowInsetsController insetsController = getWindow().getInsetsController();
             if (insetsController != null) {
@@ -347,77 +347,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
 
-/*
-    //View rootView = findViewById(R.id.terminal_toolbar_view_pager);
-    View rootView = findViewById(R.id.terminal_view);
-    //View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
-    
-    // Paso 1: escuchar visibilidad del teclado
-    ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
-        boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
-        int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-        Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
-        return insets;
-    });
-
-    // Paso 2: animar sincronizado con el teclado
-    ViewCompat.setWindowInsetsAnimationCallback(
-        rootView,
-        new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_STOP) {
-
-            float startBottom;
-            float endBottom;
-
-            @Override
-            public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
-                startBottom = rootView.getBottom();
-                //startBottom = toolbarGroup.getBottom();
-            }
-
-            @NonNull
-            @Override
-            public WindowInsetsAnimationCompat.BoundsCompat onStart(
-                    @NonNull WindowInsetsAnimationCompat animation,
-                    @NonNull WindowInsetsAnimationCompat.BoundsCompat bounds) {
-                endBottom = rootView.getBottom();
-                //endBottom = toolbarGroup.getBottom();
-                return bounds;
-            }
-
-            @NonNull
-            @Override
-            public WindowInsetsCompat onProgress(
-                    @NonNull WindowInsetsCompat insets,
-                    @NonNull List<WindowInsetsAnimationCompat> runningAnimations) {
-
-                for (WindowInsetsAnimationCompat anim : runningAnimations) {
-                    if ((anim.getTypeMask() & WindowInsetsCompat.Type.ime()) != 0) {
-                        float progress = anim.getInterpolatedFraction();
-                        float offset = (startBottom - endBottom) * (1 - progress);
-                        rootView.setTranslationY(offset);
-                        //toolbarGroup.setTranslationY(offset); // Se mueven los 3 views juntos
-                        break;
-                    }
-                }
-                return insets;
-            }
-
-            @Override
-            public void onEnd(@NonNull WindowInsetsAnimationCompat animation) {
-                rootView.setTranslationY(0); // Restablecer cuando termine la animación
-            }
-        }
-    );
-*/
 View blurView = findViewById(R.id.extrakeys_backgroundblur);
 View backgroundView = findViewById(R.id.extrakeys_background);
 View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
 
-View terminalView = findViewById(R.id.terminal_view);
-View drawerView = findViewById(R.id.drawer_layout);
-
-
-// Usamos uno de ellos como "ancla" para escuchar los insets
+// Paso 1: escuchar visibilidad del teclado (usamos uno de ellos como "ancla" para escuchar los insets)
 ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
     int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
@@ -425,7 +359,7 @@ ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     return insets;
 });
 
-// Animación sincronizada para los 3 views
+// Paso 2: animación sincronizada con el teclado
 ViewCompat.setWindowInsetsAnimationCallback(
     pagerView,
     new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_STOP) {
@@ -457,13 +391,9 @@ ViewCompat.setWindowInsetsAnimationCallback(
                 if ((anim.getTypeMask() & WindowInsetsCompat.Type.ime()) != 0) {
                     float progress = anim.getInterpolatedFraction();
                     float offset = (startBottom - endBottom) * (1 - progress);
-
                     blurView.setTranslationY(offset);
                     backgroundView.setTranslationY(offset);
                     pagerView.setTranslationY(offset);
-
-                    drawerView.setTranslationY(offset);
-                    terminalView.setTranslationY(offset);
                     break;
                 }
             }
@@ -475,9 +405,6 @@ ViewCompat.setWindowInsetsAnimationCallback(
             blurView.setTranslationY(0);
             backgroundView.setTranslationY(0);
             pagerView.setTranslationY(0);
-
-            drawerView.setTranslationY(0);
-            terminalView.setTranslationY(0);
         }
     }
 );
