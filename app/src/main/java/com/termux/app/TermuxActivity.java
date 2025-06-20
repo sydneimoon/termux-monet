@@ -113,6 +113,9 @@ import android.util.Log;
 //import android.view.View;
 //import androidx.core.view.ViewCompat;
 //import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsAnimationCompat;
+import androidx.core.view.WindowInsetsAnimationCompat.Callback;
+import androidx.core.view.WindowInsetsAnimationCompat.BoundsCompat;
 
 /**
  * A terminal emulator activity.
