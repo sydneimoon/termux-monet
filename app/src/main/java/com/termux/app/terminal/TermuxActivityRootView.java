@@ -254,13 +254,13 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
 
 public static class WindowInsetsListener implements View.OnApplyWindowInsetsListener {
 
-    @Override
+    /*@Override
     public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
         mStatusBarHeight = WindowInsetsCompat.toWindowInsetsCompat(insets)
                 .getInsets(WindowInsetsCompat.Type.statusBars()).top;
 
         return WindowInsetsCompat.CONSUMED.toWindowInsets(); // evita efectos secundarios
-    }
+    }*/
 }
 
     
