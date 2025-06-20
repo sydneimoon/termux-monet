@@ -162,7 +162,45 @@
             </RelativeLayout>
         </androidx.drawerlayout.widget.DrawerLayout>
 
-        <com.termux.app.CustomShapeBlurView
+
+
+
+<RelativeLayout
+    android:id="@+id/terminal_toolbar_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <com.termux.app.CustomShapeBlurView
+        android:id="@+id/extrakeys_backgroundblur"
+        android:layout_width="match_parent"
+        android:layout_height="37.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="4dp"
+        app:realtimeBlurRadius="15dp"
+        app:realtimeOverlayColor="@android:color/transparent" />
+
+    <View
+        android:id="@+id/extrakeys_background"
+        android:layout_width="match_parent"
+        android:layout_height="37.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="4dp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/terminal_toolbar_view_pager"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="37.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@android:color/transparent" />
+</RelativeLayout>
+
+        
+
+        <!--<com.termux.app.CustomShapeBlurView
             android:id="@+id/extrakeys_backgroundblur"
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
@@ -186,7 +224,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="4dp"
             android:layout_marginHorizontal="4dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"/>-->
     </RelativeLayout>
 
     <View
