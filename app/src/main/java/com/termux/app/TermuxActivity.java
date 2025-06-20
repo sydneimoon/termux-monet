@@ -347,7 +347,7 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
 
-
+/*
     //View rootView = findViewById(R.id.terminal_toolbar_view_pager);
     View rootView = findViewById(R.id.terminal_view);
     //View toolbarGroup = findViewById(R.id.terminal_toolbar_group);
@@ -408,8 +408,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             }
         }
     );
-
-/*View blurView = findViewById(R.id.extrakeys_backgroundblur);
+*/
+View blurView = findViewById(R.id.extrakeys_backgroundblur);
 View backgroundView = findViewById(R.id.extrakeys_background);
 View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
 
@@ -470,7 +470,7 @@ ViewCompat.setWindowInsetsAnimationCallback(
             pagerView.setTranslationY(0);
         }
     }
-);*/
+);
 
 
 
