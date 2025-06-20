@@ -109,6 +109,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.termux.app.CustomDialogFragment;
 
+import android.util.Log;
+//import android.view.View;
+//import androidx.core.view.ViewCompat;
+//import androidx.core.view.WindowInsetsCompat;
+
 /**
  * A terminal emulator activity.
  * <p/>
@@ -337,6 +342,79 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyRWPermission();
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
+
+
+/*ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+    boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
+    int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
+    Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+    return insets;
+});*/
+
+    //View rootView = findViewById(R.id.root_container);  // tu contenedor raíz o vista a animar
+    View rootView = findViewById(R.id.activity_termux_root_view);
+
+    // Paso 1: escuchar visibilidad del teclado
+    ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+        boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
+        int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
+        Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+        return insets;
+    });
+
+    // Paso 2: animar sincronizado con el teclado
+    ViewCompat.setWindowInsetsAnimationCallback(
+        rootView,
+        new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_STOP) {
+
+            float startBottom;
+            float endBottom;
+
+            @Override
+            public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
+                startBottom = rootView.getBottom();
+            }
+
+            @NonNull
+            @Override
+            public WindowInsetsAnimationCompat.BoundsCompat onStart(
+                    @NonNull WindowInsetsAnimationCompat animation,
+                    @NonNull WindowInsetsAnimationCompat.BoundsCompat bounds) {
+                endBottom = rootView.getBottom();
+                return bounds;
+            }
+
+            @NonNull
+            @Override
+            public WindowInsetsCompat onProgress(
+                    @NonNull WindowInsetsCompat insets,
+                    @NonNull List<WindowInsetsAnimationCompat> runningAnimations) {
+
+                for (WindowInsetsAnimationCompat anim : runningAnimations) {
+                    if ((anim.getTypeMask() & WindowInsetsCompat.Type.ime()) != 0) {
+                        float progress = anim.getInterpolatedFraction();
+                        float offset = (startBottom - endBottom) * (1 - progress);
+                        rootView.setTranslationY(offset);
+                        break;
+                    }
+                }
+                return insets;
+            }
+
+            @Override
+            public void onEnd(@NonNull WindowInsetsAnimationCompat animation) {
+                rootView.setTranslationY(0); // Restablecer cuando termine la animación
+            }
+        }
+    );
+
+
+
+
+        
+
+
+        
     }
 
     private void configureDrawerLayout() {
