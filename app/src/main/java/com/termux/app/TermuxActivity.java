@@ -347,16 +347,6 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         verifyAndroid11ManageFiles();
         configureDrawerLayout();
 
-
-/*ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-    boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
-    int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-    Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
-    return insets;
-});*/
-
-    //View rootView = findViewById(R.id.root_container);  // tu contenedor raíz o vista a animar
-    //View rootView = findViewById(R.id.activity_termux_root_view);
     //View rootView = findViewById(R.id.terminal_toolbar_view_pager);
     View rootView = findViewById(R.id.terminal_toolbar_container);
 
@@ -415,12 +405,6 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
     );
 
 
-
-
-        
-
-
-        
     }
 
     private void configureDrawerLayout() {
@@ -796,20 +780,13 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         // day or night theme takes affect.
         AppCompatActivityUtils.setNightMode(this, NightMode.getAppNightMode().getName(), true);
     }
-
-private void setMargins() {
-    ViewGroup rootLayout = findViewById(R.id.activity_termux_root_relative_layout);
-    int marginHorizontal = mProperties.getTerminalMarginHorizontal();
-    int marginVertical = mProperties.getTerminalMarginVertical();
-    ViewUtils.setLayoutMarginsInDp(rootLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
-}
     
-   /* private void setMargins() {
+    private void setMargins() {
         RelativeLayout relativeLayout = findViewById(R.id.activity_termux_root_relative_layout);
         int marginHorizontal = mProperties.getTerminalMarginHorizontal();
         int marginVertical = mProperties.getTerminalMarginVertical();
         ViewUtils.setLayoutMarginsInDp(relativeLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
-    }*/
+    }
 
     public void addTermuxActivityRootViewGlobalLayoutListener() {
         getTermuxActivityRootView().getViewTreeObserver().addOnGlobalLayoutListener(getTermuxActivityRootView());
