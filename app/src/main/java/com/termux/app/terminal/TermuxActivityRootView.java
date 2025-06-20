@@ -120,7 +120,7 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
 
     @Override
     public void onGlobalLayout() {
-        if (mActivity == null || !mActivity.isVisible())
+        /*if (mActivity == null || !mActivity.isVisible())
             return;
         View bottomSpaceView = mActivity.getTermuxActivityBottomSpaceView();
         if (bottomSpaceView == null)
@@ -248,19 +248,19 @@ public class TermuxActivityRootView extends LinearLayout implements ViewTreeObse
                 if (root_view_logging_enabled)
                     Logger.logVerbose(LOG_TAG, "Bottom margin already equals " + pxHidden);
             }
-        }
+        }*/
     }
 
 
 public static class WindowInsetsListener implements View.OnApplyWindowInsetsListener {
 
-    /*@Override
+    @Override
     public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
         mStatusBarHeight = WindowInsetsCompat.toWindowInsetsCompat(insets)
                 .getInsets(WindowInsetsCompat.Type.statusBars()).top;
 
         return WindowInsetsCompat.CONSUMED.toWindowInsets(); // evita efectos secundarios
-    }*/
+    }
 }
 
     
