@@ -60,6 +60,7 @@
 
         <activity
             android:name=".app.TermuxActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:configChanges="orientation|screenSize|smallestScreenSize|density|screenLayout|keyboard|keyboardHidden|navigation"
             android:label="@string/application_name"
