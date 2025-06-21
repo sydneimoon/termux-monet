@@ -359,8 +359,9 @@ ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
     int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
     //Logger.logDebug(LOG_TAG, "IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
-
-    Logger.logDebug(LOG_TAG, "IME: Visible: " + imeVisible + ", Height: " + imeHeight);
+Logger.logDebug(LOG_TAG, "IME Visible: " + imeVisible);
+Logger.logDebug(LOG_TAG, "IME Height: " + imeHeight);
+    //Logger.logDebug(LOG_TAG, "IME: Visible: " + imeVisible + ", Height: " + imeHeight);
     return insets;
 });
 
