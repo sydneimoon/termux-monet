@@ -110,7 +110,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.termux.app.CustomDialogFragment;
 
 import java.util.List;
-import android.util.Log;
+//import android.util.Log;
 //import android.view.View;
 //import androidx.core.view.ViewCompat;
 //import androidx.core.view.WindowInsetsCompat;
@@ -358,7 +358,7 @@ View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
 ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
     int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-    Log.d("IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+    Logger.logDebug(LOG_TAG, "IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
     return insets;
 });
 
