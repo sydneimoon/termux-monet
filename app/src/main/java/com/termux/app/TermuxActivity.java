@@ -298,12 +298,36 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         mTermuxActivityRootView.setActivity(this);
         mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
         mTermuxActivityRootView.setOnApplyWindowInsetsListener(new TermuxActivityRootView.WindowInsetsListener());
-        View content = findViewById(android.R.id.content);
+        /*View content = findViewById(android.R.id.content);
         content.setOnApplyWindowInsetsListener((v, insets) -> {
             WindowInsetsCompat insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(insets, v);
             mNavBarHeight = insetsCompat.getInsets(Type.systemBars()).bottom;
             return insetsCompat.toWindowInsets();
-        });
+        });*/
+
+
+View content = findViewById(android.R.id.content);
+View container = findViewById(R.id.containerView); // ← pon el ID correcto aquí
+
+ViewCompat.setOnApplyWindowInsetsListener(content, (v, insetsCompat) -> {
+    // Obtener altura del navbar (inferior)
+    int navBarHeight = insetsCompat.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
+    mNavBarHeight = navBarHeight;
+
+    // Obtener altura de la barra de estado (superior), ignorando visibilidad
+    int topInset = insetsCompat.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.statusBars()).top;
+
+    // Aplicar topMargin dinámico al container
+    if (container != null) {
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) container.getLayoutParams();
+        params.topMargin = topInset;
+        container.setLayoutParams(params);
+    }
+
+    return insetsCompat;
+});
+
+        
         if (mProperties.isUsingFullScreen()) {
             WindowInsetsController insetsController = getWindow().getInsetsController();
             if (insetsController != null) {
