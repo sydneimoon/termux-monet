@@ -358,7 +358,9 @@ View pagerView = findViewById(R.id.terminal_toolbar_view_pager);
 ViewCompat.setOnApplyWindowInsetsListener(pagerView, (v, insets) -> {
     boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
     int imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-    Logger.logDebug(LOG_TAG, "IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+    //Logger.logDebug(LOG_TAG, "IME", "Visible: " + imeVisible + ", Height: " + imeHeight);
+
+    Logger.logDebug(LOG_TAG, "IME: Visible: " + imeVisible + ", Height: " + imeHeight);
     return insets;
 });
 
