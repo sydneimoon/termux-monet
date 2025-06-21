@@ -307,8 +307,8 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
 
 View content = findViewById(android.R.id.content);
-View container = findViewById(R.id.containerView); // ← pon el ID correcto aquí
-
+View container = findViewById(R.id.activity_termux_root_relative_layout);
+        
 ViewCompat.setOnApplyWindowInsetsListener(content, (v, insetsCompat) -> {
     // Obtener altura del navbar (inferior)
     int navBarHeight = insetsCompat.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
