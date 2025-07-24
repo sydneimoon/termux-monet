@@ -423,11 +423,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             mTermuxBackgroundManager.setBackgroundImage();
         });
 
-        applyGradientToTextView(findViewById(R.id.drawer_header_alias), new int[]{
+        /*applyGradientToTextView(findViewById(R.id.drawer_header_alias), new int[]{
             getColor(R.color.drawer_degrade_name_01),
             getColor(R.color.drawer_degrade_name_02),
             getColor(R.color.drawer_degrade_name_03)
-        });
+        });*/
         /*ImageView verifyView = findViewById(R.id.drawer_header_verify);
         setAnimatedVector(verifyView, R.drawable.ic_shield_check_animated);*/
         ImageView sessionView = findViewById(R.id.new_session_button);
