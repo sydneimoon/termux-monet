@@ -34,14 +34,14 @@ https://github.com/Termux-Monet/termux-monet/releases/latest
   -->
 
 |`𝚜𝚑𝚒𝚗𝚎`|
-|:----------:|
-|[![termux-shine-01](https://github.com/user-attachments/assets/7abce288-ec7b-497e-ac44-7debcf43c535)](#---)|
-|[![termux-shine-02](https://github.com/user-attachments/assets/81d9c91d-7d4b-4a43-8a40-861a6bb30941)](#---)|
+|:-----:|
+|[![shine01](https://github.com/user-attachments/assets/226617cc-6bb0-4c28-a01b-cb0e51f09716)](#---)|
+|[![shine02](https://github.com/user-attachments/assets/7402b763-a58b-4f9d-b1a9-51b39e540643)](#---)|
 
 |`𝚛𝚎𝚖𝚒𝚡`|
-|:----------:|
-|[![termux-remix-01](https://github.com/user-attachments/assets/723d6875-19e5-43dd-b86f-b403213505fa)](#---)|
-|[![termux-remix-02](https://github.com/user-attachments/assets/08394937-702a-45a1-8117-fe64110cbf0c)](#---)|
+|:-----:|
+|[![remix01](https://github.com/user-attachments/assets/fe11cba6-b097-4141-98c8-ae11eebe15a6)](#---)|
+|[![remix02](https://github.com/user-attachments/assets/c289d019-8d8c-4d7e-8c13-4411132cb015)](#---)|
 
 </p>
 
@@ -267,20 +267,20 @@ Type "help", "copyright", "credits" or "license" for more information.
   <details>
     <summary> 𝙼𝚘𝚛𝚎 𝚒𝚗𝚏𝚘 </summary>
 
-- [Termux Wiki](https://wiki.termux.com/wiki/)
+- [Termux Wiki](https://wiki.termux.dev/wiki/)
 - [Termux App Wiki](https://github.com/termux/termux-app/wiki)
 - [Termux Packages Wiki](https://github.com/termux/termux-packages/wiki)
 
-- [FAQ](https://wiki.termux.com/wiki/FAQ)
+- [FAQ](https://wiki.termux.dev/wiki/FAQ)
 - [Termux File System Layout](https://github.com/termux/termux-packages/wiki/Termux-file-system-layout)
-- [Differences From Linux](https://wiki.termux.com/wiki/Differences_from_Linux)
-- [Package Management](https://wiki.termux.com/wiki/Package_Management)
-- [Remote Access](https://wiki.termux.com/wiki/Remote_Access)
-- [Backing up Termux](https://wiki.termux.com/wiki/Backing_up_Termux)
-- [Terminal Settings](https://wiki.termux.com/wiki/Terminal_Settings)
-- [Touch Keyboard](https://wiki.termux.com/wiki/Touch_Keyboard)
-- [Android Storage and Sharing Data with Other Apps](https://wiki.termux.com/wiki/Internal_and_external_storage)
-- [Android APIs](https://wiki.termux.com/wiki/Termux:API)
+- [Differences From Linux](https://wiki.termux.dev/wiki/Differences_from_Linux)
+- [Package Management](https://wiki.termux.dev/wiki/Package_Management)
+- [Remote Access](https://wiki.termux.dev/wiki/Remote_Access)
+- [Backing up Termux](https://wiki.termux.dev/wiki/Backing_up_Termux)
+- [Terminal Settings](https://wiki.termux.dev/wiki/Terminal_Settings)
+- [Touch Keyboard](https://wiki.termux.dev/wiki/Touch_Keyboard)
+- [Android Storage and Sharing Data with Other Apps](https://wiki.termux.dev/wiki/Internal_and_external_storage)
+- [Android APIs](https://wiki.termux.dev/wiki/Termux:API)
 - [Moved Termux Packages Hosting From Bintray to IPFS](https://github.com/termux/termux-packages/issues/6348)
 - [Running Commands in Termux From Other Apps via `RUN_COMMAND` intent](https://github.com/termux/termux-app/wiki/RUN_COMMAND-Intent)
 - [Termux and Android 10](https://github.com/termux/termux-packages/wiki/Termux-and-Android-10)
