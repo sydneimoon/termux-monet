@@ -115,6 +115,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.termux.app.CustomDialogFragment;
 
+
+import android.util.DisplayMetrics;
+
 /**
  * A terminal emulator activity.
  * <p/>
@@ -125,7 +128,7 @@ import com.termux.app.CustomDialogFragment;
  * </ul>
  * about memory leaks.
  */
-public final class TermuxActivity extends BaseTermuxActivity implements ServiceConnection {
+public final class TermuxActivity extends BaseTermuxActivity implements ServiceConnection, SuggestionBarCallback {
 
     /**
      * The connection to the {@link TermuxService}. Requested in {@link #onCreate(Bundle)} with a call to
@@ -176,6 +179,14 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
      */
     ExtraKeysView mExtraKeysView;
     ExtraKeysView mExtraKeysView2;
+
+
+
+SuggestionBarView mSuggestionBarView;
+
+
+
+    
 
     /**
      * The client for the {@link #mExtraKeysView}.
@@ -268,6 +279,12 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
 
     private static final String LOG_TAG = "TermuxActivity";
 
+
+
+
+    private static final int SUGGESTION_BAR_MIN_BUTTON_DP = 56;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Logger.logDebug(LOG_TAG, "onCreate");
@@ -291,6 +308,11 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             return;
         }
         setMargins();
+
+setSuggestionBarView();
+
+
+        
         mTermuxActivityRootView = findViewById(R.id.activity_termux_root_view);
         mTermuxActivityRootView.setActivity(this);
         mTermuxActivityBottomSpaceView = findViewById(R.id.activity_termux_bottom_space_view);
@@ -713,6 +735,16 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
     ) {
         View mainView = findViewById(mainViewId);
         View blurView = findViewById(blurViewId);
+
+
+        View appsBarBackground = findViewById(R.id.apps_bar_background);
+        View appsBarBackgroundBlur = findViewById(R.id.apps_bar_backgroundblur);
+        View appsBarContainer = findViewById(R.id.apps_bar_container);
+        appsBarBackground.setVisibility(View.VISIBLE);
+        appsBarBackgroundBlur.setVisibility(View.VISIBLE);
+        appsBarContainer.setVisibility(View.VISIBLE);
+
+        
         if (forceHide) {
             mainView.setVisibility(View.GONE);
             blurView.setVisibility(View.GONE);
@@ -747,6 +779,74 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
             view.setBackground(backgroundDrawable);
         }
     }
+
+
+
+
+
+
+
+    private void setSuggestionBarView() {
+        FrameLayout appsBarContainer = findViewById(R.id.apps_bar_container);
+        if (appsBarContainer == null) {
+            return;
+        }
+        LayoutInflater.from(this).inflate(R.layout.suggestion_bar, appsBarContainer, true);
+        mSuggestionBarView = appsBarContainer.findViewById(R.id.suggestion_bar);
+        if (mSuggestionBarView != null) {
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            int maxButtons = calculateSuggestionBarMaxButtons(displayMetrics);
+            mSuggestionBarView.setMaxButtonCount(maxButtons);
+            mSuggestionBarView.reloadAllApps();
+        }
+    }
+
+    static int calculateSuggestionBarMaxButtons(DisplayMetrics displayMetrics) {
+        if (displayMetrics == null) {
+            return 1;
+        }
+        float density = Math.max(displayMetrics.density, 0.1f);
+        int screenWidthDp = (int) (displayMetrics.widthPixels / density);
+        return Math.max(1, screenWidthDp / SUGGESTION_BAR_MIN_BUTTON_DP);
+    }
+
+
+
+
+    @Override
+    public void reloadSuggestionBar(char inputChar) {
+        if (mSuggestionBarView == null || mTerminalView == null) {
+            return;
+        }
+        String input = mTerminalView.getCurrentInput(inputChar);
+        mSuggestionBarView.reloadWithInput(input, mTerminalView);
+    }
+
+    @Override
+    public void reloadSuggestionBar(boolean delete, boolean enter) {
+        if (mSuggestionBarView == null || mTerminalView == null) {
+            return;
+        }
+        String input = "";
+        if (!enter) {
+            input = mTerminalView.getCurrentInput();
+            if (input == null) {
+                input = "";
+            }
+            if (delete && input.length() > 0) {
+                input = input.substring(0, input.length() - 1);
+            }
+        }
+        mSuggestionBarView.reloadWithInput(input, mTerminalView);
+    }
+
+
+
+    
+
+
+
+    
 
     @Override
     public void onStart() {
@@ -926,6 +1026,10 @@ public final class TermuxActivity extends BaseTermuxActivity implements ServiceC
         // Set termux terminal view and session clients
         mTermuxTerminalSessionActivityClient = new TermuxTerminalSessionActivityClient(this);
         mTermuxTerminalViewClient = new TermuxTerminalViewClient(this, mTermuxTerminalSessionActivityClient);
+
+mTermuxTerminalViewClient.setSuggestionBarCallback(this);
+
+        
         // Set termux terminal view
         mTerminalView = findViewById(R.id.terminal_view);
         mTerminalView.setTerminalViewClient(mTermuxTerminalViewClient);
